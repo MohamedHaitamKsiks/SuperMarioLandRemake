@@ -13,7 +13,8 @@
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Goomba/GoombaWalk/goomba6.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Goomba/GoombaWalk/goomba7.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Goomba/GoombaWalk/goomba8.png" type="Texture" id=13]
-[ext_resource path="res://Objects/Particles/DestParticles.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Objects/Particles/DestParticles/DestParticles.tscn" type="PackedScene" id=14]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

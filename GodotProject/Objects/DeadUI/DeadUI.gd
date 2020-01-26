@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-export var blur = 0
+export var blur = float(0.0)
 signal start
 
 # Called when the node enters the scene tree for the first time.
@@ -12,7 +12,7 @@ func _process(delta):
 	draw_blur()
 
 func draw_blur():
-	$BlurRect.get_material().set_shader_param("lod",float(blur/20))
+	$BlurRect.get_material().set_shader_param("lod",blur)
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	get_tree().paused = false
@@ -20,4 +20,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func _on_DeadUI_start():
 	$AnimationPlayer.play("start")
+	Scores.health = 3
 	get_tree().paused = true

@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Particles2D
 
 
 func _on_Timer_timeout():

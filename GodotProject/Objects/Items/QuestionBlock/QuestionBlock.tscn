@@ -20,7 +20,7 @@ animations = [ {
 resource_name = "GetItem"
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("../QuestionBlock/AnimatedSprite:position")
+tracks/0/path = NodePath("AnimatedSprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -78,6 +78,6 @@ anims/GetItem = SubResource( 3 )
 anims/GetItemSmash = SubResource( 4 )
 
 [node name="ItemInstancingPosition" type="Position2D" parent="."]
-position = Vector2( 0, -16 )
+position = Vector2( 0, -17 )
 [connection signal="get_item" from="." to="." method="_on_QuestionBlock_get_item"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

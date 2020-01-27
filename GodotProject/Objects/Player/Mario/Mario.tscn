@@ -243,7 +243,6 @@ position = Vector2( 0, 8 )
 shape = SubResource( 3 )
 
 [node name="HitBox" type="Area2D" parent="."]
-editor/display_folded = true
 visible = false
 collision_layer = 2
 collision_mask = 2
@@ -304,13 +303,14 @@ texture = ExtResource( 56 )
 [node name="DustParticles" parent="." instance=ExtResource( 57 )]
 position = Vector2( 0, 23 )
 lifetime = 0.5
-explosiveness = 0.42
+explosiveness = 1.0
 
 [node name="DeadUI" parent="." instance=ExtResource( 58 )]
 [connection signal="shake_camera" from="." to="." method="_on_Mario_shake_camera"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="area_entered" from="ItemCollision" to="." method="_on_ItemCollision_area_entered"]
 [connection signal="body_entered" from="ItemCollision" to="." method="_on_ItemCollision_body_entered"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]
 [connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]
 [connection signal="body_entered" from="AttackBox" to="." method="_on_AttackBox_body_entered"]
 [connection signal="timeout" from="HitTimer" to="." method="_on_HitTimer_timeout"]

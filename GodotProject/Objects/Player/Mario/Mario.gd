@@ -74,7 +74,7 @@ func on_floor():
 			if smash:
 				smash = false
 				start_camera_shake(16 ,0.3,0.1)
-				wave_effect()
+				wave_effect(1)
 			$DustParticles.emitting = true
 		jump = false
 		climbing = false
@@ -240,10 +240,11 @@ func dust_particles():
 		$ClimbParticles.position.x = 7
 #
 #Wave Effect
-func wave_effect():
+func wave_effect(force):
 	var node = WaveEffect.instance()
 	get_parent().add_child(node)
 	node.position = self.global_position
+	node.scale = Vector2(force,force)
 
 ##camera##
 #
@@ -283,42 +284,53 @@ func _on_ItemCollision_body_entered(body):
 	if "QuestionBlock" in body.name:
 		if smash :
 			body.emit_signal("get_item",true)
-			wave_effect()
+			wave_effect(abs(velocity.y)/MAX_VSPEED)
 			start_camera_shake(10,0.5,0.1)
 			if Input.is_action_pressed("ui_down"):
-				velocity.y = -MAX_VSPEED/2
+				velocity.y = -MAX_VSPEED/3
 		elif jump :
 			body.emit_signal("get_item",false)
 	elif "Brick" in body.name:
 		if smash :
-			wave_effect()
+			wave_effect(abs(velocity.y)/MAX_VSPEED)
 			start_camera_shake(10,0.5,0.1)
-			velocity.y = -MAX_VSPEED/2
+			velocity.y = -MAX_VSPEED/4
 			body.emit_signal("destroy")
 		elif jump :
 			start_camera_shake(8,0.3,0.1)
 			body.emit_signal("destroy")
 	elif "Item" in body.name:
 		body.emit_signal("destroy",fire_mode,self)
+		wave_effect(0.5)
+		start_camera_shake(7,0.5,0.2)
 
 ##Hit box##
+#
+#recieve_damge
+func get_damage(body,damage):
+	Scores.health -= damage
+	reset_variables()
+	can_hit = false
+	hit = true
+	$HitTimer.start()
+	if self.global_position.x > body.global_position.x :
+		velocity = Vector2(30,0)
+		$AnimatedSprite.flip_h = true
+	else :
+		velocity = Vector2(-30,0)
+		$AnimatedSprite.flip_h = false
+	start_camera_shake(4*damage,0.3*damage,0.1)
 #
 #when an enemy collids with mario
 func _on_HitBox_body_entered(body):
 	if "Goomba" in body.name and can_hit:
-		Scores.health -= 1
-		reset_variables()
-		can_hit = false
-		hit = true
-		$HitTimer.start()
-		if self.global_position.x > body.global_position.x :
-			velocity = Vector2(30,0)
-			$AnimatedSprite.flip_h = true
-		else :
-			velocity = Vector2(-30,0)
-			$AnimatedSprite.flip_h = false
-		start_camera_shake(4,0.3,0.1)
-#	
+		get_damage(body,1)
+#
+#when mario collides with area that hurt
+func _on_HitBox_area_entered(area):
+	if "SolidKiller" in area.name:
+		get_damage(area,3)
+
 #Hit timer
 func _on_HitTimer_timeout():
 	if Scores.health <= 0:
@@ -339,7 +351,7 @@ func _on_AttackBox_body_entered(body):
 		if smash:
 			smash = false
 			start_camera_shake(16,0.4,0.1)
-			wave_effect()
+			wave_effect(abs(velocity.y)/MAX_VSPEED)
 		else :
 			start_camera_shake(4,0.2,0.2)
 		velocity.y = -JUMP_FORCE/1.2
@@ -356,5 +368,6 @@ func reset_variables():
 	climbing = false
 	hit = false
 	can_hit = true
+
 
 

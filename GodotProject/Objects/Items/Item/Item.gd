@@ -20,7 +20,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity,FLOOR)
 	
 	#strech
-	$AnimatedSprite.scale.x = 1 - 0.1*abs(velocity.x)/ 50
+	$AnimatedSprite.scale.x = 1 - 0.1*abs(velocity.y)/ 50
 	$AnimatedSprite.scale.y = 1 + 0.1*abs(velocity.y)/ 50
 	
 func gravity():

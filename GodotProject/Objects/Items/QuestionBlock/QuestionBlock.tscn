@@ -5,10 +5,10 @@
 [ext_resource path="res://Assets/Graphics/Sprites/Items/QuestionBlock/question_block2.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Graphics/Sprites/Items/QuestionBlock/question_block3.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 12 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
@@ -61,17 +61,23 @@ tracks/1/keys = {
 }
 
 [node name="QuestionBlock" type="StaticBody2D"]
+collision_layer = 31
+collision_mask = 31
 script = ExtResource( 1 )
 items = [ 0 ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
+z_index = 2
+frames = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/GetItem = SubResource( 3 )
 anims/GetItemSmash = SubResource( 4 )
+
+[node name="ItemInstancingPosition" type="Position2D" parent="."]
+position = Vector2( 0, -16 )
 [connection signal="get_item" from="." to="." method="_on_QuestionBlock_get_item"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -5,6 +5,8 @@ const WaveEffect = preload("res://Objects/Particles/WaveEffect/WaveEffect.tscn")
 
 #signals
 signal shake_camera(power,time,period)
+signal transform(mode)
+
 
 #const
 const GRAVITY = 10
@@ -15,7 +17,11 @@ const JUMP_FORCE = 180
 const JUMP_ACC = 5
 const FLOOR = Vector2(0,-1)
 
+
 #variables
+#modes
+var fire_mode = false
+var star_mode = false
 #mouvements
 var velocity = Vector2(0,0)
 var ground = false
@@ -125,7 +131,7 @@ func mouvement_manager(velocity):
 		
 	#walljump
 	if Input.is_action_just_pressed("gameplay_jump") and climbing :
-		velocity.y = -JUMP_FORCE*1.25
+		velocity.y = -JUMP_FORCE*1.5
 		velocity.x = -250*direction
 		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
 		wall_jump = true
@@ -283,6 +289,17 @@ func _on_ItemCollision_body_entered(body):
 				velocity.y = -MAX_VSPEED/2
 		elif jump :
 			body.emit_signal("get_item",false)
+	elif "Brick" in body.name:
+		if smash :
+			wave_effect()
+			start_camera_shake(10,0.5,0.1)
+			velocity.y = -MAX_VSPEED/2
+			body.emit_signal("destroy")
+		elif jump :
+			start_camera_shake(8,0.3,0.1)
+			body.emit_signal("destroy")
+	elif "Item" in body.name:
+		body.emit_signal("destroy",fire_mode,self)
 
 ##Hit box##
 #

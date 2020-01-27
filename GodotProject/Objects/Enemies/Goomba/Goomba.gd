@@ -8,8 +8,7 @@ func _ready():
 	velocity.x = 20
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	
+func _process(delta):
 	velocity = move(velocity)
 	if not die:
 		fall(6,200)

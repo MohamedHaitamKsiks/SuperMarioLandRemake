@@ -2,13 +2,13 @@
 
 [ext_resource path="res://Objects/Player/Mario/Mario.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallFall/mario_small_fall4.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallDown/mario_small_down2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallDown/mario_small_down3.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallDown/mario_small_down4.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallDown/mario_small_down5.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioHurt/mario_small_hurt1.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioHurt/mario_small_hurt2.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioHurt/mario_small_hurt3.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallJump/mario_small_jump1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallJump/mario_small_jump2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallJump/mario_small_jump3.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallDown/mario_small_down2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallDown/mario_small_down3.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallDown/mario_small_down4.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallDown/mario_small_down5.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallSmash/mario_small_smash1.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallSmash/mario_small_smash2.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallSmash/mario_small_smash3.png" type="Texture" id=12]
@@ -16,9 +16,9 @@
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallSmash/mario_small_smash5.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallSmash/mario_small_smash6.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallSmash/mario_small_smash7.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallJump/mario_small_jump1.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallJump/mario_small_jump2.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallJump/mario_small_jump3.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioHurt/mario_small_hurt1.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioHurt/mario_small_hurt2.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioHurt/mario_small_hurt3.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallSprintt/mario_small_sprint1.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallSprintt/mario_small_sprint2.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallSprintt/mario_small_sprint3.png" type="Texture" id=22]
@@ -31,27 +31,27 @@
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/start/mario_small_run4.png" type="Texture" id=29]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/start/mario_small_run5.png" type="Texture" id=30]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/start/mario_small_run6.png" type="Texture" id=31]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallTurnAirr/mario_small_turn_air.png" type="Texture" id=32]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallTurnAirr/mario_small_turn_air2.png" type="Texture" id=33]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallJump/mario_small_wall_climb.png" type="Texture" id=34]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallTurn/mario_small_turn2.png" type="Texture" id=35]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallTurn/mario_small_turn3.png" type="Texture" id=36]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallTurn/mario_small_turn4.png" type="Texture" id=37]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk1.png" type="Texture" id=38]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk2.png" type="Texture" id=39]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk3.png" type="Texture" id=40]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk4.png" type="Texture" id=41]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk5.png" type="Texture" id=42]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk6.png" type="Texture" id=43]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk7.png" type="Texture" id=44]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk8.png" type="Texture" id=45]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/smears/mario_small_run6.png" type="Texture" id=46]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/smears/mario_small_run1.png" type="Texture" id=47]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/smears/mario_small_run2.png" type="Texture" id=48]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/smears/mario_small_run3.png" type="Texture" id=49]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/smears/mario_small_run4.png" type="Texture" id=50]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/smears/mario_small_run5.png" type="Texture" id=51]
-[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallSTD/mario_small_std.png" type="Texture" id=52]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk1.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk2.png" type="Texture" id=33]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk3.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk4.png" type="Texture" id=35]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk5.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk6.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk7.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallWalk/mario_wall_walk8.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallWallJump/mario_small_wall_climb.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallSTD/mario_small_std.png" type="Texture" id=41]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallTurnAirr/mario_small_turn_air.png" type="Texture" id=42]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallTurnAirr/mario_small_turn_air2.png" type="Texture" id=43]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallTurn/mario_small_turn2.png" type="Texture" id=44]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallTurn/mario_small_turn3.png" type="Texture" id=45]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallTurn/mario_small_turn4.png" type="Texture" id=46]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/smears/mario_small_run6.png" type="Texture" id=47]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/smears/mario_small_run1.png" type="Texture" id=48]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/smears/mario_small_run2.png" type="Texture" id=49]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/smears/mario_small_run3.png" type="Texture" id=50]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/smears/mario_small_run4.png" type="Texture" id=51]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallRun/smears/mario_small_run5.png" type="Texture" id=52]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallFall/mario_small_fall1.png" type="Texture" id=53]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallFall/mario_small_fall2.png" type="Texture" id=54]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/Small/MarioSmallFall/mario_small_fall3.png" type="Texture" id=55]
@@ -66,24 +66,24 @@ animations = [ {
 "name": "fall",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "jump",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": false,
 "name": "down",
 "speed": 15.0
-}, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
-"loop": false,
-"name": "hit",
-"speed": 12.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": false,
 "name": "smash",
 "speed": 24.0
 }, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 19 ) ],
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
 "loop": false,
-"name": "jump",
+"name": "hit",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ) ],
@@ -96,35 +96,35 @@ animations = [ {
 "name": "run",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 32 ), ExtResource( 33 ) ],
-"loop": false,
-"name": "turn_air",
-"speed": 15.0
-}, {
-"frames": [ ExtResource( 34 ) ],
-"loop": true,
-"name": "wall_climb",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ) ],
-"loop": false,
-"name": "turn",
-"speed": 15.0
-}, {
-"frames": [ ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ) ],
+"frames": [ ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ) ],
 "loop": true,
 "name": "wall_walk",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ) ],
+"frames": [ ExtResource( 40 ) ],
 "loop": true,
-"name": "run_with_smears",
-"speed": 12.0
+"name": "wall_climb",
+"speed": 5.0
 }, {
-"frames": [ ExtResource( 52 ) ],
+"frames": [ ExtResource( 41 ) ],
 "loop": true,
 "name": "stand",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 42 ), ExtResource( 43 ) ],
+"loop": false,
+"name": "turn_air",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ) ],
+"loop": false,
+"name": "turn",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 52 ) ],
+"loop": true,
+"name": "run_with_smears",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 53 ), ExtResource( 54 ), ExtResource( 55 ) ],
 "loop": false,
@@ -155,7 +155,7 @@ emission_shape = 1
 emission_sphere_radius = 3.0
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
-angular_velocity = 0.0
+angular_velocity = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.4
@@ -234,6 +234,9 @@ position = Vector2( 0, 8 )
 shape = SubResource( 2 )
 
 [node name="ItemCollision" type="Area2D" parent="."]
+editor/display_folded = true
+collision_layer = 5
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollision"]
 position = Vector2( 0, 8 )

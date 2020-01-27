@@ -3,10 +3,10 @@
 [ext_resource path="res://Objects/UI/UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Tilemap/TileMapLevel1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Objects/Player/Mario/Mario.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Objects/Enemies/Goomba/Goomba.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Graphics/Background/Level1/Level1Sky.png" type="Texture" id=5]
-[ext_resource path="res://Objects/Items/Coin/Coin.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Items/QuestionBlock/QuestionBlock.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Graphics/Background/Level1/Level1Sky.png" type="Texture" id=4]
+[ext_resource path="res://Objects/Items/Coin/Coin.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Items/QuestionBlock/QuestionBlock.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Items/Brick/Brick.tscn" type="PackedScene" id=7]
 
 [node name="Test" type="Node2D"]
 position = Vector2( 20.0697, 32.1952 )
@@ -20,12 +20,6 @@ tile_data = PoolIntArray( 1441831, 1, 0, 1507387, 2, 0, 1638434, 0, 0, 1638435, 
 [node name="Mario" parent="." instance=ExtResource( 3 )]
 position = Vector2( 124.451, 583.83 )
 
-[node name="Goomba" parent="." instance=ExtResource( 4 )]
-position = Vector2( 203.341, 591.805 )
-
-[node name="Goomba2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 376.458, 592.334 )
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 editor/display_folded = true
 scroll_base_scale = Vector2( 0.5, 0.5 )
@@ -35,14 +29,27 @@ motion_scale = Vector2( 0, 0 )
 
 [node name="Level1Sky" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 scale = Vector2( 0.997108, 1 )
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 
-[node name="Coin" parent="." instance=ExtResource( 6 )]
-position = Vector2( 254.04, 595.726 )
+[node name="Coin" parent="." instance=ExtResource( 5 )]
+position = Vector2( 410.739, 563.805 )
 
-[node name="QuestionBlock2" parent="." instance=ExtResource( 7 )]
+[node name="QuestionBlock2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 338.947, 595.726 )
-items = [ 0, 0 ]
+items = [ 1, 1 ]
 
-[node name="QuestionBlock" parent="." instance=ExtResource( 7 )]
+[node name="QuestionBlock" parent="." instance=ExtResource( 6 )]
 position = Vector2( 266.04, 543.805 )
+items = [ 1 ]
+
+[node name="Brick" parent="." instance=ExtResource( 7 )]
+position = Vector2( 530.392, 495.805 )
+
+[node name="Brick2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 530.392, 471.805 )
+
+[node name="Brick4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 530.392, 543.805 )
+
+[node name="Brick3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 530.392, 519.805 )

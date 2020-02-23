@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Objects/UI/UserInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Tilemap/TileMapLevel1.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/Graphics/Background/Level1/Level1Sky.png" type="Texture" id=6]
 [ext_resource path="res://Objects/Items/Coin/Coin.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Objects/Items/Brick/Brick.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Objects/Enemies/Goomba/Goomba.tscn" type="PackedScene" id=9]
 
 [node name="Test" type="Node2D"]
 position = Vector2( 20.0697, 32.1952 )
@@ -32,7 +33,6 @@ items = [ 1 ]
 position = Vector2( 124.451, 583.83 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-editor/display_folded = true
 scroll_base_scale = Vector2( 0.5, 0.5 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -60,3 +60,9 @@ position = Vector2( 532.386, 543.805 )
 
 [node name="Brick3" parent="." instance=ExtResource( 8 )]
 position = Vector2( 532.386, 519.805 )
+
+[node name="Goomba" parent="." instance=ExtResource( 9 )]
+position = Vector2( 257.846, 588.253 )
+
+[node name="Goomba2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 370.1, 586.863 )

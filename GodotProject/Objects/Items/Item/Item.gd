@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-signal destroy(mode,mario)
+signal destroy(mario)
 
 #item type
 export var type = 0
@@ -27,11 +27,7 @@ func gravity():
 	velocity.y += 5
 
 
-func _on_Item_destroy(mode,mario):
+func _on_Item_destroy(mario):
 	if type == 0 and Scores.health < 3:#mushroom
 		Scores.health += 1
-	elif type == 1 and not mode:#flower
-		mario.emit_signal("transform",1)
-	else :#star
-		mario.emit_signal("transform",2)
 	queue_free()

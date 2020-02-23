@@ -18,6 +18,10 @@ func _process(delta):
 				velocity.x = -20
 			else :
 				velocity.x = 20
+	else :
+		if not $AnimatedSprite.animation == "die":
+			$AnimatedSprite.rotation -= 0.1
+			fall(6,200)
 
 
 func _on_Goomba_kill(mario):
@@ -28,6 +32,15 @@ func _on_Goomba_kill(mario):
 	$Timer.start()
 	$CollisionShape2D.queue_free()
 	Mario = mario
+
+
+func _on_Goomba_cappy_kill():
+	velocity.y = -150
+	die = true
+	$Timer.start()
+	$AnimatedSprite.speed_scale = 0
+	$CollisionShape2D.queue_free()
+	
 	
 
 
@@ -35,7 +48,8 @@ func _on_Timer_timeout():
 	$DestParticles.emitting = true
 	$AnimatedSprite.visible = false
 	$TimerParticle.start()
-	Mario.emit_signal("shake_camera",8,0.4,0.1)
+	if $AnimatedSprite.animation == "die":
+		Mario.emit_signal("shake_camera",8,0.4,0.1)
 
 
 func _on_TimerParticle_timeout():

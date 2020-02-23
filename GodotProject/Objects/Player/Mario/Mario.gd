@@ -2,10 +2,12 @@ extends KinematicBody2D
 
 #import object to instance
 const WaveEffect = preload("res://Objects/Particles/WaveEffect/WaveEffect.tscn")
+const Cappy = preload("res://Objects/Cappy/Cappy.tscn")
 
 #signals
+# warning-ignore:unused_signal
 signal shake_camera(power,time,period)
-signal transform(mode)
+signal get_back_cappy()
 
 
 #const
@@ -20,8 +22,9 @@ const FLOOR = Vector2(0,-1)
 
 #variables
 #modes
-var fire_mode = false
-var star_mode = false
+var with_hat = true
+var sprite_with_hat = "hat_"
+var throwing = false
 #mouvements
 var velocity = Vector2(0,0)
 var ground = false
@@ -55,8 +58,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	on_floor()
-	if not (hit or prepare_smash):
+	if not (hit or prepare_smash or throwing):
 		velocity = mouvement_manager(velocity)
+		if throwing :
+			velocity = Vector2(0,0)
 	sprites_manager(velocity)
 	camera_manager(velocity)
 	dust_particles()
@@ -85,6 +90,7 @@ func on_floor():
 	
 		
 ##mouvements##	
+# warning-ignore:shadowed_variable
 func mouvement_manager(velocity):
 	#blinking effects
 	$AnimatedSprite.visible = (is_visible and not can_hit) or can_hit
@@ -115,9 +121,11 @@ func mouvement_manager(velocity):
 	if $AnimatedSprite.flip_h:
 		$CanClimbRayCastTop.cast_to.x = -12
 		$CanClimbRayCastBot.cast_to.x = -12
+		$ThrowPosition2D.position.x = -24
 	else :
 		$CanClimbRayCastTop.cast_to.x = 12
 		$CanClimbRayCastBot.cast_to.x = 12
+		$ThrowPosition2D.position.x = 24
 	var cast_wall = $CanClimbRayCastTop.is_colliding() and $CanClimbRayCastBot.is_colliding()
 	#if on wall => climb 
 	if is_on_wall() and (not ground) and cast_wall:
@@ -153,6 +161,16 @@ func mouvement_manager(velocity):
 	else :
 		$AttackBox/CollisionShape2D.disabled = true
 		
+	#Throw Cappy
+	if with_hat and not (climbing or hit or smash) and Input.is_action_just_pressed("gameplay_throwcappy"):
+		with_hat = false
+		throwing = true
+		jump = false
+		wall_jump = false
+		velocity = Vector2(0,0)
+		
+		
+		
 	# gravity
 	$AttackBox.position.y = 4*int(velocity.y>0)
 	if velocity.y <= MAX_VSPEED:
@@ -160,55 +178,70 @@ func mouvement_manager(velocity):
 		
 	return velocity
 
+#get back cappy
+func _on_Mario_get_back_cappy():
+	with_hat = true
+	sprite_with_hat = "hat_"
+	
+
 	
 ##Animed Sprite##
 #
 #sprite
+# warning-ignore:shadowed_variable
 func sprites_manager(velocity):
 	#falling stretch
 	$AnimatedSprite.scale.y = 1 + (velocity.y / MAX_VSPEED)*0.2 
 	$AnimatedSprite.scale.x = 1 - abs(velocity.y / MAX_VSPEED)*0.2 
 	
 	#sprite
-	if not turning:
-		#on ground
-		if ground :	
-			if is_on_wall() :
-				$AnimatedSprite.play("wall_walk")
-			else :
-				if down :
-					$AnimatedSprite.play("down")
+	
+	if throwing:
+		$AnimatedSprite.play("hat_throw_cappy")
+		
+	else :
+		if not turning:
+			#on ground
+			if ground :	
+				if is_on_wall() :
+					$AnimatedSprite.play(sprite_with_hat + "wall_walk")
 				else :
-					if velocity.x == 0:
-						$AnimatedSprite.play("stand")
-					elif abs(velocity.x) <= MAX_HSPEED:
-						$AnimatedSprite.play("run_with_smears")
+					if down :
+						$AnimatedSprite.play(sprite_with_hat + "down")
 					else :
-						$AnimatedSprite.play("sprint")
-		else :
-			if prepare_smash or smash :
-				$AnimatedSprite.play("smash")
+						if velocity.x == 0:
+							$AnimatedSprite.play(sprite_with_hat + "stand")
+						elif abs(velocity.x) <= MAX_HSPEED:
+							$AnimatedSprite.play(sprite_with_hat + "run_with_smears")
+						else :
+							$AnimatedSprite.play(sprite_with_hat + "sprint")
 			else :
-				if jump or wall_jump:
-					$AnimatedSprite.play("jump")			
-				if velocity.y > MAX_VSPEED / 4 :
-					if $AnimatedSprite.animation != "jump" and $AnimatedSprite.animation != "fall_after_jump":
-						$AnimatedSprite.play("fall")
-					else :
-						$AnimatedSprite.play("fall_after_jump")
-				if climbing :
-					$AnimatedSprite.play("wall_climb")
-		if hit :
-			$AnimatedSprite.play("hit")
-	#turning
-	if ((velocity.x > 0 and $AnimatedSprite.flip_h) or (velocity.x < 0 and not $AnimatedSprite.flip_h)) and not(turning or climbing or wall_jump or hit):
-		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h 
-		turning = true
-		climbing = false
-		if ground :
-			$AnimatedSprite.play("turn")
-		else :
-			$AnimatedSprite.play("turn_air")
+				if prepare_smash or smash :
+					$AnimatedSprite.play(sprite_with_hat + "smash")
+				else :
+					if jump or wall_jump:
+						$AnimatedSprite.play(sprite_with_hat + "jump")			
+	# warning-ignore:integer_division
+					if velocity.y > MAX_VSPEED / 4 :
+						if $AnimatedSprite.animation != (sprite_with_hat + "jump") and $AnimatedSprite.animation != (sprite_with_hat + "fall_after_jump") :
+							$AnimatedSprite.play(sprite_with_hat + "fall")
+						else :
+							$AnimatedSprite.play(sprite_with_hat + "fall_after_jump")
+					if climbing :
+						$AnimatedSprite.play(sprite_with_hat + "wall_climb")
+			if hit :
+				$AnimatedSprite.play(sprite_with_hat + "hit")
+		#turning
+		if ((velocity.x > 0 and $AnimatedSprite.flip_h) or (velocity.x < 0 and not $AnimatedSprite.flip_h)) and not(turning or climbing or wall_jump or hit):
+			$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h 
+			turning = true
+			climbing = false
+			if ground :
+				$AnimatedSprite.play(sprite_with_hat + "turn")
+			else :
+				$AnimatedSprite.play(sprite_with_hat + "turn_air")
+			
+				
 #		
 ##Animation ends
 func _on_AnimatedSprite_animation_finished():
@@ -216,10 +249,16 @@ func _on_AnimatedSprite_animation_finished():
 		turning = false
 		if not ground :
 			jump = false
+			
 	if prepare_smash :
 		prepare_smash = false
 		smash = true
 		velocity.y = MAX_VSPEED/2
+		
+	throwing = false
+		
+# warning-ignore:integer_division
+		
 #
 #blinking effect when get hit
 func _on_VisibleTimer_timeout():
@@ -264,6 +303,9 @@ func camera_shake():
 	camera.offset.y = -rad * sin(camera_direction)
 #
 #camera mouvements
+# warning-ignore:unused_argument
+# warning-ignore:shadowed_variable
+# warning-ignore:unused_argument
 func camera_manager(velocity):
 	camera_shake()
 #
@@ -287,6 +329,7 @@ func _on_ItemCollision_body_entered(body):
 			wave_effect(abs(velocity.y)/MAX_VSPEED)
 			start_camera_shake(10,0.5,0.1)
 			if Input.is_action_pressed("ui_down"):
+# warning-ignore:integer_division
 				velocity.y = -MAX_VSPEED/3
 		elif jump :
 			body.emit_signal("get_item",false)
@@ -294,15 +337,17 @@ func _on_ItemCollision_body_entered(body):
 		if smash :
 			wave_effect(abs(velocity.y)/MAX_VSPEED)
 			start_camera_shake(10,0.5,0.1)
+# warning-ignore:integer_division
 			velocity.y = -MAX_VSPEED/4
 			body.emit_signal("destroy")
 		elif jump :
 			start_camera_shake(8,0.3,0.1)
 			body.emit_signal("destroy")
 	elif "Item" in body.name:
-		body.emit_signal("destroy",fire_mode,self)
+		body.emit_signal("destroy",self)
 		wave_effect(0.5)
 		start_camera_shake(7,0.5,0.2)
+
 
 ##Hit box##
 #
@@ -357,6 +402,10 @@ func _on_AttackBox_body_entered(body):
 		velocity.y = -JUMP_FORCE/1.2
 		jump = true
 		body.emit_signal("kill",self)
+	elif "Cappy" in body.name and velocity.y >0:
+		velocity.y = -1.5*JUMP_FORCE
+		jump = true
+		body.emit_signal("jump")
 
 
 ##reset variables##
@@ -371,3 +420,17 @@ func reset_variables():
 
 
 
+#throw cappy
+func _on_AnimatedSprite_frame_changed():
+	if throwing and $AnimatedSprite.frame == 4:
+		velocity = Vector2(0,0)
+		
+		sprite_with_hat = "nohat_"
+		var node = Cappy.instance()
+		get_parent().add_child(node)
+		node.mario = self
+		node.global_position = $ThrowPosition2D.global_position
+		if $AnimatedSprite.flip_h :
+			node.velocity.x = -500
+		else :
+			node.velocity.x = 500

@@ -329,7 +329,6 @@ func _on_ItemCollision_body_entered(body):
 			wave_effect(abs(velocity.y)/MAX_VSPEED)
 			start_camera_shake(10,0.5,0.1)
 			if Input.is_action_pressed("ui_down"):
-# warning-ignore:integer_division
 				velocity.y = -MAX_VSPEED/3
 		elif jump :
 			body.emit_signal("get_item",false)
@@ -337,7 +336,6 @@ func _on_ItemCollision_body_entered(body):
 		if smash :
 			wave_effect(abs(velocity.y)/MAX_VSPEED)
 			start_camera_shake(10,0.5,0.1)
-# warning-ignore:integer_division
 			velocity.y = -MAX_VSPEED/4
 			body.emit_signal("destroy")
 		elif jump :

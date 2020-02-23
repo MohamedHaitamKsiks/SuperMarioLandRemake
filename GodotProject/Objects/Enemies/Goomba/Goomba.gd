@@ -3,6 +3,7 @@ extends "res://Objects/Enemies/EnemyParent.gd"
 # Declare member variables here. Examples:
 # var a = 2
 var Mario
+var Cappy
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	velocity.x = 20
@@ -20,8 +21,8 @@ func _process(delta):
 				velocity.x = 20
 	else :
 		if not $AnimatedSprite.animation == "die":
-			$AnimatedSprite.rotation -= 0.1
 			fall(6,200)
+			rotate(rot_speed)
 
 
 func _on_Goomba_kill(mario):
@@ -34,11 +35,14 @@ func _on_Goomba_kill(mario):
 	Mario = mario
 
 
-func _on_Goomba_cappy_kill():
-	velocity.y = -150
+func _on_Goomba_cappy_kill(cappy):
+	velocity.y = -100
 	die = true
 	$Timer.start()
+	rot_speed = 0.4 * sign(cappy.velocity.x)
+	velocity.x = 50 * sign(cappy.velocity.x)
 	$AnimatedSprite.speed_scale = 0
+	$AnimatedSprite.frame = 6
 	$CollisionShape2D.queue_free()
 	
 	

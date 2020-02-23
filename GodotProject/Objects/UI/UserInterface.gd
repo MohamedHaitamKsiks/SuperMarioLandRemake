@@ -26,11 +26,4 @@ func draw_coins_counter():
 	
 func draw_health():
 	var health = Scores.health
-	if health == 3 : 
-		$Health/ColorRect.rect_scale = Vector2(1,1)
-	elif health == 2 : 
-		$Health/ColorRect.rect_scale = Vector2(0.66,0.66)
-	elif health == 1 : 
-		$Health/ColorRect.rect_scale = Vector2(0.33,0.33)
-	else :
-		$Health/ColorRect.rect_scale = Vector2(0,0)
+	$Health/AnimatedSprite.frame = 3 - health

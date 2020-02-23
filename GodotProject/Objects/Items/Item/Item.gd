@@ -17,7 +17,7 @@ func _physics_process(delta):
 		velocity.y = -50
 	if is_on_wall() :
 		velocity.x = -velocity.x
-	velocity = move_and_slide(velocity,FLOOR)
+	velocity.y = move_and_slide(velocity,FLOOR).y
 	
 	#strech
 	$AnimatedSprite.scale.x = 1 - 0.1*abs(velocity.y)/ 50

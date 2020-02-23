@@ -86,7 +86,6 @@ editor_draw_drag_margin = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
 animation = "nohat_run_with_smears"
-frame = 2
 playing = true
 
 [node name="ThrowPosition2D" type="Position2D" parent="."]

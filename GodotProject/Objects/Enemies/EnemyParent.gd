@@ -3,9 +3,10 @@ extends KinematicBody2D
 var health = 1
 var die = false
 var velocity = Vector2(0,0)
+var rot_speed = 0
 const FLOOR = Vector2(0,-1)
 signal kill(mario)
-signal cappy_kill()
+signal cappy_kill(cappy)
 
 func move(velocity):
 	return move_and_slide(velocity,FLOOR)

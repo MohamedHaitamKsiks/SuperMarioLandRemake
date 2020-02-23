@@ -9,7 +9,7 @@ var velocity = Vector2(0,0)
 
 signal jump
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	pass
 
@@ -18,6 +18,8 @@ func _physics_process(delta):
 	
 	$AnimatedSprite.scale.y = 1 - abs(velocity.x / 500) * 0.3
 	$AnimatedSprite.scale.x = 1 + abs(velocity.x / 500) * 0.3
+	
+	$AnimationPlayerTurning.play("New Anim")
 	
 	if back : 
 		angle = atan2(mario.global_position.y - global_position.y , mario.global_position.x - global_position.x)
@@ -31,12 +33,8 @@ func _physics_process(delta):
 			#back
 			if(not Input.is_action_pressed("gameplay_throwcappy") and not back):
 				back = true
-				$CollisionShape2D.disabled = true
-		
-		
+				$CollisionShape2D.disabled = true		
 	move_and_slide(velocity)
-
-
 
 
 
@@ -44,9 +42,18 @@ func _on_BackArea_body_entered(body):
 	if back and "Mario" in body.name :
 		body.emit_signal("get_back_cappy")
 		queue_free()
-	if "Goomba" in body.name :
-		body.emit_signal("cappy_kill")
+
+	if	not back and "QuestionBlock" in body.name : 
+		body.emit_signal("get_item",true)
+		mario.emit_signal("shake_camera",4,0.4,0.1)
+	
+	if not back and "Brick" in body.name:
+		body.emit_signal("destroy")
+		mario.emit_signal("shake_camera",8,0.4,0.1)
+	
+	if not back and "Goomba" in body.name :
 		back = true
+		body.emit_signal("cappy_kill",self)
 		$CollisionShape2D.disabled = true
 		mario.emit_signal("shake_camera",8,0.4,0.1)
 

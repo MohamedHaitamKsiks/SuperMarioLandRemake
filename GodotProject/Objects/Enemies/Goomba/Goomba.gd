@@ -15,6 +15,7 @@ func _process(delta):
 		fall(6,200)
 		if on_wall() :
 			$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
+			$AnimatedSprite.play("turn")
 			if $AnimatedSprite.flip_h:
 				velocity.x = -20
 			else :
@@ -26,6 +27,7 @@ func _process(delta):
 
 
 func _on_Goomba_kill(mario):
+	$SFXDie.play()
 	velocity.x = 0
 	velocity.y = 0
 	die = true
@@ -39,6 +41,7 @@ func _on_Goomba_cappy_kill(cappy):
 	velocity.y = -100
 	die = true
 	$Timer.start()
+	$SFXDie.play()
 	rot_speed = 0.4 * sign(cappy.velocity.x)
 	velocity.x = 50 * sign(cappy.velocity.x)
 	$AnimatedSprite.speed_scale = 0
@@ -52,9 +55,16 @@ func _on_Timer_timeout():
 	$DestParticles.emitting = true
 	$AnimatedSprite.visible = false
 	$TimerParticle.start()
+	$SFXImpact.play()
 	if $AnimatedSprite.animation == "die":
 		Mario.emit_signal("shake_camera",8,0.4,0.1)
+		
 
 
 func _on_TimerParticle_timeout():
 	queue_free()
+
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == "turn":
+		$AnimatedSprite.play("walk")

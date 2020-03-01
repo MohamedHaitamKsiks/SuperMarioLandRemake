@@ -23,6 +23,7 @@ func draw_coins_counter():
 	var coins = Scores.coins
 	var res = str(int(coins / 10))+" "+str(coins % 10)
 	$CoinCounter/Label.text = res
+	$CoinCounter/Label2.text = res
 	
 func draw_health():
 	var health = Scores.health

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mario_throw_wappy.wav-db98db66aa6322f9131cd10ac38a6536.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Mario/mario_throw_wappy.wav"
+dest_files=[ "res://.import/mario_throw_wappy.wav-db98db66aa6322f9131cd10ac38a6536.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

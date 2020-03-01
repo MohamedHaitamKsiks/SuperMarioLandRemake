@@ -196,7 +196,7 @@ animations = [ {
 "frames": [ ExtResource( 10 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ) ],
 "loop": true,
 "name": "hat_sprint",
-"speed": 12.0
+"speed": 15.0
 }, {
 "frames": [ ExtResource( 42 ), ExtResource( 48 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ) ],
 "loop": false,
@@ -211,7 +211,7 @@ animations = [ {
 "frames": [ ExtResource( 69 ), ExtResource( 72 ), ExtResource( 73 ), ExtResource( 68 ), ExtResource( 71 ), ExtResource( 70 ) ],
 "loop": true,
 "name": "nohat_sprint",
-"speed": 12.0
+"speed": 15.0
 }, {
 "frames": [ ExtResource( 90 ), ExtResource( 77 ), ExtResource( 85 ), ExtResource( 79 ), ExtResource( 86 ), ExtResource( 93 ), ExtResource( 83 ) ],
 "loop": false,

@@ -27,7 +27,7 @@ var sprite_with_hat = "hat_"
 var throwing = false
 #mouvements
 var velocity = Vector2(0,0)
-var ground = false
+var ground = true
 #jumping
 var jump = true
 var wall_jump = false
@@ -80,12 +80,21 @@ func on_floor():
 				smash = false
 				start_camera_shake(16 ,0.3,0.1)
 				wave_effect(1)
+				$SFXSmash.play()
+			else:
+				$SFXFootStep.play()
 			$DustParticles.emitting = true
 		jump = false
 		climbing = false
 		wall_jump = false
 		ground = true
 	else :
+		if ground and turning:
+			turning = false
+			if jump :
+				$AnimatedSprite.play(sprite_with_hat + "jump")
+				return
+			$AnimatedSprite.play(sprite_with_hat + "fall")
 		ground = false
 	
 		
@@ -108,10 +117,16 @@ func mouvement_manager(velocity):
 	sprint = Input.is_action_pressed("gameplay_sprint") 
 	
 	#down
-	down = Input.is_action_pressed("ui_down") and ground and not smash
+	if Input.is_action_pressed("ui_down") and ground and not smash :
+		if not down :
+			$SFXCappy.play()
+		down = true
+	else :
+		down = false
 
 	#smash
 	if not (ground or smash or prepare_smash) and Input.is_action_just_pressed("ui_down"):
+		$SFXCappy.play()
 		prepare_smash = true
 		velocity = Vector2(0,0)
 	$ItemCollision.position.y = 16* velocity.y / MAX_VSPEED
@@ -144,12 +159,14 @@ func mouvement_manager(velocity):
 		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
 		wall_jump = true
 		turning = false 
+		$SFXJump.play()
 		
 	#jump		
 	if Input.is_action_just_pressed("gameplay_jump") and ground :
 		velocity.y = -JUMP_FORCE
 		jump = true
 		turning = false 
+		$SFXJump.play()
 	##long jump
 	if Input.is_action_pressed("gameplay_jump") and jump :
 		velocity.y -= JUMP_ACC
@@ -168,6 +185,8 @@ func mouvement_manager(velocity):
 		jump = false
 		wall_jump = false
 		velocity = Vector2(0,0)
+		$SFXThrowCappy.play()
+		$SFXCappy.play()
 		
 		
 		
@@ -182,6 +201,8 @@ func mouvement_manager(velocity):
 func _on_Mario_get_back_cappy():
 	with_hat = true
 	sprite_with_hat = "hat_"
+	$SFXCappy.play()
+
 	
 
 	
@@ -190,9 +211,21 @@ func _on_Mario_get_back_cappy():
 #sprite
 # warning-ignore:shadowed_variable
 func sprites_manager(velocity):
+
 	#falling stretch
 	$AnimatedSprite.scale.y = 1 + (velocity.y / MAX_VSPEED)*0.2 
 	$AnimatedSprite.scale.x = 1 - abs(velocity.y / MAX_VSPEED)*0.2 
+	
+	#turning
+	if ((velocity.x > 0 and $AnimatedSprite.flip_h) or (velocity.x < 0 and not $AnimatedSprite.flip_h)) and not(turning or climbing or wall_jump or hit):
+		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h 
+		turning = true
+		climbing = false
+		if ground :
+			$AnimatedSprite.play(sprite_with_hat + "turn")
+		else :
+			$AnimatedSprite.play(sprite_with_hat + "turn_air")
+	
 	
 	#sprite
 	
@@ -205,6 +238,7 @@ func sprites_manager(velocity):
 			if ground :	
 				if is_on_wall() :
 					$AnimatedSprite.play(sprite_with_hat + "wall_walk")
+					
 				else :
 					if down :
 						$AnimatedSprite.play(sprite_with_hat + "down")
@@ -212,7 +246,7 @@ func sprites_manager(velocity):
 						if velocity.x == 0:
 							$AnimatedSprite.play(sprite_with_hat + "stand")
 						elif abs(velocity.x) <= MAX_HSPEED:
-							$AnimatedSprite.play(sprite_with_hat + "run_with_smears")
+							$AnimatedSprite.play(sprite_with_hat + "run_with_smears")	
 						else :
 							$AnimatedSprite.play(sprite_with_hat + "sprint")
 			else :
@@ -222,7 +256,7 @@ func sprites_manager(velocity):
 					if jump or wall_jump:
 						$AnimatedSprite.play(sprite_with_hat + "jump")			
 	# warning-ignore:integer_division
-					if velocity.y > MAX_VSPEED / 4 :
+					if velocity.y > MAX_VSPEED / 5:
 						if $AnimatedSprite.animation != (sprite_with_hat + "jump") and $AnimatedSprite.animation != (sprite_with_hat + "fall_after_jump") :
 							$AnimatedSprite.play(sprite_with_hat + "fall")
 						else :
@@ -231,15 +265,6 @@ func sprites_manager(velocity):
 						$AnimatedSprite.play(sprite_with_hat + "wall_climb")
 			if hit :
 				$AnimatedSprite.play(sprite_with_hat + "hit")
-		#turning
-		if ((velocity.x > 0 and $AnimatedSprite.flip_h) or (velocity.x < 0 and not $AnimatedSprite.flip_h)) and not(turning or climbing or wall_jump or hit):
-			$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h 
-			turning = true
-			climbing = false
-			if ground :
-				$AnimatedSprite.play(sprite_with_hat + "turn")
-			else :
-				$AnimatedSprite.play(sprite_with_hat + "turn_air")
 			
 				
 #		
@@ -303,9 +328,6 @@ func camera_shake():
 	camera.offset.y = -rad * sin(camera_direction)
 #
 #camera mouvements
-# warning-ignore:unused_argument
-# warning-ignore:shadowed_variable
-# warning-ignore:unused_argument
 func camera_manager(velocity):
 	camera_shake()
 #
@@ -328,16 +350,21 @@ func _on_ItemCollision_body_entered(body):
 			body.emit_signal("get_item",true)
 			wave_effect(abs(velocity.y)/MAX_VSPEED)
 			start_camera_shake(10,0.5,0.1)
-			if Input.is_action_pressed("ui_down"):
-				velocity.y = -MAX_VSPEED/3
+			velocity.y = -MAX_VSPEED/3
+			body.emit_signal("destroy")
+			smash = false
+			$AnimatedSprite.play(sprite_with_hat + "jump")
+			$SFXSmash.play()
+
 		elif jump :
 			body.emit_signal("get_item",false)
 	elif "Brick" in body.name:
 		if smash :
 			wave_effect(abs(velocity.y)/MAX_VSPEED)
 			start_camera_shake(10,0.5,0.1)
-			velocity.y = -MAX_VSPEED/4
+			velocity.y = -MAX_VSPEED/8
 			body.emit_signal("destroy")
+
 		elif jump :
 			start_camera_shake(8,0.3,0.1)
 			body.emit_signal("destroy")
@@ -345,6 +372,7 @@ func _on_ItemCollision_body_entered(body):
 		body.emit_signal("destroy",self)
 		wave_effect(0.5)
 		start_camera_shake(7,0.5,0.2)
+		$SFXPowerUp.play()
 
 
 ##Hit box##
@@ -352,6 +380,7 @@ func _on_ItemCollision_body_entered(body):
 #recieve_damge
 func get_damage(body,damage):
 	Scores.health -= damage
+	$SFXHurt.play()
 	reset_variables()
 	can_hit = false
 	hit = true
@@ -422,7 +451,6 @@ func reset_variables():
 func _on_AnimatedSprite_frame_changed():
 	if throwing and $AnimatedSprite.frame == 4:
 		velocity = Vector2(0,0)
-		
 		sprite_with_hat = "nohat_"
 		var node = Cappy.instance()
 		get_parent().add_child(node)
@@ -432,3 +460,7 @@ func _on_AnimatedSprite_frame_changed():
 			node.velocity.x = -500
 		else :
 			node.velocity.x = 500
+			
+	if $AnimatedSprite.animation == sprite_with_hat + "run_with_smears" or  $AnimatedSprite.animation == sprite_with_hat + "sprint":
+		if ($AnimatedSprite.frame == 2 or $AnimatedSprite.frame == 5) :
+			$SFXFootStep.play()

@@ -10,8 +10,7 @@ var velocity = Vector2(0,0)
 signal jump
 
 
-func _ready():
-	pass
+
 
 
 func _physics_process(delta):
@@ -33,6 +32,7 @@ func _physics_process(delta):
 			#back
 			if(not Input.is_action_pressed("gameplay_throwcappy") and not back):
 				back = true
+				$SFXTurning.play()
 				$CollisionShape2D.disabled = true		
 	move_and_slide(velocity)
 
@@ -61,6 +61,7 @@ func _on_BackArea_body_entered(body):
 func _on_Timer_timeout():
 	back = true
 	$CollisionShape2D.disabled = true
+	
 
 
 func _on_Cappy_jump():

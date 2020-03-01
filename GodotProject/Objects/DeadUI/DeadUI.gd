@@ -20,5 +20,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func _on_DeadUI_start():
 	$AnimationPlayer.play("start")
+	$SFXDie.play()
 	Scores.health = 3
 	get_tree().paused = true

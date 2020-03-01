@@ -4,12 +4,15 @@ extends StaticBody2D
 var Coin = preload("res://Objects/Items/Coin/Coin.tscn")
 var Item = preload("res://Objects/Items/Item/Item.tscn")
 
-export var items = Array()
+export var items = PoolIntArray()
 signal get_item(smash)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
+	
+func _process(delta):
+	pass
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if len(items) == 0:

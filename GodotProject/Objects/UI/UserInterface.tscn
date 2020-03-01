@@ -12,12 +12,11 @@ font_path = "res://HennigarD.otf"
 
 [sub_resource type="DynamicFont" id=2]
 size = 48
-outline_size = 1
-outline_color = Color( 0, 0, 0, 0.686275 )
+outline_color = Color( 0, 0, 0, 0 )
 use_filter = true
 font_data = SubResource( 1 )
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": false,
@@ -25,7 +24,7 @@ animations = [ {
 "speed": 0.0
 } ]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
 
 uniform float lod = 0;
@@ -34,12 +33,11 @@ void fragment() {
 	COLOR.rgb = textureLod(SCREEN_TEXTURE, SCREEN_UV, lod).rgb;
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
 shader_param/lod = 0.0
 
-[sub_resource type="Animation" id=5]
-resource_name = "start"
+[sub_resource type="Animation" id=6]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:color")
@@ -59,11 +57,24 @@ script = ExtResource( 1 )
 
 [node name="CoinCounter" type="Node" parent="."]
 
+[node name="Label2" type="Label" parent="CoinCounter"]
+margin_left = 169.224
+margin_top = 45.7115
+margin_right = 253.224
+margin_bottom = 130.711
+rect_rotation = -3.89877
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 0.317647 )
+text = "0 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label" type="Label" parent="CoinCounter"]
-margin_left = 171.224
-margin_top = 37.7115
-margin_right = 255.224
-margin_bottom = 122.711
+margin_left = 169.224
+margin_top = 43.7115
+margin_right = 253.224
+margin_bottom = 128.711
 rect_rotation = -3.89877
 custom_fonts/font = SubResource( 2 )
 text = "0 0"
@@ -72,10 +83,10 @@ __meta__ = {
 }
 
 [node name="ColorRect6" type="ColorRect" parent="CoinCounter"]
-margin_left = 121.406
-margin_top = 83.7608
-margin_right = 161.406
-margin_bottom = 91.7608
+margin_left = 122.406
+margin_top = 89.7608
+margin_right = 162.406
+margin_bottom = 97.7608
 rect_rotation = -48.2212
 color = Color( 0, 0, 0, 0.160784 )
 __meta__ = {
@@ -83,10 +94,10 @@ __meta__ = {
 }
 
 [node name="ColorRect7" type="ColorRect" parent="CoinCounter"]
-margin_left = 127.327
-margin_top = 54.38
-margin_right = 167.327
-margin_bottom = 64.38
+margin_left = 129.327
+margin_top = 59.38
+margin_right = 169.327
+margin_bottom = 69.38
 rect_rotation = 44.6469
 color = Color( 0, 0, 0, 0.168627 )
 __meta__ = {
@@ -95,25 +106,25 @@ __meta__ = {
 
 [node name="ColorRect2" type="ColorRect" parent="CoinCounter"]
 margin_left = 122.406
-margin_top = 82.7608
+margin_top = 88.7608
 margin_right = 162.406
-margin_bottom = 90.7608
+margin_bottom = 96.7608
 rect_rotation = -48.2212
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect3" type="ColorRect" parent="CoinCounter"]
-margin_left = 128.327
-margin_top = 53.38
-margin_right = 168.327
-margin_bottom = 63.38
+margin_left = 129.327
+margin_top = 58.38
+margin_right = 169.327
+margin_bottom = 68.38
 rect_rotation = 44.6469
 
 [node name="ColorRect5" type="ColorRect" parent="CoinCounter"]
-margin_left = 47.0
+margin_left = 48.0
 margin_top = 108.279
-margin_right = 305.0
+margin_right = 306.0
 margin_bottom = 123.279
 rect_rotation = -3.88916
 color = Color( 0, 0, 0, 0.345098 )
@@ -123,16 +134,16 @@ __meta__ = {
 
 [node name="ColorRect4" type="ColorRect" parent="CoinCounter"]
 margin_left = 48.0
-margin_top = 106.279
+margin_top = 107.279
 margin_right = 306.0
-margin_bottom = 121.279
+margin_bottom = 122.279
 rect_rotation = -3.88916
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Sprite" type="Sprite" parent="CoinCounter"]
-position = Vector2( 84, 75 )
+position = Vector2( 85, 75 )
 scale = Vector2( 1.1, 1.1 )
 texture = ExtResource( 6 )
 
@@ -141,12 +152,12 @@ texture = ExtResource( 6 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Health"]
 position = Vector2( 1207.57, 79.5871 )
 rotation = -0.0872665
-frames = SubResource( 6 )
+frames = SubResource( 3 )
 
 [node name="Blur" type="Node" parent="."]
 
 [node name="BlurRect" type="ColorRect" parent="Blur"]
-material = SubResource( 4 )
+material = SubResource( 5 )
 use_parent_material = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -154,9 +165,9 @@ anchor_bottom = 1.0
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -3.25806
+margin_left = -0.25806
 margin_top = 1.629
-margin_right = -3.25806
+margin_right = -0.258057
 margin_bottom = 1.62903
 color = Color( 0, 0, 0, 0 )
 __meta__ = {
@@ -164,4 +175,4 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/start = SubResource( 5 )
+anims/start = SubResource( 6 )

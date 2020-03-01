@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mario_hurt.wav-9f42983e6cd6d595c0a9f3336e9b88af.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Mario/mario_hurt.wav"
+dest_files=[ "res://.import/mario_hurt.wav-9f42983e6cd6d595c0a9f3336e9b88af.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

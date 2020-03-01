@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/brick.wav-98caa0cdd4782908a2f4154db5d34002.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Items/brick.wav"
+dest_files=[ "res://.import/brick.wav-98caa0cdd4782908a2f4154db5d34002.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

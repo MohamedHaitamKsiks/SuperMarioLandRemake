@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Objects/Enemies/Goomba/Goomba.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Goomba/GoombaDie/goomb_die1.png" type="Texture" id=2]
@@ -14,6 +14,11 @@
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Goomba/GoombaWalk/goomba7.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Goomba/GoombaWalk/goomba8.png" type="Texture" id=13]
 [ext_resource path="res://Objects/Particles/DestParticles/DestParticles.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Audio/Enemies/goomba_die.wav" type="AudioStream" id=15]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Goomba/GoombaTurn/goomba_turn2.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Goomba/GoombaTurn/goomba_turn1.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Goomba/GoombaTurn/goomba_turn3.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Audio/Mario/mario_smash.wav" type="AudioStream" id=19]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -27,10 +32,10 @@ animations = [ {
 "name": "walk",
 "speed": 10.0
 }, {
-"frames": [  ],
-"loop": true,
+"frames": [ ExtResource( 17 ), ExtResource( 16 ), ExtResource( 18 ) ],
+"loop": false,
 "name": "turn",
-"speed": 5.0
+"speed": 20.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -41,10 +46,18 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource( 1 )
 
+[node name="SFXDie" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )
+bus = "SFX"
+
+[node name="SFXImpact" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 19 )
+bus = "SFX"
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "walk"
-frame = 5
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -68,5 +81,6 @@ process_parent = true
 physics_process_parent = true
 [connection signal="cappy_kill" from="." to="." method="_on_Goomba_cappy_kill"]
 [connection signal="kill" from="." to="." method="_on_Goomba_kill"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="TimerParticle" to="." method="_on_TimerParticle_timeout"]

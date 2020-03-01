@@ -15,3 +15,4 @@ func emit_particles(number):
 	get_parent().add_child(particle)
 	particle.position = global_position + Vector2(-24,-24)
 	particle.emitting = true
+	

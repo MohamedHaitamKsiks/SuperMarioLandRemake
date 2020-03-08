@@ -42,9 +42,10 @@ func _on_Goomba_cappy_kill(cappy):
 	die = true
 	$Timer.start()
 	$SFXDie.play()
-	rot_speed = 0.4 * sign(cappy.velocity.x)
+	rot_speed = 0.4 * ( sign(cappy.velocity.x) + int(cappy.velocity.x == 0) )
 	velocity.x = 50 * sign(cappy.velocity.x)
 	$AnimatedSprite.speed_scale = 0
+	$AnimatedSprite.z_index = 10
 	$AnimatedSprite.frame = 6
 	$CollisionShape2D.queue_free()
 	

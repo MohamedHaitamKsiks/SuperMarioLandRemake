@@ -3,6 +3,7 @@ extends StaticBody2D
 #preload class
 var Coin = preload("res://Objects/Items/Coin/Coin.tscn")
 var Item = preload("res://Objects/Items/Item/Item.tscn")
+var velocity = Vector2(0,0)
 
 export var items = PoolIntArray()
 signal get_item(smash)
@@ -37,3 +38,8 @@ func _on_QuestionBlock_get_item(smash):
 		
 			
 		items.remove(0)
+
+
+func _on_KillArea_body_entered(body):
+	if "Goomba" in body.name :
+		body.emit_signal("cappy_kill",self)

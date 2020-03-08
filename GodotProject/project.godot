@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="SuperMarioLandRemake"
-run/main_scene="res://Scenes/Levels/TestLevel/Test.tscn"
+run/main_scene="res://Scenes/Levels/FirstLevel/FirstLevel.tscn"
 config/icon="res://icon.png"
 
 [autoload]

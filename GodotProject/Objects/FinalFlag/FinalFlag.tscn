@@ -5,7 +5,7 @@
 [ext_resource path="res://Objects/FinalFlag/FinalFlag.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3, 59 )
+extents = Vector2( 3, 47 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "raise_flag"
@@ -38,7 +38,7 @@ position = Vector2( 14, -22 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -79 )
+position = Vector2( 0, -67 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

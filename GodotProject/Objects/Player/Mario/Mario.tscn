@@ -114,6 +114,8 @@ position = Vector2( 0, -50 )
 [node name="Camera" type="Camera2D" parent="CameraPosition"]
 current = true
 zoom = Vector2( 0.5, 0.5 )
+limit_left = 0
+limit_top = 0
 smoothing_speed = 0.0
 drag_margin_top = 0.8
 drag_margin_bottom = 0.0

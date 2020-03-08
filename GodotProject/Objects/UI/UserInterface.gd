@@ -21,7 +21,12 @@ func draw_blur():
 
 func draw_coins_counter():
 	var coins = Scores.coins
-	var res = str(int(coins / 10))+" "+str(coins % 10)
+	var res = ""
+	var digit = 3
+	
+	for k in range(digit):
+		res += str(int( coins / pow(10,digit - k - 1) ))
+		coins = coins % int(pow(10,digit - k -1 ))
 	$CoinCounter/Label.text = res
 	$CoinCounter/Label2.text = res
 	

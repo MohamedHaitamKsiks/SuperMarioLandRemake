@@ -1,0 +1,117 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Objects/PauseMenu/Button.gd" type="Script" id=1]
+[ext_resource path="res://Objects/PauseMenu/PauseFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/Graphics/Sprites/UI/SelectUI/Select.png" type="Texture" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="Animation" id=6]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 0.466516, 1 ),
+"update": 0,
+"values": [ Vector2( -700, 12 ), Vector2( -80, 12 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.85098, 0.85098, 0.85098, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 0.267943 ),
+"update": 0,
+"values": [ Vector2( -80, 12 ), Vector2( -700, 12 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.784314, 0.784314, 0.784314, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Button" type="Button"]
+margin_right = 425.0
+margin_bottom = 86.0
+mouse_filter = 1
+custom_styles/focus = SubResource( 8 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+shortcut_in_tooltip = false
+button_mask = 0
+text = "RESUME"
+flat = true
+align = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+anchor_left = -0.150588
+anchor_top = 0.139535
+anchor_right = 0.809412
+anchor_bottom = 0.511628
+margin_left = -636.0
+margin_top = -8.58307e-06
+margin_right = -596.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect"]
+show_behind_parent = true
+anchor_left = -0.0743277
+anchor_top = 0.361757
+anchor_right = 0.836386
+anchor_bottom = 0.695091
+margin_left = 25.2988
+margin_top = -10.0465
+margin_right = 65.2988
+margin_bottom = 29.9535
+color = Color( 0, 0, 0, 0.329412 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ColorRect"]
+position = Vector2( 32, 32 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/focusEntered = SubResource( 6 )
+anims/focusExit = SubResource( 7 )
+[connection signal="focus_entered" from="." to="." method="_on_Button_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_Button_focus_exited"]

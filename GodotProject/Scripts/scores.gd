@@ -9,6 +9,12 @@ var checkpoint = -1
 func _ready():
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func goto_level(scene):
+	health = 3
+	checkpoint = -1
+	get_tree().change_scene(scene)
+
+func restart_level():
+	health = 3
+	checkpoint = -1
+	get_tree().reload_current_scene()

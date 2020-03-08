@@ -8,6 +8,7 @@ const Cappy = preload("res://Objects/Cappy/Cappy.tscn")
 # warning-ignore:unused_signal
 signal shake_camera(power,time,period)
 signal get_back_cappy()
+signal finish_level()
 
 
 #const
@@ -43,6 +44,9 @@ var turning = false
 var hit = false
 var can_hit = true
 var is_visible = true
+#end level
+var slide = false
+var finish = false
 #camera
 var camera_period = 1
 var camera_power = 0
@@ -58,10 +62,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	on_floor()
-	if not (hit or prepare_smash or throwing):
+	if not (hit or prepare_smash or throwing or slide or finish):
 		velocity = mouvement_manager(velocity)
-		if throwing :
+		if throwing:
 			velocity = Vector2(0,0)
+	if finish :
+		finish_cinematic()
 	sprites_manager(velocity)
 	camera_manager(velocity)
 	dust_particles()
@@ -188,8 +194,6 @@ func mouvement_manager(velocity):
 		$SFXThrowCappy.play()
 		$SFXCappy.play()
 		
-		
-		
 	# gravity
 	$AttackBox.position.y = 4*int(velocity.y>0)
 	if velocity.y <= MAX_VSPEED:
@@ -209,7 +213,6 @@ func _on_Mario_get_back_cappy():
 ##Animed Sprite##
 #
 #sprite
-# warning-ignore:shadowed_variable
 func sprites_manager(velocity):
 
 	#falling stretch
@@ -255,7 +258,7 @@ func sprites_manager(velocity):
 				else :
 					if jump or wall_jump:
 						$AnimatedSprite.play(sprite_with_hat + "jump")			
-	# warning-ignore:integer_division
+
 					if velocity.y > MAX_VSPEED / 5:
 						if $AnimatedSprite.animation != (sprite_with_hat + "jump") and $AnimatedSprite.animation != (sprite_with_hat + "fall_after_jump") :
 							$AnimatedSprite.play(sprite_with_hat + "fall")
@@ -265,6 +268,10 @@ func sprites_manager(velocity):
 						$AnimatedSprite.play(sprite_with_hat + "wall_climb")
 			if hit :
 				$AnimatedSprite.play(sprite_with_hat + "hit")
+				
+	#slide
+	if slide :
+		$AnimatedSprite.play(sprite_with_hat + "slide")
 			
 				
 #		
@@ -282,7 +289,6 @@ func _on_AnimatedSprite_animation_finished():
 		
 	throwing = false
 		
-# warning-ignore:integer_division
 		
 #
 #blinking effect when get hit
@@ -330,18 +336,53 @@ func camera_shake():
 #camera mouvements
 func camera_manager(velocity):
 	camera_shake()
+	if finish:
+		$CameraPosition/Camera.smoothing_enabled = true
 #
 #Signal to shake the camera
 func _on_Mario_shake_camera(power,t,period):
 	start_camera_shake(power,t,period)
 
 
+##Final Level##
+func _on_FinishTimer_timeout():
+	velocity.y = 80
+	
+func finish_cinematic():
+	velocity.x = MAX_HSPEED/2
+	
+	if velocity.y<0:
+		$AnimatedSprite.play(sprite_with_hat + "jump")	
+		
+		
+	if velocity.y <= MAX_VSPEED:
+		velocity.y += GRAVITY
+
+func _on_Mario_finish_level():
+	velocity.y = -JUMP_FORCE
+	get_parent().get_node("Transition").emit_signal("goto_next_level")
+	$SFXJump.play()
+	slide = false
+	finish = true
+	
+
 ##Items##
 #
 #area
 func _on_ItemCollision_area_entered(area):
 	if "Coin" in area.name :
-		area.emit_signal("destroy_coin")	
+		area.emit_signal("destroy_coin")
+		
+	if "FinalFlag" in area.name and not slide:
+		velocity = Vector2(0,0)
+		global_position.x = area.position.x + 3
+		slide = true
+		smash = false
+		throwing = false
+		reset_variables()
+		$FinishTimer.start()
+		$JumpParticles.emitting = false
+		area.emit_signal("raise_flag",self)
 #
 #body
 func _on_ItemCollision_body_entered(body):
@@ -356,7 +397,7 @@ func _on_ItemCollision_body_entered(body):
 			$AnimatedSprite.play(sprite_with_hat + "jump")
 			$SFXSmash.play()
 
-		elif jump :
+		elif jump or wall_jump:
 			body.emit_signal("get_item",false)
 	elif "Brick" in body.name:
 		if smash :
@@ -365,7 +406,7 @@ func _on_ItemCollision_body_entered(body):
 			velocity.y = -MAX_VSPEED/8
 			body.emit_signal("destroy")
 
-		elif jump :
+		elif jump or wall_jump:
 			start_camera_shake(8,0.3,0.1)
 			body.emit_signal("destroy")
 	elif "Item" in body.name:
@@ -464,3 +505,4 @@ func _on_AnimatedSprite_frame_changed():
 	if $AnimatedSprite.animation == sprite_with_hat + "run_with_smears" or  $AnimatedSprite.animation == sprite_with_hat + "sprint":
 		if ($AnimatedSprite.frame == 2 or $AnimatedSprite.frame == 5) :
 			$SFXFootStep.play()
+

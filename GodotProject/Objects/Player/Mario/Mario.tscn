@@ -114,6 +114,7 @@ position = Vector2( 0, -50 )
 [node name="Camera" type="Camera2D" parent="CameraPosition"]
 current = true
 zoom = Vector2( 0.5, 0.5 )
+smoothing_speed = 0.0
 drag_margin_top = 0.8
 drag_margin_bottom = 0.0
 editor_draw_limits = true
@@ -182,6 +183,10 @@ one_shot = true
 wait_time = 0.2
 autostart = true
 
+[node name="FinishTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="SprintParticles" type="Particles2D" parent="."]
 position = Vector2( -4, 20 )
 z_index = 10
@@ -216,6 +221,7 @@ lifetime = 0.5
 explosiveness = 1.0
 
 [node name="DeadUI" parent="." instance=ExtResource( 58 )]
+[connection signal="finish_level" from="." to="." method="_on_Mario_finish_level"]
 [connection signal="get_back_cappy" from="." to="." method="_on_Mario_get_back_cappy"]
 [connection signal="shake_camera" from="." to="." method="_on_Mario_shake_camera"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
@@ -228,3 +234,4 @@ explosiveness = 1.0
 [connection signal="timeout" from="HitTimer" to="." method="_on_HitTimer_timeout"]
 [connection signal="timeout" from="CanHitTimer" to="." method="_on_CanHitTimer_timeout"]
 [connection signal="timeout" from="VisibleTimer" to="." method="_on_VisibleTimer_timeout"]
+[connection signal="timeout" from="FinishTimer" to="." method="_on_FinishTimer_timeout"]

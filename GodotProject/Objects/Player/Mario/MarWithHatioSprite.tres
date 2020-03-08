@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=106 format=2]
+[gd_resource type="SpriteFrames" load_steps=108 format=2]
 
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/WithHat/MarioTurn/mario_small_turn4.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/WithHat/MarioRun/smears/mario_small_run3.png" type="Texture" id=2]
@@ -105,6 +105,8 @@
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/WihoutHat/MarioSmallWallJump/mario_withouthat_climb.png" type="Texture" id=103]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/WihoutHat/MarioSmallTurnAirr/mario_withouthat_turn_air.png" type="Texture" id=104]
 [ext_resource path="res://Assets/Graphics/Sprites/Mario/WithHat/MarioSmash/mario_small_smash7.png" type="Texture" id=105]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/WithHat/MarioSlide/mario_small_slide.png" type="Texture" id=106]
+[ext_resource path="res://Assets/Graphics/Sprites/Mario/WihoutHat/MarioSmallSlide/mario_withouthat_slide.png" type="Texture" id=107]
 
 [resource]
 animations = [ {
@@ -242,4 +244,14 @@ animations = [ {
 "loop": true,
 "name": "nohat_run_with_smears",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 107 ) ],
+"loop": true,
+"name": "nohat_slide",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 106 ) ],
+"loop": false,
+"name": "hat_slide",
+"speed": 12.0
 } ]

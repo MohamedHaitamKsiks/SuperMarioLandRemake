@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Objects/PauseMenu/PauseMenu.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Button/Button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Audio/UI/ui_pause.wav" type="AudioStream" id=3]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -72,6 +73,33 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -640, 0 ) ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "quit"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ButtonPosition/Buttons:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1.86607, 1 ),
+"update": 0,
+"values": [ Vector2( 128, 332 ), Vector2( -640, 332 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
 [node name="PauseMenu" type="CanvasLayer"]
 pause_mode = 2
 script = ExtResource( 1 )
@@ -92,7 +120,7 @@ position = Vector2( -640, 0 )
 margin_left = 128.0
 margin_top = 332.0
 margin_right = 634.0
-margin_bottom = 496.0
+margin_bottom = 598.0
 rect_rotation = -2.37776
 __meta__ = {
 "_edit_use_anchors_": false
@@ -120,9 +148,22 @@ focus_neighbour_top = NodePath("../Options")
 focus_neighbour_bottom = NodePath("../Resume")
 text = "QUIT"
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/pauseIn = SubResource( 3 )
 anims/pauseOut = SubResource( 4 )
+anims/quit = SubResource( 5 )
+
+[node name="PauseSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"
 [connection signal="pressed" from="ButtonPosition/Buttons/Resume" to="." method="_on_Resume_pressed"]
 [connection signal="pressed" from="ButtonPosition/Buttons/Options" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="ButtonPosition/Buttons/Quit" to="." method="_on_Quit_pressed"]

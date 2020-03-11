@@ -110,11 +110,6 @@
 
 [resource]
 animations = [ {
-"frames": [ ExtResource( 65 ) ],
-"loop": false,
-"name": "nohat_stand",
-"speed": 0.0
-}, {
 "frames": [ ExtResource( 97 ), ExtResource( 95 ), ExtResource( 96 ), ExtResource( 101 ), ExtResource( 102 ), ExtResource( 98 ), ExtResource( 100 ), ExtResource( 99 ) ],
 "loop": true,
 "name": "nohat_wall_walk",
@@ -254,4 +249,9 @@ animations = [ {
 "loop": true,
 "name": "hat_run",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 65 ) ],
+"loop": false,
+"name": "nohat_stand",
+"speed": 0.0
 } ]

@@ -16,6 +16,8 @@ func _ready():
 func _process(delta):
 	if is_hovered():
 		grab_focus()
+	if pressed and not $ConfirmSFX.playing:
+		$ConfirmSFX.play()
 	
 
 

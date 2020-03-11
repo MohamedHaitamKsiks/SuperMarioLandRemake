@@ -1,12 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Objects/PauseMenu/Button.gd" type="Script" id=1]
 [ext_resource path="res://Objects/PauseMenu/PauseFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Assets/Graphics/Sprites/UI/SelectUI/Select.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Audio/UI/ui_confirm.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Audio/Mario/cappy.wav" type="AudioStream" id=5]
 
-[sub_resource type="StyleBoxEmpty" id=8]
+[sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=2]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:rect_position")
@@ -32,8 +34,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.85098, 0.85098, 0.85098, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("FocusSFX:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:rect_position")
@@ -64,7 +78,7 @@ tracks/1/keys = {
 margin_right = 425.0
 margin_bottom = 86.0
 mouse_filter = 1
-custom_styles/focus = SubResource( 8 )
+custom_styles/focus = SubResource( 1 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 shortcut_in_tooltip = false
@@ -84,7 +98,7 @@ anchor_top = 0.139535
 anchor_right = 0.809412
 anchor_bottom = 0.511628
 margin_left = -636.0
-margin_top = -8.58307e-06
+margin_top = -9.53674e-06
 margin_right = -596.0
 margin_bottom = 40.0
 __meta__ = {
@@ -111,7 +125,15 @@ position = Vector2( 32, 32 )
 texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/focusEntered = SubResource( 6 )
-anims/focusExit = SubResource( 7 )
+anims/focusEntered = SubResource( 2 )
+anims/focusExit = SubResource( 3 )
+
+[node name="ConfirmSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "SFX"
+
+[node name="FocusSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "SFX"
 [connection signal="focus_entered" from="." to="." method="_on_Button_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_Button_focus_exited"]

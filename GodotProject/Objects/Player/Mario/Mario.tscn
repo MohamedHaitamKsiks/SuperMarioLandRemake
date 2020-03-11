@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Objects/Player/Mario/Mario.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Player/Mario/MarWithHatioSprite.tres" type="SpriteFrames" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Audio/Mario/mario_smash.wav" type="AudioStream" id=7]
 [ext_resource path="res://Assets/Audio/Mario/cappy.wav" type="AudioStream" id=8]
 [ext_resource path="res://Assets/Audio/Items/power_up.wav" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Audio/Mario/mario_slide.wav" type="AudioStream" id=10]
 [ext_resource path="res://Assets/Graphics/Particles/dust.png" type="Texture" id=56]
 [ext_resource path="res://Objects/Particles/DestParticles/DestParticles.tscn" type="PackedScene" id=57]
 [ext_resource path="res://Objects/DeadUI/DeadUI.tscn" type="PackedScene" id=58]
@@ -108,8 +109,12 @@ stream = ExtResource( 9 )
 volume_db = 2.144
 bus = "SFX"
 
+[node name="SFXSlide" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+bus = "SFX"
+
 [node name="CameraPosition" type="Position2D" parent="."]
-position = Vector2( 0, -50 )
+position = Vector2( 0, -80 )
 
 [node name="Camera" type="Camera2D" parent="CameraPosition"]
 current = true

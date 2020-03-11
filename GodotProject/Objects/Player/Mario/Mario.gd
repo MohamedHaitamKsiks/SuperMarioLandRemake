@@ -347,6 +347,7 @@ func _on_Mario_shake_camera(power,t,period):
 ##Final Level##
 func _on_FinishTimer_timeout():
 	velocity.y = 80
+	$SFXSlide.play()
 	
 func finish_cinematic():
 	velocity.x = MAX_HSPEED/2

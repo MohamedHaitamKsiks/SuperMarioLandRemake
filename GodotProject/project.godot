@@ -21,7 +21,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Scores="*res://Scripts/scores.gd"
+Scores="*res://Scenes/MainMenu/Scripts/scores.gd"
 
 [display]
 

@@ -1,19 +1,15 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+signal quitOption()
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationPlayer.play("Start")
+	$Option/Options.visible = false
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 
 func _on_Start_pressed():
@@ -21,7 +17,8 @@ func _on_Start_pressed():
 
 
 func _on_Option_pressed():
-	pass # Replace with function body.
+	$Option/Options.visible = true
+	$Option/Options/FullScreen.grab_focus()
 
 
 func _on_Quit_pressed():
@@ -33,3 +30,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$CanvasLayer/VBoxContainer/Start.grab_focus()
 	elif anim_name == "getMenu":
 		get_tree().change_scene("res://Scenes/Levels/FirstLevel/FirstLevel.tscn")
+
+
+func _on_MainMenu_quitOption():
+	$Option/Options.visible = false
+	$CanvasLayer/VBoxContainer/Option.grab_focus()

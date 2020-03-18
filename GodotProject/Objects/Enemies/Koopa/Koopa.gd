@@ -2,13 +2,13 @@ extends "res://Objects/Enemies/EnemyParent.gd"
 
 
 var shell = false
-var speed = 20
+var speed = 30
 var rot = 0
 var Mario
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	velocity.x = 20
+	velocity.x = speed
 
 func _process(delta):
 	velocity = move(velocity)
@@ -18,6 +18,8 @@ func _process(delta):
 			velocity.x = speed
 		else :
 			velocity.x = -speed
+		if not shell :
+			$AnimatedSprite.play("turn")
 		$SFXWallCollision.play()
 		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
 	
@@ -46,7 +48,8 @@ func _on_Koopa_cappy_kill(cappy):
 		$Shell/CollisionShape2D.queue_free()
 		$AnimatedSprite.flip_v = true
 		$SFXDie.play()
-		$AnimatedSprite.play("shell")		
+		$AnimatedSprite.play("shell")
+		$DestroyTimer.start()
 	else : 
 		speed = cappy.velocity.x/4
 		velocity.x = speed
@@ -81,3 +84,9 @@ func _on_Shell_body_entered(body):
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "die":
 		$AnimatedSprite.play("shell")
+	elif $AnimatedSprite.animation == "turn":
+		$AnimatedSprite.play("walk")
+
+
+func _on_DestroyTimer_timeout():
+	queue_free()

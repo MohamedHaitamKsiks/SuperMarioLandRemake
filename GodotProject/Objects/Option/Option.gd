@@ -27,6 +27,7 @@ func _process(delta):
 func _on_Back_pressed():
 	get_parent().emit_signal("quitOption")
 	saveConfigFile(config)
+	$Options/Back/SFXModify.play()
 	
 
 

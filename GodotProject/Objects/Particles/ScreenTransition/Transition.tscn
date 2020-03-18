@@ -2,8 +2,6 @@
 
 [ext_resource path="res://Objects/Particles/ScreenTransition/Transition.gd" type="Script" id=1]
 
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "fadeIn"
 length = 2.5

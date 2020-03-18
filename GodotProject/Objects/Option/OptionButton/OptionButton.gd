@@ -34,11 +34,11 @@ func _process(delta):
 		$HBoxContainer/ArrowLeft.visible = true
 		$HBoxContainer/ArrowRight.visible = true
 	elif value == max_value :
-		$HBoxContainer/ArrowLeft.visible = true
-		$HBoxContainer/ArrowRight.visible = false
-	elif value == 0:
 		$HBoxContainer/ArrowLeft.visible = false
 		$HBoxContainer/ArrowRight.visible = true
+	elif value == 0:
+		$HBoxContainer/ArrowLeft.visible = true
+		$HBoxContainer/ArrowRight.visible = false
 
 func _on_OptionButton_focus_entered():
 	$AnimationPlayer.play("focusOn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Objects/Enemies/Koopa/Koopa.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Koopa/Walk/koopa2.png" type="Texture" id=2]
@@ -22,6 +22,9 @@
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Koopa/Die/koopa_die4.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Koopa/Die/koopa_die1.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Koopa/Die/koopa_die2.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Koopa/Turn/koopa_turn3.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Koopa/Turn/koopa_turn2.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Koopa/Turn/koopa_turn4.png" type="Texture" id=25]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -38,7 +41,12 @@ animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "walk",
-"speed": 6.0
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 24 ), ExtResource( 23 ), ExtResource( 25 ) ],
+"loop": false,
+"name": "turn",
+"speed": 18.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -84,7 +92,6 @@ script = ExtResource( 1 )
 position = Vector2( 0, -2 )
 frames = SubResource( 1 )
 animation = "walk"
-frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -109,7 +116,18 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shell"]
 position = Vector2( 0, 5 )
 shape = SubResource( 4 )
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 8.9407e-08, -8.9407e-08 )
+scale = Vector2( 0.9, 0.9 )
+process_parent = true
+physics_process_parent = true
 [connection signal="cappy_kill" from="." to="." method="_on_Koopa_cappy_kill"]
 [connection signal="kill" from="." to="." method="_on_Koopa_kill"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="body_entered" from="Shell" to="." method="_on_Shell_body_entered"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]

@@ -57,7 +57,7 @@ bus = "SFX"
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "walk"
-frame = 1
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -77,6 +77,8 @@ fract_delta = false
 one_shot = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( -1.07288e-06, 0 )
+scale = Vector2( 1.1, 1 )
 process_parent = true
 physics_process_parent = true
 [connection signal="cappy_kill" from="." to="." method="_on_Goomba_cappy_kill"]

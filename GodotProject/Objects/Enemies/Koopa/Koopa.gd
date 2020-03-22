@@ -68,7 +68,7 @@ func _on_Koopa_kill(mario):
 		$AnimatedSprite.play("die")
 		self.Mario = mario
 	else :
-		speed = 30 * (self.global_position.x - mario.global_position.x)
+		speed = 20 * (self.global_position.x - mario.global_position.x)
 		velocity.x = speed
 		$SFXWallCollision.play()
 

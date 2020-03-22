@@ -1,9 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Objects/DeadUI/DeadUI.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Audio/Mario/mario_falling.wav" type="AudioStream" id=2]
-
-
+[ext_resource path="res://Assets/Audio/Tunes/death_tune.wav" type="AudioStream" id=2]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -95,7 +93,6 @@ __meta__ = {
 
 [node name="SFXDie" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -13.116
 bus = "SFX"
 [connection signal="start" from="." to="." method="_on_DeadUI_start"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

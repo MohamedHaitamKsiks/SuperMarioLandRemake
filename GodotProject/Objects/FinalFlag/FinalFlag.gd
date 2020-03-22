@@ -24,4 +24,5 @@ func _on_FinalFlag_raise_flag(mario):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "raise_flag" :
 		mario.emit_signal("finish_level")
+		$TuneEnd.play()
 		

@@ -33,9 +33,10 @@ func _physics_process(delta):
 			if(not Input.is_action_pressed("gameplay_throwcappy") and not back):
 				back = true
 				$SFXTurning.play()
+				$SFXTurning.pitch_scale = 1
 				$CollisionShape2D.disabled = true		
 	move_and_slide(velocity)
-
+	$SFXTurning.pitch_scale += 0.01
 
 
 func _on_BackArea_body_entered(body):
@@ -67,3 +68,4 @@ func _on_Timer_timeout():
 
 func _on_Cappy_jump():
 	$AnimationPlayer.play("jump")
+

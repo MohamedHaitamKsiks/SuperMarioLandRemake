@@ -14,6 +14,9 @@ func _process(delta):
 	draw_coins_counter()
 	draw_health()
 	draw_blur()
+	$ColorRect/Title.text = get_parent().title
+
+
 
 func draw_blur():
 	$Blur/BlurRect.get_material().set_shader_param("lod",blur)
@@ -23,13 +26,13 @@ func draw_coins_counter():
 	var coins = Scores.coins
 	var res = ""
 	var digit = 3
-	
+
 	for k in range(digit):
 		res += str(int( coins / pow(10,digit - k - 1) ))
 		coins = coins % int(pow(10,digit - k -1 ))
 	$CoinCounter/Label.text = res
 	$CoinCounter/Label2.text = res
-	
+
 func draw_health():
 	var health = Scores.health
 	$Health/AnimatedSprite.frame = 3 - health

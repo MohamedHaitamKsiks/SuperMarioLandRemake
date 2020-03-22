@@ -24,6 +24,7 @@ func draw_blur():
 
 func _on_Quit_pressed():
 	$AnimationPlayer.play("quit")
+	get_parent().get_node("Music").stop()
 
 
 func _on_Resume_pressed():
@@ -48,5 +49,6 @@ func _on_Button_pressed():
 
 
 func _on_PauseMenu_quitOption():
+	
 	$Option/Options.visible = false
 	$ButtonPosition/Buttons/Options.grab_focus()

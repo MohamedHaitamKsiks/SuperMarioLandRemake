@@ -1,8 +1,9 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Objects/Particles/WaveEffect/WaveEffect.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Graphics/Tileset/FirstLevel/first_level_tiles.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Tileset/World1/first_level_tiles.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Graphics/Particles/wave_circle.png" type="Texture" id=3]
+
 
 
 [sub_resource type="Shader" id=1]

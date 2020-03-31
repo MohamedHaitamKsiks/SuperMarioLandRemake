@@ -1,19 +1,20 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Objects/Player/Mario/Mario.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Audio/Mario/mario_jump.wav" type="AudioStream" id=2]
-[ext_resource path="res://Assets/Audio/Mario/mario_throw_wappy.wav" type="AudioStream" id=3]
-[ext_resource path="res://Assets/Audio/Mario/cappy.wav" type="AudioStream" id=4]
-[ext_resource path="res://Assets/Audio/Mario/mario_hurt.wav" type="AudioStream" id=5]
-[ext_resource path="res://Assets/Audio/Mario/mario_footsteps.wav" type="AudioStream" id=6]
-[ext_resource path="res://Assets/Audio/Mario/mario_smash.wav" type="AudioStream" id=7]
-[ext_resource path="res://Assets/Audio/Items/power_up.wav" type="AudioStream" id=8]
-[ext_resource path="res://Assets/Audio/Mario/mario_slide.wav" type="AudioStream" id=9]
-[ext_resource path="res://Assets/Audio/Pipe/pipe_enter.wav" type="AudioStream" id=10]
-[ext_resource path="res://Assets/Graphics/Particles/dust.png" type="Texture" id=11]
-[ext_resource path="res://Objects/Player/Mario/MarWithHatioSprite.tres" type="SpriteFrames" id=12]
-[ext_resource path="res://Objects/Particles/DestParticles/DestParticles.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Objects/DeadUI/DeadUI.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Audio/Mario/mario_dive.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Audio/Mario/mario_throw_wappy.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Audio/Mario/cappy.wav" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Audio/Mario/mario_hurt.wav" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Audio/Mario/mario_footsteps.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets/Audio/Mario/mario_smash.wav" type="AudioStream" id=8]
+[ext_resource path="res://Assets/Audio/Items/power_up.wav" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Audio/Mario/mario_slide.wav" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Audio/Pipe/pipe_enter.wav" type="AudioStream" id=11]
+[ext_resource path="res://Assets/Graphics/Particles/dust.png" type="Texture" id=12]
+[ext_resource path="res://Objects/Player/Mario/MarWithHatioSprite.tres" type="SpriteFrames" id=13]
+[ext_resource path="res://Objects/Particles/DestParticles/DestParticles.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Objects/DeadUI/DeadUI.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0.00323407, 0.0215 ), 0.0, 4.58495, 0, 0, Vector2( 1, 0 ), 0.247053, 0.0, 0, 0 ]
@@ -85,41 +86,44 @@ script = ExtResource( 1 )
 stream = ExtResource( 2 )
 bus = "SFX"
 
-[node name="SFXThrowCappy" type="AudioStreamPlayer2D" parent="."]
+[node name="SFXDive" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 bus = "SFX"
 
-[node name="SFXCappy" type="AudioStreamPlayer2D" parent="."]
+[node name="SFXThrowCappy" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 bus = "SFX"
 
-[node name="SFXHurt" type="AudioStreamPlayer2D" parent="."]
+[node name="SFXCappy" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 bus = "SFX"
 
-[node name="SFXFootStep" type="AudioStreamPlayer2D" parent="."]
+[node name="SFXHurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
 bus = "SFX"
 
-[node name="SFXSmash" type="AudioStreamPlayer2D" parent="."]
+[node name="SFXFootStep" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
 bus = "SFX"
 
-[node name="SFXPowerUp" type="AudioStreamPlayer2D" parent="."]
+[node name="SFXSmash" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
+bus = "SFX"
+
+[node name="SFXPowerUp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
 volume_db = 18.478
 bus = "SFX"
 
 [node name="SFXSlide" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 9 )
-bus = "SFX"
-
-[node name="SFXStart" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 bus = "SFX"
 
+[node name="SFXStart" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+bus = "SFX"
+
 [node name="CameraPosition" type="Position2D" parent="."]
-editor/display_folded = true
 position = Vector2( 0, -80 )
 
 [node name="Camera" type="Camera2D" parent="CameraPosition"]
@@ -128,8 +132,6 @@ zoom = Vector2( 0.5, 0.5 )
 limit_left = 0
 limit_top = 0
 limit_bottom = 800
-drag_margin_h_enabled = false
-drag_margin_v_enabled = false
 smoothing_speed = 0.0
 drag_margin_top = 0.8
 drag_margin_bottom = 0.0
@@ -144,10 +146,10 @@ amount = 40
 lifetime = 0.75
 local_coords = false
 process_material = SubResource( 3 )
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 12 )
+frames = ExtResource( 13 )
 animation = "hat_stand"
 playing = true
 
@@ -172,7 +174,6 @@ position = Vector2( 0, 8 )
 shape = SubResource( 4 )
 
 [node name="ItemCollision" type="Area2D" parent="."]
-editor/display_folded = true
 visible = false
 collision_layer = 5
 collision_mask = 5
@@ -182,7 +183,6 @@ position = Vector2( 0, 8 )
 shape = SubResource( 5 )
 
 [node name="HitBox" type="Area2D" parent="."]
-editor/display_folded = true
 visible = false
 collision_layer = 2
 collision_mask = 2
@@ -192,7 +192,6 @@ position = Vector2( 0, 8 )
 shape = SubResource( 6 )
 
 [node name="AttackBox" type="Area2D" parent="."]
-editor/display_folded = true
 visible = false
 collision_layer = 2
 collision_mask = 2
@@ -223,7 +222,7 @@ emitting = false
 amount = 40
 local_coords = false
 process_material = SubResource( 10 )
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 
 [node name="ClimbParticles" type="Particles2D" parent="."]
 position = Vector2( 7, -1 )
@@ -232,14 +231,14 @@ emitting = false
 amount = 40
 local_coords = false
 process_material = SubResource( 11 )
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 
-[node name="DustParticles" parent="." instance=ExtResource( 13 )]
+[node name="DustParticles" parent="." instance=ExtResource( 14 )]
 position = Vector2( 0, 23 )
 lifetime = 0.5
 explosiveness = 1.0
 
-[node name="DeadUI" parent="." instance=ExtResource( 14 )]
+[node name="DeadUI" parent="." instance=ExtResource( 15 )]
 [connection signal="finish_level" from="." to="." method="_on_Mario_finish_level"]
 [connection signal="get_back_cappy" from="." to="." method="_on_Mario_get_back_cappy"]
 [connection signal="shake_camera" from="." to="." method="_on_Mario_shake_camera"]

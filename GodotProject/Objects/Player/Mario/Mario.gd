@@ -16,7 +16,7 @@ const GRAVITY = 10
 const ACC = 20
 const MAX_HSPEED = 160
 const MAX_VSPEED = 500
-const JUMP_FORCE = 180
+const JUMP_FORCE = 190
 const JUMP_ACC = 5
 const FLOOR = Vector2(0,-1)
 
@@ -26,6 +26,8 @@ const FLOOR = Vector2(0,-1)
 var with_hat = true
 var sprite_with_hat = "hat_"
 var throwing = false
+var cappy_jump = false
+#teleport
 var teleport = false
 var teleport_angle = 0
 #mouvements
@@ -44,6 +46,7 @@ var smash = false
 #run
 var sprint = false
 var turning = false
+
 #hit
 var hit = false
 var can_hit = true
@@ -63,7 +66,6 @@ var time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ground = true
 	$AnimatedSprite.position.y = 100
 
 
@@ -102,6 +104,7 @@ func on_floor():
 		climbing = false
 		wall_jump = false
 		ground = true
+		cappy_jump = false
 	else :
 		if ground and turning:
 			turning = false
@@ -112,7 +115,6 @@ func on_floor():
 		ground = false
 
 
-
 ##mouvements##
 # warning-ignore:shadowed_variable
 func mouvement_manager(velocity):
@@ -121,9 +123,9 @@ func mouvement_manager(velocity):
 
 	#basic mouvements
 	var direction = int(Input.is_action_pressed("ui_right"))-int(Input.is_action_pressed("ui_left"))
-	velocity.x += ACC * direction * int(not wall_jump and not down and not smash and not dive)#acceleration
-	velocity.x -= ACC * sign(velocity.x) * int(direction == 0 or down or smash) * int(not wall_jump) * int(not dive) * (0.5 + 0.5 * int(ground))#deceleration
-	if abs(velocity.x) > MAX_HSPEED * ( 1 + int(sprint))  :#max speed
+	velocity.x += ACC * direction * int(not (wall_jump or down or smash or dive) )#acceleration
+	velocity.x -= ACC * sign(velocity.x) * int(direction == 0 or down or smash or dive) * int(not wall_jump) * int(not dive or ground) * (1 - 0.4 * int(dive and ground)) * (0.5 + 0.5 * int(ground))#deceleration
+	if abs(velocity.x) > MAX_HSPEED * ( 1 + int(sprint)) and not dive :#max speed
 		velocity.x = MAX_HSPEED * ( 1 + int(sprint)) * sign(velocity.x)
 	if abs(velocity.x) < ACC :
 		velocity.x = 0
@@ -177,7 +179,7 @@ func mouvement_manager(velocity):
 		$SFXJump.play()
 
 	#jump
-	if Input.is_action_just_pressed("gameplay_jump") and ground :
+	if Input.is_action_just_pressed("gameplay_jump") and ground and not (throwing or dive) :
 		velocity.y = -JUMP_FORCE
 		jump = true
 		dive = false
@@ -195,32 +197,27 @@ func mouvement_manager(velocity):
 		$AttackBox/CollisionShape2D.disabled = true
 	
 	#dive
-	if Input.is_action_just_pressed("gameplay_dive") and not (dive or climbing):
+	if Input.is_action_just_pressed("gameplay_dive") and not (dive or climbing or hit):
 		reset_variables()
 		dive = true
-		velocity.x = MAX_HSPEED * (-int($AnimatedSprite.flip_h) + int(not $AnimatedSprite.flip_h))
-		velocity.y = -JUMP_FORCE
-		start_camera_shake(4,0.1,0.2)
+		velocity.x = 1.5 * MAX_HSPEED * (-int($AnimatedSprite.flip_h) + int(not $AnimatedSprite.flip_h))
+		velocity.y = -0.7 * JUMP_FORCE
+		$SFXDive.play()
+		start_camera_shake(8,0.2,0.1)
 	#dive collide with wall	
 	if dive and is_on_wall():
 		reset_variables()
-		start_camera_shake(4,0.1,0.2)
+		velocity = Vector2(0,0)
+		start_camera_shake(8,0.3,0.1)
 		get_damage($ThrowPosition2D,0)
-	
+	#
 	if dive and velocity.x == 0:
 		dive = false
-	
-	if dive:
-		var velovity_normal = sqrt(velocity.x * velocity.x + velocity.y * velocity.y)
-		if velocity.x < 0:
-			$AnimatedSprite.rotation =  atan2(0.5*velocity.y / velovity_normal , velocity.x / velovity_normal) + PI
-		else :
-			$AnimatedSprite.rotation =  atan2(0.5*velocity.y / velovity_normal , velocity.x / velovity_normal)
-	else :
-		$AnimatedSprite.rotation = 0
+	#
+
 	
 	#Throw Cappy
-	if with_hat and not (climbing or hit or smash or dive) and Input.is_action_just_pressed("gameplay_throwcappy"):
+	if with_hat and not (climbing or hit or smash or dive or cappy_jump) and Input.is_action_just_pressed("gameplay_throwcappy"):
 		with_hat = false
 		throwing = true
 		jump = false
@@ -237,6 +234,7 @@ func mouvement_manager(velocity):
 
 	return velocity
 
+
 #get back cappy
 func _on_Mario_get_back_cappy():
 	with_hat = true
@@ -244,12 +242,20 @@ func _on_Mario_get_back_cappy():
 	$SFXCappy.play()
 
 
-
-
 ##Animed Sprite##
 #
 #sprite
 func sprites_manager(velocity):
+	
+	if dive:
+		var velovity_normal = sqrt(velocity.x * velocity.x + velocity.y * velocity.y)
+		if velocity.x < 0:
+			$AnimatedSprite.rotation =  atan2(0.5*velocity.y / velovity_normal , velocity.x / velovity_normal) + PI
+		else :
+			$AnimatedSprite.rotation =  atan2(0.5*velocity.y / velovity_normal , velocity.x / velovity_normal)
+
+	else :
+		$AnimatedSprite.rotation = 0
 	
 	#teleport or start
 	if teleport :
@@ -269,6 +275,7 @@ func sprites_manager(velocity):
 	else:
 		$AnimatedSprite.position = Vector2(0,0)
 		z_index = 0
+		
 	#falling stretch
 	$AnimatedSprite.scale.y = 1 + (velocity.y / MAX_VSPEED)*0.2
 	$AnimatedSprite.scale.x = 1 - abs(velocity.y / MAX_VSPEED)*0.2
@@ -290,6 +297,7 @@ func sprites_manager(velocity):
 		$AnimatedSprite.play("hat_throw_cappy")
 	elif dive :
 		$AnimatedSprite.play(sprite_with_hat + "dive")
+
 	else :
 		if not turning:
 			#on ground
@@ -359,7 +367,7 @@ func _on_VisibleTimer_timeout():
 #Dust particles
 func dust_particles():
 	$SprintParticles.emitting = sprint and ground and abs(velocity.x)>=MAX_HSPEED or turning
-	$JumpParticles.emitting = wall_jump or jump or smash
+	$JumpParticles.emitting = wall_jump or jump or smash or dive
 	$SprintParticles.position.x = -8*sign(velocity.x)
 	$ClimbParticles.emitting = climbing
 	if $AnimatedSprite.flip_h:
@@ -406,7 +414,7 @@ func _on_Mario_shake_camera(power,t,period):
 func _on_FinishTimer_timeout():
 	velocity.y = 80
 	$SFXSlide.play()
-
+#
 func finish_cinematic():
 	velocity.x = MAX_HSPEED/2
 
@@ -416,7 +424,7 @@ func finish_cinematic():
 
 	if velocity.y <= MAX_VSPEED:
 		velocity.y += GRAVITY
-
+#
 func _on_Mario_finish_level():
 	velocity.y = -JUMP_FORCE
 	get_parent().get_node("Transition").emit_signal("goto_next_level")
@@ -504,11 +512,13 @@ func get_damage(body,damage):
 func _on_HitBox_body_entered(body):
 	#cappy
 	if "Cappy" in body.name :
-		if not throwing :
+		if not throwing and not body.back:
 			velocity.y = -1.5*JUMP_FORCE
 			turning = false
+			dive = false
 			jump = true
-			$AnimatedSprite.play(sprite_with_hat + "jump")
+			cappy_jump = true
+			$SFXDive.play()
 			body.emit_signal("jump")
 	#enemy	
 	if  can_hit:

@@ -9,8 +9,9 @@ var Mario
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	velocity.x = speed
+	set_physics_process(false)
 
-func _process(delta):
+func _physics_process(delta):
 	velocity = move(velocity)
 	fall(6,200)
 	if on_wall() :
@@ -26,10 +27,9 @@ func _process(delta):
 	
 	if shell:
 		if not die :
-			$Shell/CollisionShape2D.scale.x = 2 * int(velocity.x != 0)
+			
 			if $AnimatedSprite.animation == "shell":
 				$AnimatedSprite.speed_scale = abs(velocity.x)/70
-		
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -68,13 +68,18 @@ func _on_Koopa_kill(mario):
 		$AnimatedSprite.play("die")
 		self.Mario = mario
 	else :
-		speed = 20 * (self.global_position.x - mario.global_position.x)
-		velocity.x = speed
-		$SFXWallCollision.play()
+		if velocity.x == 0:
+			speed = 20 * (self.global_position.x - mario.global_position.x)
+			velocity.x = speed
+			$SFXWallCollision.play()
+		else :
+			velocity.x = 0
+			speed = 0
+			$SFXWallCollision.play()
 
 
 func _on_Shell_body_entered(body):
-	if body != self :
+	if body != self and velocity.x != 0 and shell:
 		if "Goomba" in body.name or "Koopa" in body.name :
 			body.emit_signal("cappy_kill",self)
 			Mario.emit_signal("shake_camera",8,0.2,0.1)
@@ -90,3 +95,4 @@ func _on_AnimatedSprite_animation_finished():
 
 func _on_DestroyTimer_timeout():
 	queue_free()
+

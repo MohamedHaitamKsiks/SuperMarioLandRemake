@@ -45,7 +45,9 @@ func _on_TeleportTimer_timeout():
 	Mario.teleport = false
 	Mario.global_position = self.get_node("PipeOut").get_node("Position2D").global_position
 	Mario.velocity = Vector2(-cos(get_node("PipeOut").transform.get_rotation() + transform.get_rotation() + PI/2) * get_node("PipeOut").out_speed ,-sin(get_node("PipeOut").transform.get_rotation() + transform.get_rotation() + PI/2) * get_node("PipeOut").out_speed)
-	Mario.wall_jump = true
-	Mario.get_node("AnimatedSprite").play(Mario.sprite_with_hat + "jump")
-	Mario.ground = false
+	if Mario.velocity.x == 0:
+		Mario.jump = true
+	else :
+		Mario.dive = true
 	Mario.get_node("SFXJump").play()
+	Mario.emit_signal("shake_camera",8,0.2,0.5)

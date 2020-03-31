@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Objects/DeadUI/DeadUI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Audio/Tunes/death_tune.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Audio/Tunes/game_over_tune.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Audio/UI/ui_confirm.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Graphics/Sprites/UI/LiveCounterUI/liveui.png" type="Texture" id=5]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -17,15 +20,43 @@ shader = SubResource( 1 )
 shader_param/lod = 0.0
 
 [sub_resource type="DynamicFontData" id=3]
-font_path = "res://HennigarD.otf"
+font_path = "res://SuperMario256.ttf"
 
 [sub_resource type="DynamicFont" id=4]
 size = 160
+outline_size = 10
 font_data = SubResource( 3 )
 
 [sub_resource type="Animation" id=5]
-resource_name = "start"
-length = 3.0
+resource_name = "game_over"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("LableGameOver:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 8.4, 9.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SFXGameOver:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 6.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:blur")
 tracks/0/interp = 2
@@ -33,10 +64,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.9, 6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0, 5.0 ]
+"values": [ 0, 5.0, 5.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Label:rect_position")
@@ -45,10 +76,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 0.406126, 0.435275 ),
+"times": PoolRealArray( 0, 0.7, 0.9, 1.1, 1.3, 6 ),
+"transitions": PoolRealArray( 3.03143, 0.435275, 3.36359, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 368, 1000 ), Vector2( 368, 240 ) ]
+"values": [ Vector2( 280, -300 ), Vector2( 280, 300 ), Vector2( 280, 200 ), Vector2( 280, 300 ), Vector2( 280, 300 ), Vector2( 280, 300 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("ColorRect:color")
@@ -57,11 +88,67 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 2.2, 3 ),
-"transitions": PoolRealArray( 1, 1, 0.450625 ),
+"times": PoolRealArray( 0, 2.2, 3, 5.9 ),
+"transitions": PoolRealArray( 1, 1, 0.450625, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("LiveCounter:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 3.3, 3.7, 5.4, 5.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("LiveCounter/LiveBefore:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 4.2, 6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("LiveCounter/LiveAfter:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 4.2, 6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("SFXDeleteLive:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 4.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://HennigarD.otf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 48
+extra_spacing_char = 4
+font_data = SubResource( 7 )
 
 [node name="DeadUI" type="CanvasLayer"]
 pause_mode = 2
@@ -73,15 +160,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Label" type="Label" parent="."]
-margin_left = 368.0
-margin_top = 1000.0
-margin_right = 921.0
-margin_bottom = 1213.0
+margin_left = 280.0
+margin_top = -300.0
+margin_right = 1043.0
+margin_bottom = -87.0001
 custom_fonts/font = SubResource( 4 )
-text = "T O O    B A D"
+custom_colors/font_color = Color( 0.737255, 0.258824, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+text = "TOO BAD"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/start = SubResource( 5 )
+anims/game_over = SubResource( 5 )
+anims/start = SubResource( 6 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -94,5 +184,51 @@ __meta__ = {
 [node name="SFXDie" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 bus = "SFX"
+
+[node name="SFXGameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"
+
+[node name="SFXDeleteLive" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="LableGameOver" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 122.0
+margin_top = 283.0
+margin_right = 1157.0
+margin_bottom = 606.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.737255, 0.258824, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+text = "GAME OVER
+"
+
+[node name="LiveCounter" type="Position2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 115.137, 1.31927 )
+
+[node name="liveui" type="Sprite" parent="LiveCounter"]
+position = Vector2( 447.259, 356.259 )
+rotation = -0.0922184
+scale = Vector2( 1.47415, 1.47415 )
+texture = ExtResource( 5 )
+
+[node name="LiveBefore" type="Label" parent="LiveCounter"]
+margin_left = 519.682
+margin_top = 344.835
+margin_right = 586.682
+margin_bottom = 430.835
+custom_fonts/font = SubResource( 8 )
+text = "X 2"
+
+[node name="LiveAfter" type="Label" parent="LiveCounter"]
+visible = false
+margin_left = 519.682
+margin_top = 344.835
+margin_right = 586.682
+margin_bottom = 430.835
+custom_fonts/font = SubResource( 8 )
+text = "X 1"
 [connection signal="start" from="." to="." method="_on_DeadUI_start"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

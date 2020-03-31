@@ -3,6 +3,7 @@ extends KinematicBody2D
 var health = 1
 var die = false
 var velocity = Vector2(0,0)
+var ground
 var rot_speed = 0
 const FLOOR = Vector2(0,-1)
 signal kill(mario)
@@ -14,6 +15,9 @@ func move(velocity):
 func fall(gravity,max_vspeed):
 	if (not is_on_floor()):
 		velocity.y += gravity 
+		ground = false
+	else :
+		ground = true
 	if velocity.y > max_vspeed :
 		velocity.y = max_vspeed
 		

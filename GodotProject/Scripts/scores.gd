@@ -2,6 +2,7 @@ extends Node
 
 var coins = 0
 var health = 3
+var lives = 3
 var blur = 0
 var checkpoint = -1
 
@@ -16,5 +17,6 @@ func goto_level(scene):
 
 func restart_level():
 	health = 3
+	lives = 3
 	checkpoint = -1
 	get_tree().reload_current_scene()

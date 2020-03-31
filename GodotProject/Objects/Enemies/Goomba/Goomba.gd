@@ -7,9 +7,10 @@ var Cappy
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	velocity.x = 20
+	set_physics_process(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	velocity = move(velocity)
 	if not die:
 		fall(7,200)
@@ -27,17 +28,18 @@ func _process(delta):
 
 
 func _on_Goomba_kill(mario):
+	$CollisionShape2D.queue_free()
 	$SFXDie.play()
 	velocity.x = 0
 	velocity.y = 0
 	die = true
 	$AnimatedSprite.play("die")
 	$Timer.start()
-	$CollisionShape2D.queue_free()
 	Mario = mario
 
 
 func _on_Goomba_cappy_kill(cappy):
+	$CollisionShape2D.queue_free()
 	velocity.y = -50
 	die = true
 	$Timer.start()
@@ -47,7 +49,7 @@ func _on_Goomba_cappy_kill(cappy):
 	$AnimatedSprite.speed_scale = 0
 	$AnimatedSprite.z_index = 10
 	$AnimatedSprite.frame = 6
-	$CollisionShape2D.queue_free()
+	
 	
 	
 
@@ -69,3 +71,4 @@ func _on_TimerParticle_timeout():
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "turn":
 		$AnimatedSprite.play("walk")
+

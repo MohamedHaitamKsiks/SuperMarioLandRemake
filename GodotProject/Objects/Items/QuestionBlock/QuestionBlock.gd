@@ -6,11 +6,12 @@ var Item = preload("res://Objects/Items/Item/Item.tscn")
 var velocity = Vector2(0,0)
 
 export var items = PoolIntArray()
+export var type = 0
 signal get_item(smash)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	$AnimatedSprite.frame = type
 	
 func _process(delta):
 	pass

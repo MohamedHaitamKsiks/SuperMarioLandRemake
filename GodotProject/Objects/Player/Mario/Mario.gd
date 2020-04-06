@@ -123,7 +123,7 @@ func mouvement_manager(velocity):
 
 	#basic mouvements
 	var direction = int(Input.is_action_pressed("ui_right"))-int(Input.is_action_pressed("ui_left"))
-	velocity.x += ACC * direction * int(not (wall_jump or down or smash or dive) )#acceleration
+	velocity.x += ACC * direction * int(not (wall_jump or down or smash or dive) ) * (1 - int(sprint and abs(velocity.x) > MAX_HSPEED and velocity.x * direction >= 0)*0.7)#acceleration
 	velocity.x -= ACC * sign(velocity.x) * int(direction == 0 or down or smash or dive) * int(not wall_jump) * int(not dive or ground) * (1 - 0.4 * int(dive and ground)) * (0.5 + 0.5 * int(ground))#deceleration
 	if abs(velocity.x) > MAX_HSPEED * ( 1 + int(sprint)) and not dive :#max speed
 		velocity.x = MAX_HSPEED * ( 1 + int(sprint)) * sign(velocity.x)
@@ -270,7 +270,6 @@ func sprites_manager(velocity):
 			$AnimatedSprite.position.y = 0
 			start = false
 			turning = false
-			$SFXJump.play()
 		z_index = -100
 	else:
 		$AnimatedSprite.position = Vector2(0,0)
@@ -279,6 +278,8 @@ func sprites_manager(velocity):
 	#falling stretch
 	$AnimatedSprite.scale.y = 1 + (velocity.y / MAX_VSPEED)*0.2
 	$AnimatedSprite.scale.x = 1 - abs(velocity.y / MAX_VSPEED)*0.2
+	
+	$AnimatedSprite.speed_scale = 1
 
 	#turning
 	if ((velocity.x > 0 and $AnimatedSprite.flip_h) or (velocity.x < 0 and not $AnimatedSprite.flip_h)) and not(turning or climbing or wall_jump or hit):
@@ -311,8 +312,9 @@ func sprites_manager(velocity):
 					else :
 						if velocity.x == 0:
 							$AnimatedSprite.play(sprite_with_hat + "stand")
-						elif abs(velocity.x) <= MAX_HSPEED:
+						elif abs(velocity.x) < 2 * MAX_HSPEED:
 							$AnimatedSprite.play(sprite_with_hat + "run_with_smears")
+							$AnimatedSprite.speed_scale = abs(velocity.x)/MAX_HSPEED
 						else :
 							$AnimatedSprite.play(sprite_with_hat + "sprint")
 			else :
@@ -442,7 +444,10 @@ func _on_Mario_finish_level():
 func _on_ItemCollision_area_entered(area):
 	if "Coin" in area.name :
 		area.emit_signal("destroy_coin")
-
+	
+	if "Star" in area.name :
+		area.emit_signal("destroy_star")
+	
 	if "FinalFlag" in area.name and not slide:
 		velocity = Vector2(0,0)
 		$AnimatedSprite.rotation = 0

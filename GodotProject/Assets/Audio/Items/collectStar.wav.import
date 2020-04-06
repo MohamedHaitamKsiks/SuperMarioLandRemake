@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/collectStar.wav-2948734e6d8698ac7edf48d9bf11e691.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Items/collectStar.wav"
+dest_files=[ "res://.import/collectStar.wav-2948734e6d8698ac7edf48d9bf11e691.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -21,7 +21,9 @@ func _physics_process(delta):
 		else :
 			velocity.x = -speed
 			$RayCast2D.position.x = -6
-		$SFXWallCollision.play()
+		if shell :
+			$SFXWallCollision.play()
+			$AnimatedSprite.scale.x *= -1
 		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
 	
 	
@@ -63,7 +65,7 @@ func _on_Koopa_kill(mario):
 		velocity.x = 0
 		speed = 0
 		shell = true
-		$SFXWallCollision.play()
+		$SFXDie.play()
 		$AnimatedSprite.play("die")
 		self.Mario = mario
 	else :

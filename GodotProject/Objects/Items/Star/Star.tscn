@@ -1,0 +1,93 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Assets/Graphics/Sprites/Items/Star/star3.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Graphics/Sprites/Items/Star/star5.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Sprites/Items/Star/star1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/Sprites/Items/Star/star6.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/Sprites/Items/Star/star2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Graphics/Sprites/Items/Star/star4.png" type="Texture" id=6]
+[ext_resource path="res://Objects/Items/Star/Star.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Audio/Items/star.wav" type="AudioStream" id=8]
+[ext_resource path="res://Assets/Audio/Items/collectStar.wav" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Audio/Items/coin.wav" type="AudioStream" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "destroy",
+"speed": 24.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "default"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( -2, -2, 0.329877 ),
+"update": 0,
+"values": [ 10.0, -10.0, 10.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 0.241484, 3.36358, 0.170755 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 0, 0 ) ]
+}
+
+[node name="Star" type="Area2D"]
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 1 )
+rotation = -0.123451
+frames = SubResource( 1 )
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/default = SubResource( 3 )
+anims/destroy = SubResource( 4 )
+
+[node name="SFXstar" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+max_distance = 200.0
+bus = "SFX"
+
+[node name="SFXcollect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+volume_db = 19.067
+bus = "SFX"
+
+[node name="SFXDestroy" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+bus = "SFX"
+[connection signal="destroy_star" from="." to="." method="_on_Star_destroy_star"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="finished" from="SFXDestroy" to="." method="_on_SFXDestroy_finished"]

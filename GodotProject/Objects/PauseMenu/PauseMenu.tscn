@@ -115,7 +115,6 @@ __meta__ = {
 }
 
 [node name="ButtonPosition" type="Position2D" parent="."]
-editor/display_folded = true
 position = Vector2( -640, 0 )
 
 [node name="Buttons" type="VBoxContainer" parent="ButtonPosition"]
@@ -163,6 +162,7 @@ anims/pauseOut = SubResource( 4 )
 anims/quit = SubResource( 5 )
 
 [node name="Option" parent="." instance=ExtResource( 3 )]
+layer = 5
 
 [node name="PauseSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )

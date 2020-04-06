@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Objects/Player/Mario/Mario.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Audio/Mario/mario_jump.wav" type="AudioStream" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Objects/Player/Mario/MarWithHatioSprite.tres" type="SpriteFrames" id=13]
 [ext_resource path="res://Objects/Particles/DestParticles/DestParticles.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/DeadUI/DeadUI.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Audio/Mario/mario_sprint.wav" type="AudioStream" id=16]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0.00323407, 0.0215 ), 0.0, 4.58495, 0, 0, Vector2( 1, 0 ), 0.247053, 0.0, 0, 0 ]
@@ -121,6 +122,10 @@ bus = "SFX"
 
 [node name="SFXStart" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
+bus = "SFX"
+
+[node name="SFXSprint" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 16 )
 bus = "SFX"
 
 [node name="CameraPosition" type="Position2D" parent="."]

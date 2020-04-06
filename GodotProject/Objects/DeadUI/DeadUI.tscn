@@ -141,6 +141,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("LiveCounter/LiveAfter:rect_position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 4.2, 4.4, 4.6, 6 ),
+"transitions": PoolRealArray( 1, 0.241484, 3.24901, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 519.682, 344.835 ), Vector2( 519.682, 344.835 ), Vector2( 519.682, 322.835 ), Vector2( 519.682, 344.835 ), Vector2( 519.682, 344.835 ) ]
+}
 
 [sub_resource type="DynamicFontData" id=7]
 font_path = "res://HennigarD.otf"
@@ -168,6 +180,9 @@ custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.737255, 0.258824, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 text = "TOO BAD"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/game_over = SubResource( 5 )
@@ -203,6 +218,9 @@ custom_colors/font_color = Color( 0.737255, 0.258824, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 text = "GAME OVER
 "
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LiveCounter" type="Position2D" parent="."]
 modulate = Color( 1, 1, 1, 0 )

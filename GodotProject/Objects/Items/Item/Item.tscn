@@ -5,7 +5,6 @@
 [ext_resource path="res://Assets/Graphics/Sprites/Items/Items/items3.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Graphics/Sprites/Items/Items/items1.png" type="Texture" id=4]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 3 ) ],

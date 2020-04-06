@@ -21,7 +21,9 @@ func _physics_process(delta):
 			velocity.x = -speed
 		if not shell :
 			$AnimatedSprite.play("turn")
-		$SFXWallCollision.play()
+		if shell :
+			$SFXWallCollision.play()
+			$AnimatedSprite.scale.x *= -1
 		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
 	
 	
@@ -51,9 +53,9 @@ func _on_Koopa_cappy_kill(cappy):
 		$AnimatedSprite.play("shell")
 		$DestroyTimer.start()
 	else : 
+		$SFXWallCollision.play()
 		speed = cappy.velocity.x/4
 		velocity.x = speed
-		$SFXWallCollision.play()
 		$AnimatedSprite.play("shell")
 		
 
@@ -64,7 +66,7 @@ func _on_Koopa_kill(mario):
 		velocity.x = 0
 		speed = 0
 		shell = true
-		$SFXWallCollision.play()
+		$SFXDie.play()
 		$AnimatedSprite.play("die")
 		self.Mario = mario
 	else :

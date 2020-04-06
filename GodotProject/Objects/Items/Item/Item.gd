@@ -12,6 +12,7 @@ func _ready():
 
 func _physics_process(delta):
 	#applicate gravity
+	$AnimatedSprite.frame = type
 	gravity() 
 	if is_on_floor() and type == 2:#if the item is a mushroom 
 		velocity.y = -50
@@ -30,4 +31,6 @@ func gravity():
 func _on_Item_destroy(mario):
 	if type == 0 and Scores.health < 3:#mushroom
 		Scores.health += 1
+	else :
+		Scores.lives += 1
 	queue_free()

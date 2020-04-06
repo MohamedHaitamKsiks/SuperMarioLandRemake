@@ -5,6 +5,8 @@ export var teleport_enable = false
 export var period = 1
 export var start = 0
 export var out_speed = 50
+export var underworld_music = false
+export var overworld_music = false
 
 var button_to_enter = "ui_down"
 var Mario
@@ -39,6 +41,9 @@ func _process(delta):
 			Mario.teleport_angle =  transform.get_rotation() + PI/2
 			$TeleportTimer.start()
 			$SFXPipeEntered.play()
+			if underworld_music or overworld_music :
+				get_parent().get_parent().get_node("Music").stop()
+				get_parent().get_parent().get_node("UnderworldMusic").stop()
 		
 
 func _on_TeleportTimer_timeout():
@@ -51,3 +56,7 @@ func _on_TeleportTimer_timeout():
 		Mario.dive = true
 	Mario.get_node("SFXJump").play()
 	Mario.emit_signal("shake_camera",8,0.2,0.5)
+	if overworld_music:
+		 get_parent().get_parent().get_node("Music").play()
+	if underworld_music:
+		 get_parent().get_parent().get_node("UnderworldMusic").play()

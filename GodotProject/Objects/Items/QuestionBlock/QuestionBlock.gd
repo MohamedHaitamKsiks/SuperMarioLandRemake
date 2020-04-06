@@ -34,6 +34,7 @@ func _on_QuestionBlock_get_item(smash):
 		else:
 			var node = Item.instance()
 			$ItemInstancingPosition.add_child(node)
+			node.type = items[0] - 1
 			node.velocity.x = 50
 			node.velocity.y = -100
 		

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Level 1 - Super Mario Bros Castle Theme.wav-a57693a79670b2a59fb152ce9d316eef.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Music/Level 1 - Super Mario Bros Castle Theme.wav"
+dest_files=[ "res://.import/Level 1 - Super Mario Bros Castle Theme.wav-a57693a79670b2a59fb152ce9d316eef.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

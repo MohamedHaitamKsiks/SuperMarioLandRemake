@@ -20,7 +20,7 @@
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserDie/bowser_die1.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Audio/Mario/mario_footsteps.wav" type="AudioStream" id=19]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform float inten = 0.0;
@@ -30,27 +30,12 @@ void fragment(){
 	COLOR.r += inten;
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/inten = 0.0
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 9 ), ExtResource( 3 ) ],
-"loop": false,
-"name": "prepareJump",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 11 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 18 ), ExtResource( 17 ) ],
-"loop": true,
-"name": "die",
-"speed": 6.0
-}, {
 "frames": [ ExtResource( 16 ), ExtResource( 8 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": false,
 "name": "firebreath",
@@ -60,9 +45,24 @@ animations = [ {
 "loop": true,
 "name": "std",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "die",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 9 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "prepareJump",
+"speed": 10.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 24, 32 )
 
 [node name="Bowser" type="KinematicBody2D"]
@@ -71,14 +71,14 @@ collision_mask = 2
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 4 )
-frames = SubResource( 1 )
+material = SubResource( 2 )
+frames = SubResource( 3 )
 animation = "std"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 8 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -99,11 +99,15 @@ bus = "SFX"
 position = Vector2( -32, 8 )
 
 [node name="DieTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.5
 one_shot = true
 
 [node name="HitTimer" type="Timer" parent="."]
 wait_time = 0.3
+one_shot = true
+
+[node name="FallTimer" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 [connection signal="cappy_kill" from="." to="." method="_on_Bowser_cappy_kill"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
@@ -111,3 +115,4 @@ one_shot = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="DieTimer" to="." method="_on_DieTimer_timeout"]
 [connection signal="timeout" from="HitTimer" to="." method="_on_HitTimer_timeout"]
+[connection signal="timeout" from="FallTimer" to="." method="_on_FallTimer_timeout"]

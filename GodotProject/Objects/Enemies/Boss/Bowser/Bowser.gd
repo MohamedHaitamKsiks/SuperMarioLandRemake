@@ -13,17 +13,21 @@ var hit = false
 
 var Mario
 
+var gravity = 9
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Timer.start()
 	health = 5
+	
 	Mario = get_parent().get_parent().get_node("Mario")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	fall(9,300)
+	fall(gravity,300)
+	
 	if ground :
 		if jump and velocity.y > 0:
 			velocity.x = 0
@@ -33,7 +37,7 @@ func _physics_process(delta):
 			$SFXStep.play()
 			$Timer.start()
 	
-	if die and ground :
+	if die :
 		$AnimatedSprite.play("die")
 		
 	if hit:
@@ -93,6 +97,10 @@ func _on_Bowser_cappy_kill(cappy):
 			Mario.emit_signal("shake_camera",8,0.4,0.1)
 		else :
 			die = true
+			velocity.y = 0
+			velocity.x = 0
+			gravity = 0
+			$FallTimer.start()
 			get_parent().get_parent().get_node("Music").stop()
 			$DieTimer.start()
 			Mario.emit_signal("shake_camera",8,2,0.1)
@@ -105,8 +113,13 @@ func _on_DieTimer_timeout():
 	goomba.global_position = global_position
 	goomba.get_node("DestParticles").emitting = true
 	goomba.emit_signal("cappy_kill",self)
+	goomba.velocity.y = -350
 	
 
 
 func _on_HitTimer_timeout():
 	hit = false
+
+
+func _on_FallTimer_timeout():
+	gravity = 9

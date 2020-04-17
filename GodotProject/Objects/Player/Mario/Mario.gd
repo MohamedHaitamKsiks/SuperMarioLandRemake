@@ -571,7 +571,7 @@ func _on_HitBox_body_entered(body):
 func _on_HitBox_area_entered(area):
 	if "SolidKiller" in area.name:
 		get_damage(area,3)
-	elif ( "Piranha" in area.name or "Firebreath" in area.name ) and can_hit :
+	elif ( "Piranha" in area.name or "Fire" in area.name ) and can_hit :
 		get_damage(area,1)
 
 #Hit timer

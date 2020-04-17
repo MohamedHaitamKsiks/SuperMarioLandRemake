@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var Coin = preload("res://Objects/Items/Coin/Coin.tscn")
+
 var health = 1
 var die = false
 var velocity = Vector2(0,0)
@@ -23,3 +25,9 @@ func fall(gravity,max_vspeed):
 		
 func on_wall():
 	return is_on_wall()
+
+func destory():
+	var node = Coin.instance()
+	get_parent().add_child(node)
+	node.global_position = self.global_position
+	node.emit_signal("destroy_coin")

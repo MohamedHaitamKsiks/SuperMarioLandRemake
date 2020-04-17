@@ -8,12 +8,14 @@ export var blur = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationPlayer.play("start")
+	$ColorRect.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	draw_coins_counter()
 	draw_health()
 	draw_blur()
+	draw_star()
 	$ColorRect/Title.text = get_parent().title
 
 
@@ -36,6 +38,10 @@ func draw_coins_counter():
 func draw_health():
 	var health = Scores.health
 	$Health/AnimatedSprite.frame = 3 - health
+
+func draw_star():
+	for k in range(3):
+		$StarsCounter.get_node("Star"+str(k+1)).region_rect = Rect2(32 * int(Scores.level_stars[Scores.level_id][k]),0,32,32)
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

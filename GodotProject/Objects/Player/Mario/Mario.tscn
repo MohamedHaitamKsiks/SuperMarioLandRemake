@@ -124,7 +124,7 @@ bus = "SFX"
 stream = ExtResource( 11 )
 bus = "SFX"
 
-[node name="SFXSprint" type="AudioStreamPlayer2D" parent="."]
+[node name="SFXFinish" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 16 )
 bus = "SFX"
 
@@ -188,7 +188,6 @@ position = Vector2( 0, 8 )
 shape = SubResource( 5 )
 
 [node name="HitBox" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 2
 

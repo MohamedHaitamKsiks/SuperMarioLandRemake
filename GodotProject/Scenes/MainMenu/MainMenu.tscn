@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Scenes/MainMenu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Items/QuestionBlock/QuestionBlock.tscn" type="PackedScene" id=2]
@@ -163,18 +163,6 @@ tracks/5/keys = {
 "update": 0,
 "values": [ 0, 0, 1.0 ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("Music:playing")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 2.9 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
 [sub_resource type="Animation" id=8]
 length = 1.5
@@ -215,7 +203,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("CanvasLayer/VBoxContainer/Start:rect_position")
+tracks/3/path = NodePath("CanvasLayer/VBoxContainer/Load:rect_position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -237,6 +225,70 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "newGame"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/VBoxContainer:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 1, 1.5 ),
+"transitions": PoolRealArray( 2.07053, 1, 1.03526, 1 ),
+"update": 0,
+"values": [ Vector2( 89, 321 ), Vector2( 89, 321 ), Vector2( -640, 330 ), Vector2( -640, 330 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SFXStartGame:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SFXMenu:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CanvasLayer/VBoxContainer/New:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 1.5 ),
+"transitions": PoolRealArray( 1, 0.482968, 3.03143, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 90 ), Vector2( 0, 90 ), Vector2( 64, 90 ), Vector2( 0, 90 ), Vector2( 0, 90 ) ]
 }
 
 [node name="MainMenu" type="Node2D"]
@@ -307,10 +359,10 @@ tile_data = PoolIntArray( 1900573, 13, 0, 1966081, 13, 0, 1966087, 15, 0, 196608
 material = SubResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -25.0294
-margin_top = 206.416
-margin_right = -497.029
-margin_bottom = -5.58368
+margin_left = -82.2034
+margin_top = 227.541
+margin_right = -554.202
+margin_bottom = 15.5409
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -351,35 +403,44 @@ texture = ExtResource( 11 )
 margin_left = -640.0
 margin_top = 321.0
 margin_right = -102.0
-margin_bottom = 587.0
+margin_bottom = 677.0
 rect_rotation = -1.23946
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Start" parent="CanvasLayer/VBoxContainer" instance=ExtResource( 12 )]
+[node name="Load" parent="CanvasLayer/VBoxContainer" instance=ExtResource( 12 )]
 margin_right = 538.0
 focus_neighbour_top = NodePath("../Quit")
-focus_neighbour_bottom = NodePath("../Option")
-text = "START"
+focus_neighbour_bottom = NodePath("../New")
+text = "LOAD GAME"
 
-[node name="Option" parent="CanvasLayer/VBoxContainer" instance=ExtResource( 12 )]
+[node name="New" parent="CanvasLayer/VBoxContainer" instance=ExtResource( 12 )]
 margin_top = 90.0
 margin_right = 538.0
 margin_bottom = 176.0
-focus_neighbour_top = NodePath("../Start")
+focus_neighbour_top = NodePath("../Load")
+focus_neighbour_bottom = NodePath("../Option")
+text = "NEW GAME"
+
+[node name="Option" parent="CanvasLayer/VBoxContainer" instance=ExtResource( 12 )]
+margin_top = 180.0
+margin_right = 538.0
+margin_bottom = 266.0
+focus_neighbour_top = NodePath("../New")
 focus_neighbour_bottom = NodePath("../Quit")
 text = "OPTION"
 
 [node name="Quit" parent="CanvasLayer/VBoxContainer" instance=ExtResource( 12 )]
-margin_top = 180.0
+margin_top = 270.0
 margin_right = 538.0
-margin_bottom = 266.0
+margin_bottom = 356.0
 focus_neighbour_top = NodePath("../Option")
-focus_neighbour_bottom = NodePath("../Start")
+focus_neighbour_bottom = NodePath("../Load")
 text = "EXIT"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
@@ -392,6 +453,7 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Start = SubResource( 7 )
 anims/getMenu = SubResource( 8 )
+anims/newGame = SubResource( 9 )
 
 [node name="SFXStartGame" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
@@ -409,7 +471,8 @@ bus = "SFX"
 stream = ExtResource( 17 )
 bus = "MUSIC"
 [connection signal="quitOption" from="." to="." method="_on_MainMenu_quitOption"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Load" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Option" to="." method="_on_Option_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

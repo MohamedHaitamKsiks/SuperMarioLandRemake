@@ -51,6 +51,7 @@ func _on_Koopa_cappy_kill(cappy):
 		$SFXDie.play()
 		$AnimatedSprite.play("shell")
 		$DestroyTimer.start()
+		destory()
 	else : 
 		speed = cappy.velocity.x/4
 		velocity.x = speed
@@ -94,4 +95,8 @@ func _on_AnimatedSprite_animation_finished():
 
 func _on_DestroyTimer_timeout():
 	queue_free()
+	var node = Coin.instance()
+	get_parent().add_child(node)
+	node.global_position = self.global_position
+	node.emit_signal("destroy_coin")
 

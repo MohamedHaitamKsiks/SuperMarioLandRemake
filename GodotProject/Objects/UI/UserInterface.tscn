@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Objects/UI/UserInterface.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Sprites/UI/CoinCounterUI/coins.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Graphics/Sprites/UI/HealthUI/health3.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Graphics/Sprites/UI/HealthUI/health4.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Audio/UI/ui_confirm.wav" type="AudioStream" id=7]
+[ext_resource path="res://Objects/UI/StarsCounter.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://HennigarD.otf"
@@ -24,7 +25,7 @@ uniform float lod = 0;
 
 void fragment() {
 	COLOR.rgb = vec3(0.0,0.0,0.0);
-	COLOR.a = textureLod(TEXTURE,UV,0.0).a / 5.0;
+	COLOR.a = textureLod(TEXTURE,UV,0.0).a / 2.0;
 }"
 
 [sub_resource type="ShaderMaterial" id=4]
@@ -103,50 +104,51 @@ tracks/2/keys = {
 script = ExtResource( 1 )
 
 [node name="CoinCounter" type="Position2D" parent="."]
+visible = false
 position = Vector2( -24, -8 )
 rotation = -0.0452533
 
 [node name="Label2" type="Label" parent="CoinCounter"]
-margin_left = 170.675
-margin_top = 45.767
-margin_right = 254.675
-margin_bottom = 130.766
+margin_left = 171.674
+margin_top = 45.8122
+margin_right = 257.674
+margin_bottom = 130.811
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 0.317647 )
-text = "0 0"
+custom_colors/font_color = Color( 0, 0, 0, 0.560784 )
+text = "000"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="CoinCounter"]
-margin_left = 170.721
-margin_top = 42.768
-margin_right = 254.721
-margin_bottom = 128.768
+margin_left = 174.236
+margin_top = 42.926
+margin_right = 260.237
+margin_bottom = 128.926
 custom_fonts/font = SubResource( 2 )
-text = "0 0"
+text = "000"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect6" type="ColorRect" parent="CoinCounter"]
-margin_left = 125.584
-margin_top = 95.9006
-margin_right = 165.584
-margin_bottom = 103.901
+margin_left = 125.539
+margin_top = 96.8996
+margin_right = 165.539
+margin_bottom = 104.9
 rect_rotation = -48.2212
-color = Color( 0, 0, 0, 0.160784 )
+color = Color( 0, 0, 0, 0.478431 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect7" type="ColorRect" parent="CoinCounter"]
-margin_left = 132.505
-margin_top = 65.5198
-margin_right = 172.505
-margin_bottom = 75.5198
+margin_left = 132.46
+margin_top = 66.5188
+margin_right = 172.46
+margin_bottom = 76.5188
 rect_rotation = 44.6469
-color = Color( 0, 0, 0, 0.168627 )
+color = Color( 0, 0, 0, 0.486275 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -172,12 +174,12 @@ __meta__ = {
 }
 
 [node name="ColorRect5" type="ColorRect" parent="CoinCounter"]
-margin_left = 48.0
-margin_top = 108.279
-margin_right = 306.0
-margin_bottom = 123.279
+margin_left = 47.9548
+margin_top = 109.278
+margin_right = 305.955
+margin_bottom = 124.278
 rect_rotation = -360.0
-color = Color( 0, 0, 0, 0.345098 )
+color = Color( 0, 0, 0, 0.54902 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -204,12 +206,22 @@ scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 2 )
 
 [node name="Health" type="Position2D" parent="."]
+visible = false
 position = Vector2( -24, 32 )
 rotation = -0.0452533
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="Health"]
+modulate = Color( 0, 0, 0, 0.454902 )
+position = Vector2( 1217.43, 118.754 )
+frames = SubResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Health"]
 position = Vector2( 1217.52, 116.756 )
 frames = SubResource( 5 )
+
+[node name="StarsCounter" parent="." instance=ExtResource( 8 )]
+visible = false
+position = Vector2( 48, 132 )
 
 [node name="Blur" type="Node" parent="."]
 
@@ -219,11 +231,12 @@ use_parent_material = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color( 1, 1, 1, 0 )
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -0.25806
@@ -232,21 +245,26 @@ margin_right = -0.258057
 margin_bottom = -0.370972
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -47.7707
-margin_top = 31.331
-margin_right = -47.7708
-margin_bottom = 31.331
+margin_left = -47.771
+margin_top = -1000.0
+margin_right = -47.771
+margin_bottom = -1000.0
 rect_rotation = -3.04261
 custom_fonts/font = SubResource( 9 )
 text = "TITLE"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/start = SubResource( 10 )

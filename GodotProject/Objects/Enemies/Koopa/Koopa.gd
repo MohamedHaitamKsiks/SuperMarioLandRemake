@@ -1,6 +1,7 @@
 extends "res://Objects/Enemies/EnemyParent.gd"
 
 
+
 var shell = false
 var speed = 30
 var rot = 0
@@ -52,6 +53,7 @@ func _on_Koopa_cappy_kill(cappy):
 		$SFXDie.play()
 		$AnimatedSprite.play("shell")
 		$DestroyTimer.start()
+		destory()
 	else : 
 		$SFXWallCollision.play()
 		speed = cappy.velocity.x/4
@@ -97,4 +99,4 @@ func _on_AnimatedSprite_animation_finished():
 
 func _on_DestroyTimer_timeout():
 	queue_free()
-
+	

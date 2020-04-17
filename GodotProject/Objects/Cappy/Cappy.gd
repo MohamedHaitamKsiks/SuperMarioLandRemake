@@ -52,7 +52,7 @@ func _on_BackArea_body_entered(body):
 		body.emit_signal("destroy")
 		mario.emit_signal("shake_camera",8,0.4,0.1)
 	
-	if not back and ("Goomba" in body.name or "Koopa" in body.name ):
+	if not back and ("Goomba" in body.name or "Koopa" in body.name or "Bowser" in body.name ):
 		back = true
 		body.emit_signal("cappy_kill",self)
 		$CollisionShape2D.disabled = true

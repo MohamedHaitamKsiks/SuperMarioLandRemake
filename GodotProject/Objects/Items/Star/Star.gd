@@ -9,7 +9,8 @@ const WaveEffect = preload("res://Objects/Particles/WaveEffect/WaveEffect.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if Scores.level_stars[id]:
+	
+	if Scores.level_stars[Scores.level_id][id]:
 		enable = false
 	$SFXstar.play()
 	$AnimationPlayer.play("default")
@@ -44,7 +45,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$SFXDestroy.play()
 		if enable :
 			Scores.stars += 1
-			Scores.level_stars[id] = true
+			Scores.level_stars[Scores.level_id][id] = true
 		
 
 

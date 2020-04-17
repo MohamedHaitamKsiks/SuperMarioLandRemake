@@ -36,6 +36,7 @@ func _on_Goomba_kill(mario):
 	$AnimatedSprite.play("die")
 	$Timer.start()
 	Mario = mario
+	destory()
 
 
 func _on_Goomba_cappy_kill(cappy):
@@ -49,6 +50,7 @@ func _on_Goomba_cappy_kill(cappy):
 	$AnimatedSprite.speed_scale = 0
 	$AnimatedSprite.z_index = 10
 	$AnimatedSprite.frame = 6
+	destory()
 	
 	
 	

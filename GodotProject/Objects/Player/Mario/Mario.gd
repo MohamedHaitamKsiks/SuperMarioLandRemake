@@ -56,6 +56,7 @@ var start = true
 #end level
 var slide = false
 var finish = false
+var finish_dance = false
 #camera
 var camera_period = 1
 var camera_power = 0
@@ -78,10 +79,14 @@ func _physics_process(delta):
 			velocity = Vector2(0,0)
 	if finish :
 		finish_cinematic()
-	sprites_manager(velocity)
+	else :
+		sprites_manager(velocity)
 	camera_manager(velocity)
 	dust_particles()
-	velocity = move_and_slide(velocity,FLOOR)
+	
+	velocity = move_and_slide_with_snap(velocity,- FLOOR ,FLOOR)
+	
+	
 	time += delta
 
 
@@ -99,7 +104,11 @@ func on_floor():
 				$SFXSmash.play()
 			else:
 				$SFXFootStep.play()
+				if finish:
+					finish_dance = not finish_dance
+					
 			$DustParticles.emitting = true
+			
 		jump = false
 		climbing = false
 		wall_jump = false
@@ -138,8 +147,10 @@ func mouvement_manager(velocity):
 		if not down :
 			$SFXCappy.play()
 		down = true
+		$HitBox.position.y = 16
 	else :
 		down = false
+		$HitBox.position.y = 0
 
 	#smash
 	if not (ground or smash or prepare_smash) and Input.is_action_just_pressed("ui_down"):
@@ -162,6 +173,7 @@ func mouvement_manager(velocity):
 	#if on wall => climb
 	if is_on_wall() and (not ground and not dive) and cast_wall:
 		climbing = true
+		cappy_jump = false
 		jump = false
 		turning = false
 		velocity.y = 10
@@ -356,6 +368,9 @@ func _on_AnimatedSprite_animation_finished():
 		velocity.y = MAX_VSPEED/2
 
 	throwing = false
+	if $AnimatedSprite.animation == "hat_finish":
+		velocity.y = -MAX_VSPEED/2
+		$SFXFinish.play()
 
 
 #
@@ -417,12 +432,26 @@ func _on_FinishTimer_timeout():
 	velocity.y = 80
 	$SFXSlide.play()
 #
-func finish_cinematic():
-	velocity.x = MAX_HSPEED/2
-
+func finish_cinematic():	
+	$AnimatedSprite.flip_h = false
+	if finish_dance :
+		velocity.x = 0
+		$AnimatedSprite.speed_scale = 1
+	else :
+		velocity.x += ACC * int(velocity.x <MAX_HSPEED)
+		if ground and velocity.x >0:
+			$AnimatedSprite.play(sprite_with_hat + "run_with_smears")
+			$AnimatedSprite.speed_scale = abs(velocity.x)/MAX_HSPEED
+			
+		
 	if velocity.y<0:
 		$AnimatedSprite.play(sprite_with_hat + "jump")
-
+		$AnimatedSprite.speed_scale = 1
+	elif velocity.y>0:
+		$AnimatedSprite.play(sprite_with_hat + "fall")
+	else :
+		if finish_dance and ground:
+			$AnimatedSprite.play("hat_finish")
 
 	if velocity.y <= MAX_VSPEED:
 		velocity.y += GRAVITY
@@ -527,7 +556,9 @@ func _on_HitBox_body_entered(body):
 			body.emit_signal("jump")
 	#enemy	
 	if  can_hit:
-		if "Goomba" in body.name:
+		if "Goomba" in body.name :
+			get_damage(body,1)
+		if "Bowser" in body.name :
 			get_damage(body,1)
 		if "Koopa" in body.name:
 			if body.velocity.x == 0:
@@ -540,7 +571,7 @@ func _on_HitBox_body_entered(body):
 func _on_HitBox_area_entered(area):
 	if "SolidKiller" in area.name:
 		get_damage(area,3)
-	elif "Piranha" in area.name and can_hit :
+	elif ( "Piranha" in area.name or "Firebreath" in area.name ) and can_hit :
 		get_damage(area,1)
 
 #Hit timer

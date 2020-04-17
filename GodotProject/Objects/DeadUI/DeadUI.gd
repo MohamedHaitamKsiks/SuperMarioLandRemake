@@ -21,16 +21,14 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		if Scores.lives == 0:
 			$AnimationPlayer.play("game_over")
 			return
-		get_tree().paused = false
-		get_tree().reload_current_scene()
+		Scores.restart_level()
 	else :
 		get_tree().paused = false
-		Scores.restart_level()
+		Scores.game_over()
 
 func _on_DeadUI_start():
 	$AnimationPlayer.play("start")
 	get_parent().get_parent().get_node("Music").stop()
 	$SFXDie.play()
-	Scores.health = 3
 	Scores.lives -= 1
 	get_tree().paused = true

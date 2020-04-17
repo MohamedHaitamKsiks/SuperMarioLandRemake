@@ -1,0 +1,113 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Objects/Enemies/Boss/Bowser/Bowser.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserJump/bowser_jump1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserJump/bowser_jump3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserStd/bowser_std.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserFireBreathh/bowser_fire_breath9.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserFireBreathh/bowser_fire_breath10.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserFireBreathh/bowser_fire_breath7.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserFireBreathh/bowser_fire_breath3.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserJump/bowser_jump2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserFireBreathh/bowser_fire_breath6.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserJump/bowser_jump4.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserFireBreathh/bowser_fire_breath8.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Audio/Enemies/koopa.wav" type="AudioStream" id=13]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserFireBreathh/bowser_fire_breath5.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserFireBreathh/bowser_fire_breath4.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserFireBreathh/bowser_fire_breath2.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserDie/bowser_die2.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserDie/bowser_die1.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Audio/Mario/mario_footsteps.wav" type="AudioStream" id=19]
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform float inten = 0.0;
+
+void fragment(){
+	COLOR = texture(TEXTURE,UV);
+	COLOR.r += inten;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/inten = 0.0
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 9 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "prepareJump",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "die",
+"speed": 6.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 8 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "firebreath",
+"speed": 11.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "std",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24, 32 )
+
+[node name="Bowser" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 4 )
+frames = SubResource( 1 )
+animation = "std"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 8 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SFXStep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 19 )
+volume_db = 9.197
+pitch_scale = 0.66
+bus = "SFX"
+
+[node name="SFXBlink" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+volume_db = 1.415
+pitch_scale = 1.6
+bus = "SFX"
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( -32, 8 )
+
+[node name="DieTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="HitTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+[connection signal="cappy_kill" from="." to="." method="_on_Bowser_cappy_kill"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="DieTimer" to="." method="_on_DieTimer_timeout"]
+[connection signal="timeout" from="HitTimer" to="." method="_on_HitTimer_timeout"]

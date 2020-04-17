@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Super Mario Mania - World 1 Map Theme.wav-3b2c74a1c87c68895038fc6e8600b7cf.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Music/Super Mario Mania - World 1 Map Theme.wav"
+dest_files=[ "res://.import/Super Mario Mania - World 1 Map Theme.wav-3b2c74a1c87c68895038fc6e8600b7cf.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

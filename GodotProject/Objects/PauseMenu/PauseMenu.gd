@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 export var blur = float(0.0)
+export var quit_scene = "res://Scenes/Worldmap/Worldmap.tscn"
 var paused = false
 
 signal quitOption()
@@ -12,7 +13,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	draw_blur()
-	if Input.is_action_just_pressed("ui_accept") and not paused:
+	if Input.is_action_just_pressed("ui_pause") and not paused:
 			get_tree().paused = true
 			$PauseSFX.play()
 			$AnimationPlayer.play("pauseIn")
@@ -24,6 +25,10 @@ func draw_blur():
 
 func _on_Quit_pressed():
 	$AnimationPlayer.play("quit")
+	if "Worldmap" in get_parent().name:
+		for node in get_parent().get_node("GroupOfMusics").get_children():
+			node.stop()
+		return
 	get_parent().get_node("Music").stop()
 
 
@@ -40,7 +45,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$ButtonPosition/Buttons/Resume.grab_focus()
 	elif anim_name == "quit":
 		get_tree().paused = false
-		get_tree().change_scene("res://Scenes/MainMenu/MainMenu.tscn")
+		get_tree().change_scene(quit_scene)
 
 
 func _on_Button_pressed():

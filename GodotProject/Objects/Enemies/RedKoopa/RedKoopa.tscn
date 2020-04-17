@@ -73,7 +73,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 20, 11 )
+extents = Vector2( 19, 11 )
 
 [node name="RedKoopa" type="KinematicBody2D"]
 collision_layer = 2
@@ -84,7 +84,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, -4 )
 frames = SubResource( 1 )
 animation = "walk"
-frame = 2
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

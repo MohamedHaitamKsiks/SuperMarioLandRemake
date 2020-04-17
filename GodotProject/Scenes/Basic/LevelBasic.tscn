@@ -1,0 +1,132 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/spawn.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Audio/Music/Level 1 - Super Mario Bros Theme_V1.wav" type="AudioStream" id=2]
+[ext_resource path="res://Objects/UI/UserInterface.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Particles/ScreenTransition/Transition.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/PauseMenu/PauseMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Levels/World1/TileMap.tres" type="TileSet" id=8]
+[ext_resource path="res://Objects/Solid/Solid.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Audio/Music/Level 1 - Super Mario Bros Underground Theme.wav" type="AudioStream" id=22]
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+uniform vec3 color = vec3(1.0, 1.0, 1.0);
+
+float rand(vec2 coord){
+	return fract(sin(dot(coord,vec2(58,78)))*1000.0);
+}
+
+float noise(vec2 coord){
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+	
+	float a = rand(i);
+	float b = rand(i + vec2(1.0,0.0));
+	float c= rand(i + vec2(0.0,1.0));
+	float d = rand(i + vec2(1.0,1.0));
+	
+	f = f * f * (3.0 - 2.0*f);
+	
+	float value = mix(a,b,f.x) + (c-a) * f.y *(1.0 - f.x) + (d-b) * f.x * f.y;
+	return value;
+}
+
+float fbm(vec2 coord){
+	float value = 0.8;
+	float scale = 0.6;
+	
+	for (int i = 0 ; i < 2;i++){
+		value *= noise(coord) * scale;
+		coord *= 2.0;
+		scale *= 0.5;
+	}
+	return value;
+}
+
+void fragment(){
+	vec2 coord = UV * 10.0;
+	float motion = fbm(coord + TIME/2.0 );
+	float final = fbm(coord * motion );
+	COLOR = vec4(color,final);
+}"
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+shader_param/color = Vector3( 0.9, 1, 1 )
+
+[node name="Level2" type="Node2D"]
+script = ExtResource( 1 )
+next_level = "res://Scenes/Levels/World1/Level1.tscn"
+title = "WORLD 1 - 1"
+
+[node name="UnderorldMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "MUSIC"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+bus = "MUSIC"
+
+[node name="UserInterface" parent="." instance=ExtResource( 3 )]
+
+[node name="Transition" parent="." instance=ExtResource( 4 )]
+next_level = "res://Scenes/Worldmap/Worldmap.tscn"
+
+[node name="PauseMenu" parent="." instance=ExtResource( 5 )]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="FogLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+position = Vector2( 0, -1 )
+z_index = 1000
+z_as_relative = false
+motion_scale = Vector2( 0, 0 )
+
+[node name="FogRect" type="ColorRect" parent="ParallaxBackground/FogLayer"]
+material = SubResource( 8 )
+margin_left = -352.0
+margin_top = -211.0
+margin_right = 392.0
+margin_bottom = 213.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Solid" parent="." instance=ExtResource( 9 )]
+visible = false
+position = Vector2( -56, 91.9999 )
+rotation = -3.14159
+scale = Vector2( 5.02982, -44.3105 )
+
+[node name="Solid2" parent="." instance=ExtResource( 9 )]
+visible = false
+position = Vector2( 7936, 140 )
+rotation = -3.14159
+scale = Vector2( 5.02982, -44.3105 )
+
+[node name="TileMapLevel2Solid" type="TileMap" parent="."]
+tile_set = ExtResource( 8 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 31
+collision_mask = 31
+format = 1
+tile_data = PoolIntArray( 2556149, 1, 0, 2556150, 1, 2, 2621685, 1, 65536, 2621686, 1, 65538, 2687221, 1, 65536, 2687222, 1, 65538, 2752757, 1, 65536, 2752758, 1, 65538, 2818293, 1, 131072, 2818294, 1, 131074 )
+
+[node name="GroupOfQuestionBlock" type="Node" parent="."]
+
+[node name="GroupOfCoins" type="Node" parent="."]
+
+[node name="GroupOfBricks" type="Node" parent="."]
+
+[node name="GroupOfEnemies" type="Node" parent="."]
+
+[node name="GroupOfPipes" type="Node" parent="."]
+
+[node name="GroupOfHelp" type="Node" parent="."]
+
+[node name="GroupOfDeathArea" type="Node" parent="."]
+
+[node name="GroupeOfStars" type="Node" parent="."]

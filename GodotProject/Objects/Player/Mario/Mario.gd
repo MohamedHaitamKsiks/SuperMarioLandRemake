@@ -479,6 +479,8 @@ func _on_ItemCollision_area_entered(area):
 	
 	if "FinalFlag" in area.name and not slide:
 		velocity = Vector2(0,0)
+		start_camera_shake(16,0.4,0.1)
+		$SFXThrowCappy.play()
 		$AnimatedSprite.rotation = 0
 		if $AnimatedSprite.flip_h :
 			global_position.x = area.position.x  + 3

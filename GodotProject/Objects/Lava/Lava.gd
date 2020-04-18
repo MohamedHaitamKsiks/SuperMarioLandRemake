@@ -5,12 +5,19 @@ extends Sprite
 # var b = "text"
 var time =0
 
+var y0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	y0 = position.y
 	
 func _physics_process(delta):
-	pass
+	time += delta
+	
+	position.y = y0 + 13 * cos(1.5 * time)
+	
+	rotation =  PI * cos(1.5 * time) / 800
+	
 
 
 func _on_Lava_item_rect_changed():

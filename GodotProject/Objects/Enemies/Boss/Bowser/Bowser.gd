@@ -115,6 +115,8 @@ func _on_DieTimer_timeout():
 	goomba.emit_signal("cappy_kill",self)
 	goomba.velocity.y = -350
 	
+	get_parent().get_node("Pipe").teleport_enable = true
+	get_parent().get_node("Pipe").position.x -= 32 
 
 
 func _on_HitTimer_timeout():
@@ -123,3 +125,4 @@ func _on_HitTimer_timeout():
 
 func _on_FallTimer_timeout():
 	gravity = 9
+	$SFXFall.play()

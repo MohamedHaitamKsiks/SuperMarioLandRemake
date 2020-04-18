@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Objects/Enemies/Boss/Bowser/Bowser.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserJump/bowser_jump1.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserDie/bowser_die2.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Graphics/Sprites/Enemies/Bosses/Bowser/BowserDie/bowser_die1.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Audio/Mario/mario_footsteps.wav" type="AudioStream" id=19]
+[ext_resource path="res://Assets/Audio/Mario/mario_slide.wav" type="AudioStream" id=20]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -36,16 +37,6 @@ shader_param/inten = 0.0
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 16 ), ExtResource( 8 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 6 ) ],
-"loop": false,
-"name": "firebreath",
-"speed": 11.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "std",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 18 ), ExtResource( 17 ) ],
 "loop": true,
 "name": "die",
@@ -60,6 +51,16 @@ animations = [ {
 "loop": false,
 "name": "prepareJump",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 8 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "firebreath",
+"speed": 11.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "std",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
@@ -93,6 +94,12 @@ bus = "SFX"
 stream = ExtResource( 13 )
 volume_db = 1.415
 pitch_scale = 1.6
+bus = "SFX"
+
+[node name="SFXFall" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 20 )
+pitch_scale = 0.52
+attenuation = 1.93187
 bus = "SFX"
 
 [node name="Position2D" type="Position2D" parent="."]

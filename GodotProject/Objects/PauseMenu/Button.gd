@@ -14,10 +14,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if is_hovered():
-		grab_focus()
 	if pressed and not $ConfirmSFX.playing:
 		$ConfirmSFX.play()
+		
 	
 
 
@@ -27,7 +26,6 @@ func _on_Button_focus_entered():
 
 
 func _on_Button_focus_exited():
-	
 	$AnimationPlayer.play("focusExit")
 
 

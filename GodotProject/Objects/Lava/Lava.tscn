@@ -4,7 +4,7 @@
 [ext_resource path="res://Objects/Lava/Lava.gd" type="Script" id=2]
 [ext_resource path="res://Objects/Solid/SolidKiller/SolidKiller.tscn" type="PackedScene" id=3]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 const float pi = 3.14;
@@ -15,9 +15,7 @@ uniform float scale = 5.0;
 uniform float ratiox = 1.0;
 uniform float ratioy = 1.0;
 
-void vertex(){
-	VERTEX.y = VERTEX.y + 2.0 * cos(0.8 * TIME + VERTEX.x);
-}
+
 
 void fragment(){
 	vec2 newUV;
@@ -29,20 +27,20 @@ void fragment(){
 	
 }"
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/speed = 6.0
 shader_param/scale = 5.0
 shader_param/ratiox = 350.0
 shader_param/ratioy = 5.0
 
 [node name="Lava" type="Sprite"]
-material = SubResource( 1 )
+material = SubResource( 2 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="SolidKiller" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0.0510445, -1.51238 )
+position = Vector2( -0.137337, -2.56475 )
 scale = Vector2( 1.64878, 1.24694 )
 collision_layer = 2
 collision_mask = 2

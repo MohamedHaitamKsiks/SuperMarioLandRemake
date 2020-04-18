@@ -129,7 +129,7 @@ stream = ExtResource( 16 )
 bus = "SFX"
 
 [node name="CameraPosition" type="Position2D" parent="."]
-position = Vector2( 0, -80 )
+position = Vector2( 0, -70 )
 
 [node name="Camera" type="Camera2D" parent="CameraPosition"]
 current = true
@@ -138,7 +138,6 @@ limit_left = 0
 limit_top = 0
 limit_bottom = 800
 smoothing_speed = 0.0
-drag_margin_top = 0.8
 drag_margin_bottom = 0.0
 editor_draw_limits = true
 editor_draw_drag_margin = true

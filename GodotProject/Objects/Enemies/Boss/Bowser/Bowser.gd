@@ -116,7 +116,7 @@ func _on_DieTimer_timeout():
 	goomba.velocity.y = -350
 	
 	get_parent().get_node("Pipe").teleport_enable = true
-	get_parent().get_node("Pipe").position.x -= 32 
+	get_parent().get_node("Pipe").position.x -= 40 
 
 
 func _on_HitTimer_timeout():

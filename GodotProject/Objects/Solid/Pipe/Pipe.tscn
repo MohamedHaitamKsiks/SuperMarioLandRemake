@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Objects/Solid/Pipe/Pipe.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Sprites/Pipe/pipe.png" type="Texture" id=2]
 [ext_resource path="res://Objects/Enemies/Piranha/Piranha.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Audio/Pipe/pipe_enter.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Graphics/Sprites/Pipe/enter.png" type="Texture" id=5]
+[ext_resource path="res://Objects/Particles/DestParticles/DestParticles.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 22, 32 )
@@ -39,4 +41,14 @@ one_shot = true
 [node name="SFXPipeEntered" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 bus = "SFX"
+
+[node name="DestParticles" parent="." instance=ExtResource( 6 )]
+position = Vector2( 0, -35 )
+z_index = 10
+lifetime = 0.5
+
+[node name="enter" type="Sprite" parent="."]
+position = Vector2( 0, -86 )
+z_index = 50
+texture = ExtResource( 5 )
 [connection signal="timeout" from="TeleportTimer" to="." method="_on_TeleportTimer_timeout"]

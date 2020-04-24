@@ -122,6 +122,7 @@ bus = "SFX"
 
 [node name="SFXStart" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
+volume_db = -2.122
 bus = "SFX"
 
 [node name="SFXFinish" type="AudioStreamPlayer2D" parent="."]

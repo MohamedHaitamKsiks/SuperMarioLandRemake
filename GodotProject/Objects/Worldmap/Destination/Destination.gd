@@ -19,8 +19,9 @@ var collision = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if enable :
-		$Help.visible = enable
+	if enable or goto_next_world:
+		$Help.visible = true
+		$Help.star_counter = not goto_next_world
 	else :
 		$Help.queue_free()
 	if Scores.stars < stars_required :
@@ -37,7 +38,7 @@ func _ready():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept") and enable and collision :
 		mario.emit_signal("start_level",Scores.level_path[level_id])
 		Scores.level_id = level_id

@@ -17,6 +17,8 @@ font_path = "res://HennigarD.otf"
 
 [sub_resource type="DynamicFont" id=5]
 size = 50
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_char = 6
 font_data = SubResource( 4 )
 
@@ -25,6 +27,8 @@ font_path = "res://HennigarD.otf"
 
 [sub_resource type="DynamicFont" id=7]
 size = 48
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_top = 3
 extra_spacing_char = 6
 font_data = SubResource( 6 )
@@ -215,3 +219,4 @@ stream = ExtResource( 5 )
 bus = "SFX"
 [connection signal="focus_entered" from="." to="." method="_on_OptionButton_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_OptionButton_focus_exited"]
+[connection signal="gui_input" from="." to="." method="_on_OptionButton_gui_input"]

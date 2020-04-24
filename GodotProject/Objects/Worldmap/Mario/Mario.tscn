@@ -50,6 +50,7 @@ zoom = Vector2( 0.5, 0.5 )
 limit_left = 0
 limit_top = 0
 limit_bottom = 360
+smoothing_enabled = true
 
 [node name="RayCastDown" type="RayCast2D" parent="."]
 enabled = true

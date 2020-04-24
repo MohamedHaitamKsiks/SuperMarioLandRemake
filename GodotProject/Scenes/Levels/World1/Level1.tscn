@@ -983,7 +983,7 @@ text = "Ground Pound"
 image_enable = true
 image_path = "res://Assets/Graphics/Sprites/Help/HelpImage/smash.png"
 button_enable = true
-button = "ui_down"
+button = "gameplay_down"
 
 [node name="GroupOfDeathArea" type="Node" parent="."]
 

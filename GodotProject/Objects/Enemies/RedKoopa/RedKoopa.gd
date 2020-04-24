@@ -14,7 +14,7 @@ func _ready():
 func _physics_process(delta):
 	velocity = move(velocity)
 	fall(6,200)
-	if on_wall() or (not $RayCast2D.is_colliding() and ground):
+	if on_wall() or (not $RayCast2D.is_colliding() and not shell and ground):
 		if $AnimatedSprite.flip_h :
 			velocity.x = speed
 			$RayCast2D.position.x = 6

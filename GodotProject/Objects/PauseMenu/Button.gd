@@ -27,6 +27,3 @@ func _on_Button_focus_entered():
 
 func _on_Button_focus_exited():
 	$AnimationPlayer.play("focusExit")
-
-
-

@@ -22,16 +22,16 @@ func _physics_process(delta):
 	time += delta
 	
 	if velocity == Vector2(0,0) and can_move:
-		if Input.is_action_just_pressed("ui_left") and not $RayCastLeft.is_colliding():
+		if Input.is_action_just_pressed("left") and not $RayCastLeft.is_colliding():
 			velocity.x = -SPEED
 			$SFXStep.play()
-		elif Input.is_action_just_pressed("ui_right") and not $RayCastRight.is_colliding():
+		elif Input.is_action_just_pressed("right") and not $RayCastRight.is_colliding():
 			velocity.x = SPEED
 			$SFXStep.play()
-		elif Input.is_action_just_pressed("ui_up") and not $RayCastUp.is_colliding():
+		elif Input.is_action_just_pressed("up") and not $RayCastUp.is_colliding():
 			velocity.y = -SPEED
 			$SFXStep.play()
-		elif Input.is_action_just_pressed("ui_down") and not $RayCastDown.is_colliding():
+		elif Input.is_action_just_pressed("down") and not $RayCastDown.is_colliding():
 			velocity.y = SPEED
 			$SFXStep.play()
 			

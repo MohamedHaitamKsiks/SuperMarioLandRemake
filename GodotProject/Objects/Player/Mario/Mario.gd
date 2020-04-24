@@ -131,7 +131,7 @@ func mouvement_manager(velocity):
 	$AnimatedSprite.visible = (is_visible and not can_hit) or can_hit
 
 	#basic mouvements
-	var direction = int(Input.is_action_pressed("ui_right"))-int(Input.is_action_pressed("ui_left"))
+	var direction = int(Input.is_action_pressed("right"))-int(Input.is_action_pressed("left"))
 	velocity.x += ACC * direction * int(not (wall_jump or down or smash or dive) ) * (1 - int(sprint and abs(velocity.x) > MAX_HSPEED and velocity.x * direction >= 0)*0.7)#acceleration
 	velocity.x -= ACC * sign(velocity.x) * int(direction == 0 or down or smash or dive) * int(not wall_jump) * int(not dive or ground) * (1 - 0.4 * int(dive and ground)) * (0.5 + 0.5 * int(ground))#deceleration
 	if abs(velocity.x) > MAX_HSPEED * ( 1 + int(sprint)) and not dive :#max speed
@@ -143,7 +143,7 @@ func mouvement_manager(velocity):
 	sprint = Input.is_action_pressed("gameplay_sprint")
 
 	#down
-	if Input.is_action_pressed("ui_down") and ground and not smash :
+	if Input.is_action_pressed("gameplay_down") and ground and not smash :
 		if not down :
 			$SFXCappy.play()
 		down = true
@@ -153,7 +153,7 @@ func mouvement_manager(velocity):
 		$HitBox.position.y = 0
 
 	#smash
-	if not (ground or smash or prepare_smash) and Input.is_action_just_pressed("ui_down"):
+	if not (ground or smash or prepare_smash) and Input.is_action_just_pressed("gameplay_down"):
 		$SFXCappy.play()
 		prepare_smash = true
 		velocity = Vector2(0,0)
@@ -198,7 +198,7 @@ func mouvement_manager(velocity):
 		turning = false
 		$SFXJump.play()
 	##long jump
-	if Input.is_action_pressed("gameplay_jump") and jump :
+	if Input.is_action_pressed("gameplay_jump") and jump and not cappy_jump:
 		velocity.y -= JUMP_ACC
 	#stop jumping
 	if velocity.y >0 :
@@ -429,7 +429,7 @@ func _on_Mario_shake_camera(power,t,period):
 
 ##Final Level##
 func _on_FinishTimer_timeout():
-	velocity.y = 80
+	velocity.y = 160
 	$SFXSlide.play()
 #
 func finish_cinematic():	

@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Objects/Option/Controls/Controls.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Option/OptionButton/OptionButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Option/SubOption/SubOption.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float lod = 0.0;
+
+void fragment() {
+	COLOR.rgb = textureLod(SCREEN_TEXTURE, SCREEN_UV, lod).rgb - vec3(0.2,0.2,0.2);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/lod = 1.0
+
+[node name="Controls" type="CanvasLayer"]
+script = ExtResource( 1 )
+gamepad = 1
+
+[node name="Blur" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+visible = false
+margin_left = 344.0
+margin_top = 77.0
+margin_right = 1019.0
+margin_bottom = 765.0
+rect_clip_content = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 675.0
+margin_bottom = 688.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubOption" parent="ScrollContainer/Controls" instance=ExtResource( 3 )]
+margin_right = 675.0
+margin_bottom = 86.0
+text = "Keyboard"
+
+[node name="Jump" parent="ScrollContainer/Controls" instance=ExtResource( 2 )]
+margin_top = 90.0
+margin_right = 675.0
+margin_bottom = 163.0
+text = "Jump"
+max_value = -1
+
+[node name="Dash" parent="ScrollContainer/Controls" instance=ExtResource( 2 )]
+margin_top = 167.0
+margin_right = 675.0
+margin_bottom = 240.0
+text = "Dash"
+max_value = -1
+
+[node name="Throw Cappy" parent="ScrollContainer/Controls" instance=ExtResource( 2 )]
+margin_top = 244.0
+margin_right = 675.0
+margin_bottom = 317.0
+text = "Throw Cappy"
+max_value = -1
+
+[node name="Dive" parent="ScrollContainer/Controls" instance=ExtResource( 2 )]
+margin_top = 321.0
+margin_right = 675.0
+margin_bottom = 394.0
+text = "Dive"
+max_value = -1
+
+[node name="Ground Pound" parent="ScrollContainer/Controls" instance=ExtResource( 2 )]
+margin_top = 398.0
+margin_right = 675.0
+margin_bottom = 471.0
+text = "Ground Pound"
+max_value = -1
+
+[node name="Back" parent="ScrollContainer/Controls" instance=ExtResource( 2 )]
+margin_top = 475.0
+margin_right = 675.0
+margin_bottom = 548.0
+text = "Back"
+[connection signal="pressed" from="ScrollContainer/Controls/Back" to="." method="_on_Back_pressed"]

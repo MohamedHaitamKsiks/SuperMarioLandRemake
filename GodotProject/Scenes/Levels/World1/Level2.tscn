@@ -491,25 +491,25 @@ position = Vector2( 8636, 344 )
 position = Vector2( 8683, 287 )
 
 [node name="Coin129" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 8752, 247 )
+position = Vector2( 8738, 242 )
 
 [node name="Coin122" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 8716, 261 )
+position = Vector2( 8708, 264 )
 
 [node name="Coin123" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 8789, 242 )
+position = Vector2( 8797, 216 )
 
 [node name="Coin124" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 8851, 264 )
+position = Vector2( 8764, 228 )
 
 [node name="Coin131" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 8873, 286 )
+position = Vector2( 8851, 205 )
 
 [node name="Coin130" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 8823, 248 )
+position = Vector2( 8823, 211 )
 
 [node name="Coin125" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 8892, 315 )
+position = Vector2( 8881, 205 )
 
 [node name="Coin112" parent="GroupOfCoins" instance=ExtResource( 13 )]
 position = Vector2( 7676, 364 )
@@ -1409,7 +1409,7 @@ teleport_enable = true
 position = Vector2( -1107, -451 )
 rotation = -2.69123
 plant_enable = false
-out_speed = 500
+out_speed = 580
 
 [node name="Pipe6" parent="GroupOfPipes" instance=ExtResource( 7 )]
 position = Vector2( 2540, 268 )
@@ -1480,102 +1480,86 @@ curve = SubResource( 3 )
 [node name="MovingPlatform" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 5828, -60 )
 rotation = -1.94099e-06
-rotate = false
 speed = 50
 
 [node name="MovingPlatform9" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 5978.12, -60 )
 rotation = -1.94099e-06
 offset = 150.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform2" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 6084, -14.927 )
 rotation = -1.94099e-06
 offset = 300.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform10" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 6084, 134.765 )
 rotation = -1.94099e-06
 offset = 450.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform3" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 6084, 284.893 )
 rotation = -1.91131e-06
 offset = 600.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform11" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 6084, 434.973 )
 rotation = -1.91131e-06
 offset = 750.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform4" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 6084, 584.148 )
 offset = 900.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform12" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 6084, 734.349 )
 offset = 1050.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform5" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 6066.17, 868 )
 offset = 1200.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform13" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 5916.12, 868 )
 offset = 1350.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform6" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 5828, 804.142 )
 offset = 1500.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform14" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 5828, 653.816 )
 offset = 1650.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform7" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 5828, 503.761 )
 offset = 1800.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform15" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 5828, 353.52 )
 offset = 1950.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform8" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 5828, 202.578 )
 offset = 2100.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform16" parent="GroupOfPlatforms/Path2D" instance=ExtResource( 19 )]
 position = Vector2( 5828, 52.4005 )
 offset = 2250.0
-rotate = false
 speed = 50
 
 [node name="Path2D2" type="Path2D" parent="GroupOfPlatforms"]
@@ -1585,100 +1569,84 @@ curve = SubResource( 3 )
 [node name="MovingPlatform" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 5828, -60 )
 rotation = -1.94099e-06
-rotate = false
 speed = 50
 
 [node name="MovingPlatform9" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 5978.12, -60 )
 rotation = -1.94099e-06
 offset = 150.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform2" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 6084, -14.927 )
 rotation = -1.94099e-06
 offset = 300.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform10" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 6084, 134.765 )
 rotation = -1.94099e-06
 offset = 450.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform3" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 6084, 284.893 )
 rotation = -1.91131e-06
 offset = 600.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform11" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 6084, 434.973 )
 rotation = -1.91131e-06
 offset = 750.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform4" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 6084, 584.148 )
 offset = 900.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform12" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 6084, 734.349 )
 offset = 1050.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform5" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 6066.17, 868 )
 offset = 1200.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform13" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 5916.12, 868 )
 offset = 1350.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform6" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 5828, 804.142 )
 offset = 1500.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform14" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 5828, 653.816 )
 offset = 1650.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform7" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 5828, 503.761 )
 offset = 1800.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform15" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 5828, 353.52 )
 offset = 1950.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform8" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 5828, 202.578 )
 offset = 2100.0
-rotate = false
 speed = 50
 
 [node name="MovingPlatform16" parent="GroupOfPlatforms/Path2D2" instance=ExtResource( 19 )]
 position = Vector2( 5828, 52.4005 )
 offset = 2250.0
-rotate = false
 speed = 50

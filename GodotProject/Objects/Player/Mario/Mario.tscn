@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Objects/Player/Mario/Mario.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Audio/Mario/mario_jump.wav" type="AudioStream" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://Objects/Particles/DestParticles/DestParticles.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/DeadUI/DeadUI.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Audio/Mario/mario_sprint.wav" type="AudioStream" id=16]
+[ext_resource path="res://Assets/Audio/Mario/mario_climbing.wav" type="AudioStream" id=17]
+[ext_resource path="res://Assets/Audio/Mario/mario_walljump.wav" type="AudioStream" id=18]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0.00323407, 0.0215 ), 0.0, 4.58495, 0, 0, Vector2( 1, 0 ), 0.247053, 0.0, 0, 0 ]
@@ -129,6 +131,20 @@ bus = "SFX"
 stream = ExtResource( 16 )
 bus = "SFX"
 
+[node name="SFXClimbing" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 17 )
+volume_db = -21.225
+pitch_scale = 0.9
+attenuation = 0.0
+bus = "SFX"
+
+[node name="SFXWalljump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 18 )
+volume_db = 5.66
+pitch_scale = 0.9
+attenuation = 0.0
+bus = "SFX"
+
 [node name="CameraPosition" type="Position2D" parent="."]
 position = Vector2( 0, -70 )
 
@@ -138,7 +154,9 @@ zoom = Vector2( 0.5, 0.5 )
 limit_left = 0
 limit_top = 0
 limit_bottom = 800
+drag_margin_v_enabled = true
 smoothing_speed = 0.0
+drag_margin_top = 0.67
 drag_margin_bottom = 0.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
@@ -156,20 +174,19 @@ texture = ExtResource( 12 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 13 )
 animation = "hat_stand"
+frame = 6
 playing = true
 
 [node name="ThrowPosition2D" type="Position2D" parent="."]
 position = Vector2( 16, 6 )
 
 [node name="CanClimbRayCastTop" type="RayCast2D" parent="."]
-visible = false
-position = Vector2( 0, 3 )
+position = Vector2( 0, -17 )
 enabled = true
 cast_to = Vector2( 12, 0 )
 
 [node name="CanClimbRayCastBot" type="RayCast2D" parent="."]
-visible = false
-position = Vector2( 0, 15 )
+position = Vector2( 0, 21 )
 enabled = true
 cast_to = Vector2( 12, 0 )
 

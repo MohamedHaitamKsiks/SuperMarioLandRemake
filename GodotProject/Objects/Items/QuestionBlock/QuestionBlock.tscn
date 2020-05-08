@@ -32,7 +32,7 @@ anims/GetItem = ExtResource( 5 )
 anims/GetItemSmash = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+rotation = 3.14159
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

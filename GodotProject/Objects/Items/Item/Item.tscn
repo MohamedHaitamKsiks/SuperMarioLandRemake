@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Objects/Items/Item/Item.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Sprites/Items/Items/items2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Graphics/Sprites/Items/Items/items3.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Graphics/Sprites/Items/Items/items1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Audio/Items/powe_up_appears.wav" type="AudioStream" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -26,8 +27,19 @@ frames = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+disabled = true
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 process_parent = true
 physics_process_parent = true
+
+[node name="SFXAppears" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+attenuation = 3.24901
+bus = "SFX"
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 16 )
 [connection signal="destroy" from="." to="." method="_on_Item_destroy"]

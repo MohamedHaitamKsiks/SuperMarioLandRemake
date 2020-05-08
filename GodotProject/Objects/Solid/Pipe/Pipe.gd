@@ -62,7 +62,7 @@ func _process(delta):
 			if underworld_music or overworld_music :
 				get_parent().get_parent().get_node("Music").stop()
 				get_parent().get_parent().get_node("UnderworldMusic").stop()
-				get_parent().get_parent().get_node("Transition").get_node("AnimationPlayer").play("teleport")
+			get_parent().get_parent().get_node("Transition").get_node("AnimationPlayer").play("teleport")
 
 func _on_TeleportTimer_timeout():
 	Mario.teleport = false

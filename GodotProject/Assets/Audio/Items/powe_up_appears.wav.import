@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/powe_up_appears.wav-62f886f242a9c0cc368c26c7fc4f0380.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Items/powe_up_appears.wav"
+dest_files=[ "res://.import/powe_up_appears.wav-62f886f242a9c0cc368c26c7fc4f0380.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

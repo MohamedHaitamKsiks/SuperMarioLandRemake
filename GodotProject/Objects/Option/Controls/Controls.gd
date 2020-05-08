@@ -67,10 +67,10 @@ func store_action(event,action):
 func _input(event):
 	if $ScrollContainer.visible:
 		if wait_input:
-			if event is InputEventKey and event.is_pressed():
+			if event is InputEventKey and event.is_pressed() and gamepad == 0:
 				store_action(event,controls_list[select])
 				wait_input = false
-			elif event is InputEventJoypadButton and event.is_pressed():
+			elif event is InputEventJoypadButton and event.is_pressed() and gamepad == 1:
 				store_action(event,controls_list[select])
 				wait_input = false
 		else :

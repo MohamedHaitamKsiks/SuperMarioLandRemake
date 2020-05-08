@@ -24,7 +24,7 @@ func _process(delta):
 			$AnimationPlayer.play("pauseIn")
 			paused = true
 	
-	if can_move and paused : 
+	if can_move and paused: 
 		pause()
 
 func draw_blur():
@@ -42,17 +42,17 @@ func _on_Quit_pressed():
 
 func _on_Resume_pressed():
 	if paused :
-		get_tree().paused = false
 		$AnimationPlayer.play("pauseOut")
-		paused = false
 		$ButtonPosition/Buttons/Resume.release_focus()
 		can_move = false
-
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "pauseIn":
 		$ButtonPosition/Buttons/Resume.grab_focus()
 		can_move = true
+	elif anim_name == "pauseOut" and paused:
+		get_tree().paused = false
+		paused = false
 	elif anim_name == "quit":
 		get_tree().paused = false
 		get_tree().change_scene(quit_scene)

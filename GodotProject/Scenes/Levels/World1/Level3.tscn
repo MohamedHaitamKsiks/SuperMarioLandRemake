@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Scripts/spawn.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Audio/Music/Level 1 - Super Mario Bros Theme_V1.wav" type="AudioStream" id=2]
@@ -25,6 +25,8 @@
 [ext_resource path="res://Objects/Items/Star/Star.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Objects/Items/QuestionBlock/QuestionBlock.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Objects/FinalFlag/FinalFlag.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Objects/Items/LargeQuestionBlock/LargeQuestionBlock.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Objects/Tilemap/GeneralTileSet.tres" type="TileSet" id=27]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -423,7 +425,7 @@ shader_param/color = Vector3( 1, 1, 0 )
 
 [sub_resource type="Curve2D" id=24]
 _data = {
-"points": PoolVector2Array( 13.3, 306.849, -13.3, -306.849, 6088, 552, -67.4499, -312.549, 67.4499, 312.549, 6976, 544, 0, 0, 0, 0, 6480, 840, 8.54999, 341.999, -8.54999, -341.999, 6088, 552 )
+"points": PoolVector2Array( 0, 0, 0, 0, 6088, 699.233, 0, 0, 0, 0, 6088, 378.845, 0, 0, 0, 0, 6984, 378.845, 0, 0, 0, 0, 6984, 666.373, 0, 0, 0, 0, 6088, 699.233 )
 }
 
 [node name="Level2" type="Node2D"]
@@ -836,71 +838,67 @@ out_speed = 400
 [node name="GroupOfMovingPlatform" type="Node" parent="."]
 
 [node name="Path2D" type="Path2D" parent="GroupOfMovingPlatform"]
-position = Vector2( -8, 0 )
+position = Vector2( -8, 31.0744 )
+scale = Vector2( 1, 0.973817 )
 z_index = -1
 curve = SubResource( 24 )
 
 [node name="MovingPlatform" parent="GroupOfMovingPlatform/Path2D" instance=ExtResource( 14 )]
-position = Vector2( 6088, 552 )
+position = Vector2( 6088, 699.233 )
 speed = 100
 
 [node name="MovingPlatform2" parent="GroupOfMovingPlatform/Path2D" instance=ExtResource( 14 )]
-position = Vector2( 6187.59, 390.82 )
-offset = 200.0
+position = Vector2( 6163.51, 378.845 )
+offset = 395.66
 speed = 100
 
 [node name="MovingPlatform3" parent="GroupOfMovingPlatform/Path2D" instance=ExtResource( 14 )]
-position = Vector2( 6375.7, 326.562 )
-offset = 400.0
+position = Vector2( 6379.96, 378.845 )
+offset = 611.97
 speed = 100
 
 [node name="MovingPlatform4" parent="GroupOfMovingPlatform/Path2D" instance=ExtResource( 14 )]
-position = Vector2( 6573.89, 317.717 )
-offset = 600.0
+position = Vector2( 6610.6, 378.845 )
+offset = 844.58
 speed = 100
 
 [node name="MovingPlatform5" parent="GroupOfMovingPlatform/Path2D" instance=ExtResource( 14 )]
-position = Vector2( 6768.37, 355.31 )
-offset = 800.0
+position = Vector2( 6875.85, 378.845 )
+offset = 1109.8
 speed = 100
 
 [node name="MovingPlatform6" parent="GroupOfMovingPlatform/Path2D" instance=ExtResource( 14 )]
-position = Vector2( 6935.37, 461.19 )
-offset = 1000.0
+position = Vector2( 6984, 537.83 )
+offset = 1375.02
 speed = 100
 
 [node name="MovingPlatform7" parent="GroupOfMovingPlatform/Path2D" instance=ExtResource( 14 )]
-position = Vector2( 6973.05, 649.647 )
-offset = 1200.0
+position = Vector2( 6877.61, 670.275 )
+offset = 1607.63
 speed = 100
 
 [node name="MovingPlatform8" parent="GroupOfMovingPlatform/Path2D" instance=ExtResource( 14 )]
-position = Vector2( 6831.45, 782.829 )
-offset = 1400.0
+position = Vector2( 6629.73, 679.365 )
+offset = 1856.54
 speed = 100
 
 [node name="MovingPlatform9" parent="GroupOfMovingPlatform/Path2D" instance=ExtResource( 14 )]
-position = Vector2( 6637.5, 831.058 )
-offset = 1600.0
+position = Vector2( 6412.18, 687.344 )
+offset = 2072.85
 speed = 100
 
 [node name="MovingPlatform10" parent="GroupOfMovingPlatform/Path2D" instance=ExtResource( 14 )]
-position = Vector2( 6438.01, 842.936 )
-offset = 1800.0
-speed = 100
-
-[node name="MovingPlatform11" parent="GroupOfMovingPlatform/Path2D" instance=ExtResource( 14 )]
-position = Vector2( 6242.83, 807.553 )
-offset = 2000.0
+position = Vector2( 6145.89, 697.11 )
+offset = 2339.15
 speed = 100
 
 [node name="MovingPlatform12" parent="GroupOfMovingPlatform/Path2D" instance=ExtResource( 14 )]
-position = Vector2( 6130.78, 711.262 )
+position = Vector2( 6335.15, 690.169 )
 offset = 2150.0
 speed = 100
 
 [node name="FinalFlag" parent="." instance=ExtResource( 25 )]
-position = Vector2( 12657, 540 )
+position = Vector2( 12821, 540 )
 
 [node name="Lava" parent="." instance=ExtResource( 13 )]
 position = Vector2( 6232, 744 )
@@ -921,7 +919,14 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 31
 collision_mask = 31
 format = 1
-tile_data = PoolIntArray( 1835791, 2, 2, 1835792, 2, 2, 1835793, 2, 2, 1835794, 2, 2, 1901326, 2, 2, 1901327, 2, 2, 1901328, 2, 2, 1901329, 2, 2, 1901330, 2, 2, 1966861, 2, 2, 1966862, 2, 2, 1966863, 2, 2, 1966864, 2, 2, 1966865, 2, 2, 1966866, 2, 2, 2032396, 2, 2, 2032397, 2, 2, 2032398, 2, 2, 2032399, 2, 2, 2032400, 2, 2, 2032401, 2, 2, 2032402, 2, 2, 2097931, 2, 2, 2097932, 2, 2, 2097933, 2, 2, 2097934, 2, 2, 2097935, 2, 2, 2097936, 2, 2, 2097937, 2, 2, 2097938, 2, 2, 2163466, 2, 2, 2163467, 2, 2, 2163468, 2, 2, 2163469, 2, 2, 2163470, 2, 2, 2163471, 2, 2, 2163472, 2, 2, 2163473, 2, 2, 2163474, 2, 2 )
+
+[node name="TileMapFinalFlag" type="TileMap" parent="."]
+tile_set = ExtResource( 27 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 31
+collision_mask = 31
+format = 1
+tile_data = PoolIntArray( 1704724, 0, 0, 1704725, 0, 1, 1704726, 0, 1, 1704727, 0, 1, 1704728, 0, 1, 1704729, 0, 2, 1770260, 0, 65536, 1770261, 0, 65537, 1770262, 0, 65537, 1770263, 0, 65537, 1770264, 0, 65537, 1770265, 0, 65538, 1835796, 0, 65536, 1835797, 0, 65537, 1835798, 0, 65537, 1835799, 0, 65537, 1835800, 0, 65537, 1835801, 0, 65538, 1901330, 1, 0, 1901331, 1, 1, 1901332, 1, 1, 1901333, 1, 1, 1901334, 1, 2, 1901335, 0, 65537, 1901336, 0, 65537, 1901337, 0, 65538, 1966866, 1, 65536, 1966867, 1, 65537, 1966868, 1, 65537, 1966869, 1, 65537, 1966870, 1, 65538, 1966871, 0, 65537, 1966872, 0, 65537, 1966873, 0, 65538, 2032402, 1, 65536, 2032403, 1, 65537, 2032404, 1, 65537, 2032405, 1, 65537, 2032406, 1, 65538, 2032407, 0, 65537, 2032408, 0, 65537, 2032409, 0, 65538, 2097934, 2, 0, 2097935, 2, 1, 2097936, 2, 1, 2097937, 2, 1, 2097938, 2, 2, 2097939, 1, 65537, 2097940, 1, 65537, 2097941, 1, 65537, 2097942, 1, 65538, 2097943, 0, 65537, 2097944, 0, 65537, 2097945, 0, 65538, 2163470, 2, 131072, 2163471, 2, 131073, 2163472, 2, 131073, 2163473, 2, 131073, 2163474, 2, 131074, 2163475, 1, 131073, 2163476, 1, 131073, 2163477, 1, 131073, 2163478, 1, 131074, 2163479, 0, 131073, 2163480, 0, 131073, 2163481, 0, 131074 )
 
 [node name="TileMapLevel2Deco16x17" type="TileMap" parent="."]
 tile_set = SubResource( 19 )
@@ -939,34 +944,20 @@ position = Vector2( 7184, 540 )
 
 [node name="GroupOfQuestionBlock" type="Node" parent="."]
 
-[node name="QuestionBlock" parent="GroupOfQuestionBlock" instance=ExtResource( 24 )]
-position = Vector2( 8192, 504 )
-items = PoolIntArray( 0, 0 )
-type = 1
-
-[node name="QuestionBlock2" parent="GroupOfQuestionBlock" instance=ExtResource( 24 )]
+[node name="LargeQuestionBlock" parent="GroupOfQuestionBlock" instance=ExtResource( 26 )]
 position = Vector2( 8216, 504 )
-items = PoolIntArray( 0, 0 )
+items = PoolIntArray( 0 )
+
+[node name="LargeQuestionBlock2" parent="GroupOfQuestionBlock" instance=ExtResource( 26 )]
+position = Vector2( 8288, 504 )
+items = PoolIntArray( 0 )
 
 [node name="QuestionBlock4" parent="GroupOfQuestionBlock" instance=ExtResource( 24 )]
-position = Vector2( 8240, 504 )
+position = Vector2( 8168, 504 )
 items = PoolIntArray( 0, 0 )
 type = 1
 
-[node name="QuestionBlock3" parent="GroupOfQuestionBlock" instance=ExtResource( 24 )]
-position = Vector2( 8264, 504 )
-items = PoolIntArray( 1, 0 )
-
-[node name="QuestionBlock8" parent="GroupOfQuestionBlock" instance=ExtResource( 24 )]
-position = Vector2( 8288, 504 )
-items = PoolIntArray( 0, 0 )
-type = 1
-
-[node name="QuestionBlock7" parent="GroupOfQuestionBlock" instance=ExtResource( 24 )]
-position = Vector2( 8312, 504 )
-items = PoolIntArray( 0, 0 )
-
-[node name="QuestionBlock6" parent="GroupOfQuestionBlock" instance=ExtResource( 24 )]
+[node name="QuestionBlock5" parent="GroupOfQuestionBlock" instance=ExtResource( 24 )]
 position = Vector2( 8336, 504 )
 items = PoolIntArray( 0, 0 )
 type = 1
@@ -1078,19 +1069,19 @@ position = Vector2( 5344, 480 )
 position = Vector2( 5384, 488 )
 
 [node name="Coin2" parent="GroupOfCoins" instance=ExtResource( 22 )]
-position = Vector2( 6184, 368 )
+position = Vector2( 6160, 368 )
 
 [node name="Coin3" parent="GroupOfCoins" instance=ExtResource( 22 )]
-position = Vector2( 6368, 304 )
+position = Vector2( 6376, 368 )
 
 [node name="Coin4" parent="GroupOfCoins" instance=ExtResource( 22 )]
-position = Vector2( 6568, 296 )
+position = Vector2( 6608, 368 )
 
 [node name="Coin5" parent="GroupOfCoins" instance=ExtResource( 22 )]
-position = Vector2( 6760, 328 )
+position = Vector2( 6864, 368 )
 
 [node name="Coin6" parent="GroupOfCoins" instance=ExtResource( 22 )]
-position = Vector2( 6928, 432 )
+position = Vector2( 6976, 528 )
 
 [node name="Coin14" parent="GroupOfCoins" instance=ExtResource( 22 )]
 position = Vector2( 7320, 528 )
@@ -1159,7 +1150,34 @@ position = Vector2( 9544, 552 )
 position = Vector2( 12416, 528 )
 
 [node name="Coin51" parent="GroupOfCoins" instance=ExtResource( 22 )]
-position = Vector2( 12448, 512 )
+position = Vector2( 12448, 528 )
+
+[node name="Coin65" parent="GroupOfCoins" instance=ExtResource( 22 )]
+position = Vector2( 12480, 528 )
+
+[node name="Coin66" parent="GroupOfCoins" instance=ExtResource( 22 )]
+position = Vector2( 12528, 496 )
+
+[node name="Coin67" parent="GroupOfCoins" instance=ExtResource( 22 )]
+position = Vector2( 12552, 496 )
+
+[node name="Coin68" parent="GroupOfCoins" instance=ExtResource( 22 )]
+position = Vector2( 12576, 496 )
+
+[node name="Coin69" parent="GroupOfCoins" instance=ExtResource( 22 )]
+position = Vector2( 12592, 448 )
+
+[node name="Coin70" parent="GroupOfCoins" instance=ExtResource( 22 )]
+position = Vector2( 12616, 448 )
+
+[node name="Coin71" parent="GroupOfCoins" instance=ExtResource( 22 )]
+position = Vector2( 12640, 448 )
+
+[node name="Coin72" parent="GroupOfCoins" instance=ExtResource( 22 )]
+position = Vector2( 12624, 400 )
+
+[node name="Coin73" parent="GroupOfCoins" instance=ExtResource( 22 )]
+position = Vector2( 12688, 400 )
 
 [node name="Coin50" parent="GroupOfCoins" instance=ExtResource( 22 )]
 position = Vector2( 12384, 528 )
@@ -1313,5 +1331,5 @@ position = Vector2( 7968, 176 )
 id = 1
 
 [node name="Star3" parent="GroupeOfStars" instance=ExtResource( 23 )]
-position = Vector2( 12568, 424 )
+position = Vector2( 12656, 392 )
 id = 2

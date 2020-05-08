@@ -40,7 +40,7 @@ func _on_Option_pressed():
 
 
 func _on_Quit_pressed():
-	get_tree().exit()
+	get_tree().quit()
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

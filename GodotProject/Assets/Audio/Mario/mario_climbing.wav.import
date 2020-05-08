@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mario_climbing.wav-f0e3ab7566b55aa80c221708bef4fe48.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Mario/mario_climbing.wav"
+dest_files=[ "res://.import/mario_climbing.wav-f0e3ab7566b55aa80c221708bef4fe48.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

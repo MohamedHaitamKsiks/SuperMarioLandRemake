@@ -4,6 +4,7 @@ extends CanvasLayer
 # var a = 2
 # var b = "text"
 export var blur = 0
+var time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +18,8 @@ func _process(delta):
 	draw_blur()
 	draw_star()
 	$ColorRect/Title.text = get_parent().title
+	
+	time += delta
 
 
 
@@ -38,6 +41,10 @@ func draw_coins_counter():
 func draw_health():
 	var health = Scores.health
 	$Health/AnimatedSprite.frame = 3 - health
+	if health <= 1:
+		$Health.position.y = 10 * abs(sin(10*time))
+	
+	
 
 func draw_star():
 	for k in range(3):

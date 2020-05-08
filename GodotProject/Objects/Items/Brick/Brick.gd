@@ -13,6 +13,5 @@ func _on_Brick_destroy():
 func emit_particles(number):
 	var particle = BrickParticle.instance()
 	get_parent().add_child(particle)
-	particle.position = global_position + Vector2(-24,-24)
-	particle.emitting = true
+	particle.position = global_position
 	

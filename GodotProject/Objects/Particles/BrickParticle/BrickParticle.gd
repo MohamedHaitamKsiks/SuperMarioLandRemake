@@ -2,6 +2,7 @@ extends Node2D
 
 var debrit = preload("res://Objects/Particles/BrickParticle/BrickDebrit.tscn")
 var blink = 0
+var velocity = Vector2(0,0)
 
 func _ready():
 	for k in range(5):
@@ -21,4 +22,11 @@ func _on_Blink_timeout():
 		blink += 1
 		return
 	$impact.visible = false
+	$KillArea/CollisionShape2D.disabled = true
 	
+
+
+func _on_KillArea_body_entered(body):
+	for enemy in EnemyList.enemy_body:
+		if enemy in body.name :
+			body.emit_signal("cappy_kill",self)

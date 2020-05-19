@@ -10,8 +10,6 @@
 [ext_resource path="res://Assets/Graphics/Sprites/CheckPoint/checkpoint1.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Audio/Checkpoint/checkpoint.wav" type="AudioStream" id=9]
 
-
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 8 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 7 ) ],
@@ -37,7 +35,7 @@ position = Vector2( 7, -17 )
 shape = SubResource( 2 )
 
 [node name="SpawnPosition" type="Position2D" parent="."]
-position = Vector2( 0, -17 )
+position = Vector2( 0, -13 )
 
 [node name="SFXCheckpoint" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )

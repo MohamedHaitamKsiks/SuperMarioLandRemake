@@ -52,19 +52,18 @@ func _on_BackArea_body_entered(body):
 		body.emit_signal("destroy")
 		mario.emit_signal("shake_camera",8,0.4,0.1)
 	
-	if not back and ("Goomba" in body.name or "Koopa" in body.name or "Bowser" in body.name ):
-		back = true
-		body.emit_signal("cappy_kill",self)
-		$CollisionShape2D.disabled = true
-		mario.emit_signal("shake_camera",8,0.4,0.1)
+	for enemy in EnemyList.enemy_body:
+		if not back and (enemy in body.name ):
+			back = true
+			body.emit_signal("cappy_kill",self)
+			$CollisionShape2D.disabled = true
+			mario.emit_signal("shake_camera",8,0.4,0.1)
 
 
 func _on_Timer_timeout():
 	back = true
 	$CollisionShape2D.disabled = true
 	
-	
-
 
 func _on_Cappy_jump():
 	$AnimationPlayer.play("jump")

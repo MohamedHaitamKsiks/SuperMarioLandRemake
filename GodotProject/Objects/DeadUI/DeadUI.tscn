@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Objects/DeadUI/DeadUI.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Audio/Tunes/death_tune.wav" type="AudioStream" id=2]
@@ -19,16 +19,30 @@ void fragment() {
 shader = SubResource( 1 )
 shader_param/lod = 0.0
 
-[sub_resource type="DynamicFontData" id=3]
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+void fragment(){
+	COLOR.a = texture(TEXTURE,UV).a;
+	if (COLOR.rgb == vec3(1.0,1.0,1.0)){
+		float mid = (UV.y*18.0) * (UV.y*18.0);
+		COLOR.rgb = vec3(1.0 - 0.6*mid , 0.1*mid , 0.2*mid);
+	}
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
 font_path = "res://SuperMario256.ttf"
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 size = 160
-outline_size = 10
-font_data = SubResource( 3 )
+outline_size = 5
+font_data = SubResource( 5 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "game_over"
+[sub_resource type="Animation" id=7]
 length = 10.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("LableGameOver:modulate")
@@ -55,7 +69,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 length = 6.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:blur")
@@ -153,18 +167,58 @@ tracks/7/keys = {
 "update": 0,
 "values": [ Vector2( 519.682, 344.835 ), Vector2( 519.682, 344.835 ), Vector2( 519.682, 322.835 ), Vector2( 519.682, 344.835 ), Vector2( 519.682, 344.835 ) ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("BlackRect:color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.4, 6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.298039 ), Color( 0, 0, 0, 0.298039 ) ]
+}
 
-[sub_resource type="DynamicFontData" id=7]
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+
+void fragment(){
+	COLOR.a = texture(TEXTURE,UV).a;
+	if (COLOR.rgb == vec3(1.0,1.0,1.0)){
+		float mid = UV.y*18.0 * UV.y*18.0 * UV.y*18.0;
+		COLOR.rgb = vec3(1.0 - 0.6*mid , 0.1*mid , 0.2*mid);
+	}
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 160
+outline_size = 8
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFontData" id=12]
 font_path = "res://HennigarD.otf"
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=13]
 size = 48
 extra_spacing_char = 4
-font_data = SubResource( 7 )
+font_data = SubResource( 12 )
 
 [node name="DeadUI" type="CanvasLayer"]
 pause_mode = 2
 script = ExtResource( 1 )
+
+[node name="BlackRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BlurRect" type="ColorRect" parent="."]
 material = SubResource( 2 )
@@ -175,21 +229,23 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
+material = SubResource( 4 )
 margin_left = 280.0
 margin_top = -300.0
 margin_right = 1043.0
-margin_bottom = -87.0001
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color = Color( 0.737255, 0.258824, 0, 1 )
-custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+margin_bottom = -100.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_outline_modulate = Color( 1, 0.972549, 0.972549, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 8
 text = "TOO BAD"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/game_over = SubResource( 5 )
-anims/start = SubResource( 6 )
+anims/game_over = SubResource( 7 )
+anims/start = SubResource( 8 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -212,13 +268,14 @@ stream = ExtResource( 4 )
 
 [node name="LableGameOver" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 10 )
 margin_left = 122.0
 margin_top = 283.0
 margin_right = 1157.0
 margin_bottom = 606.0
-custom_fonts/font = SubResource( 4 )
-custom_colors/font_color = Color( 0.737255, 0.258824, 0, 1 )
-custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 11 )
+custom_colors/font_outline_modulate = Color( 0.996078, 0.996078, 0.996078, 1 )
+custom_constants/shadow_offset_y = 10
 text = "GAME OVER
 "
 __meta__ = {
@@ -240,7 +297,7 @@ margin_left = 519.682
 margin_top = 344.835
 margin_right = 586.682
 margin_bottom = 430.835
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 13 )
 text = "X 2"
 
 [node name="LiveAfter" type="Label" parent="LiveCounter"]
@@ -249,7 +306,7 @@ margin_left = 519.682
 margin_top = 344.835
 margin_right = 586.682
 margin_bottom = 430.835
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 13 )
 text = "X 1"
 [connection signal="start" from="." to="." method="_on_DeadUI_start"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

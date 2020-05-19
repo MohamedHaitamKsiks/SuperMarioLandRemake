@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Objects/Particles/BrickParticle/BrickParticle.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Graphics/Particles/impact.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Audio/Items/brick.wav" type="AudioStream" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 11, 11 )
 
 [node name="BrickParticle" type="Node2D"]
 script = ExtResource( 1 )
@@ -25,5 +28,14 @@ texture = ExtResource( 2 )
 [node name="Blink" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="KillArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillArea"]
+position = Vector2( 0, -6 )
+shape = SubResource( 1 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Blink" to="." method="_on_Blink_timeout"]
+[connection signal="body_entered" from="KillArea" to="." method="_on_KillArea_body_entered"]

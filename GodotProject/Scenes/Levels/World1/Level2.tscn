@@ -440,13 +440,19 @@ position = Vector2( 3548, 60 )
 position = Vector2( 3580, 76 )
 
 [node name="Coin83" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 3236, 252 )
+position = Vector2( 3308, 220 )
 
 [node name="Coin84" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 3276, 228 )
+position = Vector2( 3332, 204 )
+
+[node name="Coin134" parent="GroupOfCoins" instance=ExtResource( 13 )]
+position = Vector2( 3252, 244 )
+
+[node name="Coin135" parent="GroupOfCoins" instance=ExtResource( 13 )]
+position = Vector2( 3220, 244 )
 
 [node name="Coin85" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 3324, 212 )
+position = Vector2( 3284, 244 )
 
 [node name="Coin86" parent="GroupOfCoins" instance=ExtResource( 13 )]
 position = Vector2( 5132, 524 )
@@ -515,25 +521,25 @@ position = Vector2( 8823, 199 )
 position = Vector2( 8881, 200 )
 
 [node name="Coin112" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 7676, 364 )
+position = Vector2( 7690.25, 384.373 )
 
 [node name="Coin118" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 7628, 396 )
+position = Vector2( 7635.02, 424.728 )
 
 [node name="Coin113" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 7732, 340 )
+position = Vector2( 7759.42, 362.902 )
 
 [node name="Coin114" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 7796, 332 )
+position = Vector2( 7839.53, 359.671 )
 
 [node name="Coin115" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 7860, 332 )
+position = Vector2( 7895.63, 373.03 )
 
 [node name="Coin116" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 7916, 348 )
+position = Vector2( 7947.13, 397.031 )
 
 [node name="Coin117" parent="GroupOfCoins" instance=ExtResource( 13 )]
-position = Vector2( 7972, 380 )
+position = Vector2( 7984.5, 429.251 )
 
 [node name="Coin109" parent="GroupOfCoins" instance=ExtResource( 13 )]
 position = Vector2( 6940, 164 )
@@ -1013,6 +1019,26 @@ position = Vector2( 3212, 300 )
 items = PoolIntArray( 0 )
 type = 1
 
+[node name="QuestionBlock72" parent="GroupOfBricks" instance=ExtResource( 12 )]
+position = Vector2( 3284, 276 )
+items = PoolIntArray( 0 )
+type = 1
+
+[node name="QuestionBlock71" parent="GroupOfBricks" instance=ExtResource( 12 )]
+position = Vector2( 3284, 300 )
+items = PoolIntArray( 0 )
+type = 1
+
+[node name="QuestionBlock66" parent="GroupOfBricks" instance=ExtResource( 12 )]
+position = Vector2( 3260, 276 )
+items = PoolIntArray( 0 )
+type = 1
+
+[node name="QuestionBlock53" parent="GroupOfBricks" instance=ExtResource( 12 )]
+position = Vector2( 3260, 300 )
+items = PoolIntArray( 0 )
+type = 1
+
 [node name="QuestionBlock18" parent="GroupOfBricks" instance=ExtResource( 12 )]
 position = Vector2( 3028, 180 )
 items = PoolIntArray( 0 )
@@ -1377,28 +1403,16 @@ teleport_enable = true
 position = Vector2( -368, 72 )
 rotation = -1.5708
 plant_enable = false
-out_speed = 60
+out_speed = 120
 
 [node name="Pipe5" parent="GroupOfPipes" instance=ExtResource( 7 )]
 position = Vector2( 3140, 356 )
-
-[node name="Pipe10" parent="GroupOfPipes" instance=ExtResource( 7 )]
-position = Vector2( 7980, 444 )
-rotation = -1.74846e-07
-plant_enable = false
-start = 1
-out_speed = 100
 
 [node name="Pipe13" parent="GroupOfPipes" instance=ExtResource( 7 )]
 position = Vector2( 9500, 428 )
 rotation = -1.5708
 plant_enable = false
 start = 1
-out_speed = 100
-
-[node name="Pipe11" parent="GroupOfPipes" instance=ExtResource( 7 )]
-position = Vector2( 7628, 444 )
-rotation = -1.74846e-07
 out_speed = 100
 
 [node name="Pipe12" parent="GroupOfPipes" instance=ExtResource( 7 )]
@@ -1440,7 +1454,7 @@ teleport_enable = true
 position = Vector2( 152, -32 )
 rotation = 1.5708
 plant_enable = false
-out_speed = 100
+out_speed = 130
 
 [node name="GroupOfHelp" type="Node" parent="."]
 

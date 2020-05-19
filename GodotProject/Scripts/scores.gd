@@ -19,8 +19,8 @@ func _ready():
 	level_path.append("res://Scenes/Levels/World1/Level1.tscn")
 	level_path.append("res://Scenes/Levels/World1/Level2.tscn")
 	level_path.append("res://Scenes/Levels/World1/Level3.tscn")
-	
-	for k in range(3):
+	level_path.append("res://Scenes/Levels/World2/Level4.tscn")
+	for k in range(4):
 		level_stars.append([false,false,false])
 		
 		

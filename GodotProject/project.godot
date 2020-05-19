@@ -19,11 +19,13 @@ config/name="SuperMarioMania"
 run/main_scene="res://Scenes/MainMenu/MainMenu.tscn"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
 Scores="*res://Scripts/scores.gd"
 GameData="*res://Scripts/gamedata.gd"
+EnemyList="*res://Scripts/enemylist.gd"
 
 [display]
 

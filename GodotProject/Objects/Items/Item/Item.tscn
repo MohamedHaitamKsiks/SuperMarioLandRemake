@@ -35,6 +35,7 @@ physics_process_parent = true
 
 [node name="SFXAppears" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
+volume_db = 14.444
 autoplay = true
 attenuation = 3.24901
 bus = "SFX"

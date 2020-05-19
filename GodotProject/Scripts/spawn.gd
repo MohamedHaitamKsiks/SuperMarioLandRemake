@@ -15,8 +15,6 @@ func _ready():
 		var checkpointNode = get_node("Checkpoint" + str(Scores.checkpoint))
 		$Mario.position = checkpointNode.position + checkpointNode.get_node("SpawnPosition").position
 		$Mario.start = false
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+		$Mario.can_move = false
+		$Mario.ground = true
+		

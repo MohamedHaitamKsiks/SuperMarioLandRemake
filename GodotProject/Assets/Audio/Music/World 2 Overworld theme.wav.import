@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/World 2 Overworld theme.wav-8fea90866081a09f1ac98443f22644fa.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Music/World 2 Overworld theme.wav"
+dest_files=[ "res://.import/World 2 Overworld theme.wav-8fea90866081a09f1ac98443f22644fa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

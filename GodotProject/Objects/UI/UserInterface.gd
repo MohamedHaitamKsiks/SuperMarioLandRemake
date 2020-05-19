@@ -53,3 +53,4 @@ func draw_star():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	get_parent().get_node("Music").play()
+	get_parent().get_node("Mario").can_move = true

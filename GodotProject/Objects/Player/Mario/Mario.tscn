@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Objects/Player/Mario/Mario.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Audio/Mario/mario_jump.wav" type="AudioStream" id=2]
@@ -18,6 +18,10 @@
 [ext_resource path="res://Assets/Audio/Mario/mario_sprint.wav" type="AudioStream" id=16]
 [ext_resource path="res://Assets/Audio/Mario/mario_climbing.wav" type="AudioStream" id=17]
 [ext_resource path="res://Assets/Audio/Mario/mario_walljump.wav" type="AudioStream" id=18]
+[ext_resource path="res://Assets/Audio/Mario/mario_max_speed.wav" type="AudioStream" id=19]
+[ext_resource path="res://Assets/Audio/Mario/mario_break.wav" type="AudioStream" id=20]
+[ext_resource path="res://Assets/Audio/Mario/mario_pushing.wav" type="AudioStream" id=21]
+[ext_resource path="res://Assets/Audio/Mario/mario_flipjump.wav" type="AudioStream" id=22]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0.00323407, 0.0215 ), 0.0, 4.58495, 0, 0, Vector2( 1, 0 ), 0.247053, 0.0, 0, 0 ]
@@ -50,13 +54,21 @@ extents = Vector2( 7, 13 )
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 6, 2 )
 
-[sub_resource type="Curve" id=8]
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.591743 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.527344, 0.979229, 1, 1 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="Curve" id=10]
 _data = [ Vector2( 0, 0.0336 ), 0.0, 5.04735, 0, 0, Vector2( 1, 0 ), -2.5556, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=9]
-curve = SubResource( 8 )
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=12]
+render_priority = 1
 emission_shape = 1
 emission_sphere_radius = 3.0
 flag_disable_z = true
@@ -66,10 +78,11 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.4
 scale_random = 0.1
-scale_curve = SubResource( 9 )
+scale_curve = SubResource( 11 )
+color_ramp = SubResource( 9 )
 anim_speed_random = 0.08
 
-[sub_resource type="ParticlesMaterial" id=11]
+[sub_resource type="ParticlesMaterial" id=13]
 emission_shape = 1
 emission_sphere_radius = 2.0
 flag_disable_z = true
@@ -133,7 +146,7 @@ bus = "SFX"
 
 [node name="SFXClimbing" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 17 )
-volume_db = -21.225
+volume_db = -15.269
 pitch_scale = 0.9
 attenuation = 0.0
 bus = "SFX"
@@ -143,6 +156,24 @@ stream = ExtResource( 18 )
 volume_db = 5.66
 pitch_scale = 0.9
 attenuation = 0.0
+bus = "SFX"
+
+[node name="SFXMaxSpeed" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 19 )
+attenuation = 0.196146
+bus = "SFX"
+
+[node name="SFXBreak" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 20 )
+volume_db = 2.548
+bus = "SFX"
+
+[node name="SFXCharge" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 21 )
+bus = "SFX"
+
+[node name="SFXJumpFlip" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 22 )
 bus = "SFX"
 
 [node name="CameraPosition" type="Position2D" parent="."]
@@ -174,18 +205,20 @@ texture = ExtResource( 12 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 13 )
 animation = "hat_stand"
-frame = 6
+frame = 2
 playing = true
 
 [node name="ThrowPosition2D" type="Position2D" parent="."]
 position = Vector2( 16, 6 )
 
 [node name="CanClimbRayCastTop" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( 0, -17 )
 enabled = true
 cast_to = Vector2( 12, 0 )
 
 [node name="CanClimbRayCastBot" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( 0, 21 )
 enabled = true
 cast_to = Vector2( 12, 0 )
@@ -209,6 +242,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+visible = false
 position = Vector2( 0, 8 )
 shape = SubResource( 6 )
 
@@ -240,9 +274,10 @@ one_shot = true
 position = Vector2( -4, 20 )
 z_index = 10
 emitting = false
-amount = 40
+amount = 50
+lifetime = 0.7
 local_coords = false
-process_material = SubResource( 10 )
+process_material = SubResource( 12 )
 texture = ExtResource( 12 )
 
 [node name="ClimbParticles" type="Particles2D" parent="."]
@@ -251,7 +286,7 @@ z_index = 10
 emitting = false
 amount = 40
 local_coords = false
-process_material = SubResource( 11 )
+process_material = SubResource( 13 )
 texture = ExtResource( 12 )
 
 [node name="DustParticles" parent="." instance=ExtResource( 14 )]

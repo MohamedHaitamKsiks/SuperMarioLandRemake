@@ -47,5 +47,6 @@ func _on_QuestionBlock_get_item(smash):
 
 
 func _on_KillArea_body_entered(body):
-	if "Goomba" in body.name or "Koopa" in body.name :
-		body.emit_signal("cappy_kill",self)
+	for enemy in EnemyList.enemy_body:
+		if enemy in body.name :
+			body.emit_signal("cappy_kill",self)
